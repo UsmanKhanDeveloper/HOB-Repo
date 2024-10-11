@@ -16,7 +16,7 @@ const LogIn =() => {
     const onLogInPress = async () =>{};
 
     return(
-        <ScrollView className="flex-1 bg-white">
+        <View className="flex-1 bg-white">
         <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
           <Image source={images.houseHeader} className="z-0 w-full h-[250px]"/>
@@ -67,7 +67,7 @@ const LogIn =() => {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </View>
     );
 };
 
