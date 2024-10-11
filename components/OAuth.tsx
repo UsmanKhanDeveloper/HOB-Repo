@@ -2,8 +2,11 @@ import { View, Text, Image } from "react-native";
 import CustomButton from "./CustomButton";
 import { icons } from "@/constants";
 
-const OAuth = () => (
-  <View>
+const OAuth = () => {
+
+    const handleGoogleLogIn = async () =>{};
+return (
+    <View>
     {/* "Or" Section */}
     <View className="flex flex-row justify-center items-center mt-2 gap-x-3">
       <View className="flex-1 h-[1px] bg-general-100" />
@@ -22,8 +25,14 @@ const OAuth = () => (
           className="w-5 h-5 mr-2"
         />
       )}
+      bgVariant="outline"
+        textVariant="default"
+        onPress={handleGoogleLogIn}
     />
   </View>
 );
+}
+  
+  
 
 export default OAuth;
