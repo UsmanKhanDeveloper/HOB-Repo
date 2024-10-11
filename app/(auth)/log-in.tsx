@@ -1,5 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
+import OAuth from "@/components/OAuth";
 import { images, icons } from "@/constants";
 import { Link } from "expo-router";
 import React, { useState } from "react";
@@ -12,9 +13,7 @@ const LogIn =() => {
       });
     
 
-    function onSignInPress(event: GestureResponderEvent): void {
-        throw new Error("Function not implemented.");
-    }
+    const onLogInPress = async () =>{};
 
     return(
         <ScrollView className="flex-1 bg-white">
@@ -51,9 +50,12 @@ const LogIn =() => {
   
             <CustomButton
               title="Log In"
-              onPress={onSignInPress}
+              onPress={onLogInPress}
               className="mt-6"
             />
+            <View>
+            <OAuth/>
+            </View>
             <View className="p-4 bottom-10">
             <Link
               href="/sign-up"
@@ -63,7 +65,6 @@ const LogIn =() => {
               <Text className="text-primary-500">Sign Up</Text>
             </Link>
             </View>
-           
           </View>
         </View>
       </ScrollView>
