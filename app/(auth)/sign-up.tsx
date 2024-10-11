@@ -1,5 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
+import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
 import { Link } from "expo-router";
 import React, { useState } from "react";
@@ -11,6 +12,10 @@ const SignUp =() => {
         email: "",
         password: "",
       });
+
+      const onSignUpPress = async() => {}
+
+
     return(
         <ScrollView className="flex-1 bg-white">
             <View className="flex-1 bg-white">
@@ -49,9 +54,10 @@ const SignUp =() => {
           />
           <CustomButton
             title="Sign Up"
+            onPress={onSignUpPress}
             className="mt-6"
-
           />
+          <OAuth/>
           </View>
           <View className="bottom-10">
           <Link
