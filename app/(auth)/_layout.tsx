@@ -4,11 +4,8 @@ const Layout = () =>{
 
   return (
       <Stack>
-        <Stack.Screen name="welcome" options={{ headerShown: false }} />
         <Stack.Screen name="log-in" options={{ headerShown: false }} />
         <Stack.Screen name="sign-up" options={{ headerShown: false }} />
-
-
       </Stack>
   );
 }
