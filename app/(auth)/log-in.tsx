@@ -54,7 +54,7 @@ const LogIn =() => {
               onPress={onSignInPress}
               className="mt-6"
             />
-  
+            <View className="p-4 bottom-10">
             <Link
               href="/sign-up"
               className="text-lg text-center text-general-200 mt-10"
@@ -62,6 +62,8 @@ const LogIn =() => {
               Don't have an account?{" "}
               <Text className="text-primary-500">Sign Up</Text>
             </Link>
+            </View>
+           
           </View>
         </View>
       </ScrollView>
