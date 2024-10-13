@@ -3,7 +3,8 @@ import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
 import { images, icons } from "@/constants";
 import { Link } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
+import React = require("react");
 import {GestureResponderEvent, Image, ScrollView,Text, View} from "react-native";
 
 const LogIn =() => {
@@ -11,7 +12,6 @@ const LogIn =() => {
         email: "",
         password: "",
       });
-    
 
     const onLogInPress = async () =>{};
 

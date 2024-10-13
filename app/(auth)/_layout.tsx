@@ -1,4 +1,5 @@
 import { Stack } from 'expo-router';
+import React = require('react');
 
 const Layout = () =>{
 
