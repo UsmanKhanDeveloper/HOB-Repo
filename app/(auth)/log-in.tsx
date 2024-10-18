@@ -22,7 +22,7 @@ const LogIn =() => {
           <Image source={images.houseHeader} className="z-0 w-full h-[250px]"/>
           <View className="bottom-70 items-center">
             <Text className="text-3xl text-black font-JakartaBold text-center text-[#0286FF]">
-              Welcome to House of Beginners
+              Welcome to Home of Beginners
             </Text>
           </View>
         </View>
