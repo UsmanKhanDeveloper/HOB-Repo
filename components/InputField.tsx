@@ -8,6 +8,8 @@ import {
     Keyboard,
     Platform,
 } from "react-native";
+import React from 'react';
+
 
 import {InputFieldProps} from "@/types/type";
 
