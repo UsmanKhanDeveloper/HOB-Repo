@@ -1,4 +1,6 @@
 import {TouchableOpacity, Text} from "react-native";
+import React from 'react';
+
 
 import {ButtonProps} from "@/types/type";
 

@@ -2,19 +2,41 @@ import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
 import { images, icons } from "@/constants";
-import { Link } from "expo-router";
-import { useState } from "react";
-import React = require("react");
-import {GestureResponderEvent, Image, ScrollView,Text, View} from "react-native";
+import { isLoaded } from "expo-font";
+import { Link, router } from "expo-router";
+import React, { useCallback, useState } from "react";
+import {Alert, GestureResponderEvent, Image, ScrollView,Text, View} from "react-native";
+import { useSignIn } from "@clerk/clerk-expo";
 
 const LogIn =() => {
+  const { signIn, setActive, isLoaded } = useSignIn();
+
     const [form, setForm] = useState({
         email: "",
         password: "",
       });
 
-    const onLogInPress = async () =>{};
-
+      const onLogInPress = useCallback(async () => {
+        if (!isLoaded) return;
+    
+        try {
+          const logInAttempt = await signIn.create({
+            identifier: form.email,
+            password: form.password,
+          });
+    
+          if (logInAttempt.status === "complete") {
+            await setActive({ session: logInAttempt.createdSessionId });
+            router.replace("/(root)/(tabs)/guides"); //change to home screen route
+          } else {
+            console.log(JSON.stringify(logInAttempt, null, 2));
+            Alert.alert("Error", "Log in failed. Please try again.");
+          }
+        } catch (err: any) {
+          console.log(JSON.stringify(err, null, 2));
+          Alert.alert("Error", err.errors[0].longMessage);
+        }
+      }, [isLoaded, form]);
     return(
         <View className="flex-1 bg-white">
         <View className="flex-1 bg-white">
@@ -22,12 +44,10 @@ const LogIn =() => {
           <Image source={images.houseHeader} className="z-0 w-full h-[250px]"/>
           <View className="bottom-70 items-center">
             <Text className="text-3xl text-black font-JakartaBold text-center text-[#0286FF]">
-              Welcome to House of Beginners
+              Welcome to Home of Beginners
             </Text>
           </View>
         </View>
-
-  
           <View className="p-5 top-20">
             <InputField
               label="Email"
@@ -72,3 +92,4 @@ const LogIn =() => {
 };
 
 export default LogIn;
+
