@@ -7,6 +7,7 @@ const Layout = () =>{
   return (
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="Homepage" options={{ headerShown: false }}/>
       </Stack>
   );
 }
