@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, ScrollView, Image, StyleSheet } from 'rea
 import { useRouter } from 'expo-router';
 import React from 'react';
 import {images} from "@/constants";
+import buyingGuideSelection from "*.png";
 
 const Guides = () => {
     const router = useRouter();
@@ -22,7 +23,7 @@ const Guides = () => {
                     //onPress={() => router.push('/guide-Buying')}
                 >
                     <Image
-                        source={images.buyingGuidesSelection} // replace with your actual image
+                        source={images.buyingGuideSelection} // replace with your actual image
                         style={styles.image}
                     />
                     <Text style={styles.cardText}>Buying Guide</Text>
@@ -33,7 +34,7 @@ const Guides = () => {
                     //onPress={() => router.push('/guide-Selling')}
                 >
                     <Image
-                        source={images.buyingGuidesSelection} // replace with your actual image
+                        source={images.buyingGuideSelection} // replace with your actual image
                         style={styles.image}
                     />
                     <Text style={styles.cardText}>Selling Guide</Text>
@@ -47,7 +48,7 @@ const Guides = () => {
                    //onPress={() => router.push('/guide-Landlord-Renting')}
                 >
                     <Image
-                        source={images.buyingGuidesSelection} // replace with your actual image
+                        source={images.buyingGuideSelection} // replace with your actual image
                         style={styles.image}
                     />
                     <Text style={styles.cardText}>Landlord Renting Guide</Text>
@@ -58,7 +59,7 @@ const Guides = () => {
                     //onPress={() => router.push('/guide-Tenant-Renting')}
                 >
                     <Image
-                        source={images.buyingGuidesSelection} // replace with your actual image
+                        source={images.buyingGuideSelection} // replace with your actual image
                         style={styles.image}
                     />
                     <Text style={styles.cardText}>Tenant Renting Guide</Text>

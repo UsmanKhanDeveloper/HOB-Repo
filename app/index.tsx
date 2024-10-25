@@ -15,4 +15,4 @@ if (isSignedIn) {
 
 };
 
-export default Home;
+export default Home; 

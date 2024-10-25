@@ -26,8 +26,8 @@ import to from "@/assets/icons/to.png";
 import check from "@/assets/images/check.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
-import houseHeader from "@/assets/images/house-header.png"
-import buyingGuidesSelection from "@/assets/images/buying-guides-selection.png";
+import houseHeader from "@/assets/images/house-header.png";
+import buyingGuideSelection from "@/assets/images/buying-guide-selection.png";
 
 
 export const images = {
@@ -35,7 +35,7 @@ export const images = {
     noResult,
     message,
     houseHeader,
-    buyingGuidesSelection,
+    buyingGuideSelection,
 };
 
 export const icons = {
