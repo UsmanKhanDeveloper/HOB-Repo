@@ -27,7 +27,7 @@ const LogIn =() => {
     
           if (logInAttempt.status === "complete") {
             await setActive({ session: logInAttempt.createdSessionId });
-            router.replace("/(root)/Homepage"); 
+            router.replace("/(root)/(tabs)/guides"); //change to home screen route
           } else {
             console.log(JSON.stringify(logInAttempt, null, 2));
             Alert.alert("Error", "Log in failed. Please try again.");
@@ -73,7 +73,10 @@ const LogIn =() => {
               onPress={onLogInPress}
               className="mt-6"
             />
-            <OAuth />
+            <View>
+            <OAuth/>
+            </View>
+            <View className="p-4 bottom-10">
             <Link
               href="/sign-up"
               className="text-lg text-center text-general-200 mt-10"
@@ -81,6 +84,12 @@ const LogIn =() => {
               Don't have an account?{" "}
               <Text className="text-primary-500">Sign Up</Text>
             </Link>
+              <Link href="/guides"
+                    className="text-lg text-center text-general-200 mt-10">
+                <Text>navigate to guides page?? </Text>
+                <Text className="text-primary-500">Guides</Text>
+              </Link>
+            </View>
           </View>
         </View>
       </View>

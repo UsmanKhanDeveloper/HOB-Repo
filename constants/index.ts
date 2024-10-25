@@ -27,8 +27,7 @@ import check from "@/assets/images/check.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
 import houseHeader from "@/assets/images/house-header.png"
-import appLogo from "@/assets/images/app-logo.png"
-
+import buyingGuidesSelection from "@/assets/images/buying-guides-selection.png";
 
 
 export const images = {
@@ -36,7 +35,7 @@ export const images = {
     noResult,
     message,
     houseHeader,
-    appLogo
+    buyingGuidesSelection,
 };
 
 export const icons = {
