@@ -38,6 +38,7 @@ const LogIn =() => {
         }
       }, [isLoaded, form]);
     return(
+      <ScrollView>
         <View className="flex-1 bg-white">
         <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
@@ -84,6 +85,7 @@ const LogIn =() => {
             </View>
           </View>
         </View>
+        </ScrollView>
     );
 };
 

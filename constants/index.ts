@@ -27,7 +27,10 @@ import check from "@/assets/images/check.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
 import houseHeader from "@/assets/images/house-header.png";
-import buyingGuideSelection from "@/assets/images/buying-guide-selection.png";
+import buyingGuidesSelection from "@/assets/images/buying-guides-selection.png";
+import appLogo from "@/assets/images/app-logo.png";
+import primary from "@/assets/images/primary.png";
+import filters from "@/assets/icons/filters.png";
 
 
 export const images = {
@@ -35,7 +38,9 @@ export const images = {
     noResult,
     message,
     houseHeader,
-    buyingGuideSelection,
+    buyingGuidesSelection,
+    appLogo,
+    primary,
 };
 
 export const icons = {
@@ -64,6 +69,7 @@ export const icons = {
     star,
     target,
     to,
+    filters,
 };
 
 export const listing = [
