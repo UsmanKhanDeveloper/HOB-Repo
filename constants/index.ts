@@ -26,14 +26,16 @@ import to from "@/assets/icons/to.png";
 import check from "@/assets/images/check.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
-import houseHeader from "@/assets/images/house-header.png"
+import houseHeader from "@/assets/images/house-header.png";
+import buyingGuideSelection from "@/assets/images/buying-guide-selection.png";
 
 
 export const images = {
     check,
     noResult,
     message,
-    houseHeader
+    houseHeader,
+    buyingGuideSelection,
 };
 
 export const icons = {

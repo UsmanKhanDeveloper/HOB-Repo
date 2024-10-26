@@ -1,30 +1,23 @@
 import React from "react";
 import Logo from "./Logo.png";
 import { Image } from 'expo-image';
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { images } from "@/constants";
 
-
-// any is temp
-function Homepage() {
-
-  const navigation = useNavigation();
+function Homepage(){
     
     return (<View style={styles.container}>
     <Image
       style={styles.image}
-      source={Logo}
+      source={images.appLogo}
       contentFit="cover"
       transition={1000} 
     />
- 
-    <TouchableOpacity style={styles.Button}
-    onPress={() => {navigation.navigate('/(auth)/log-in')}}>
-      <Text style={styles.ButtonText}>Sign in</Text> 
-    </TouchableOpacity>
 
-       
-
+    <View style={styles.Button}>
+      <Text style={styles.ButtonText}>Sign in</Text>  
+    </View> 
 
     </View>) 
 }

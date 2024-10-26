@@ -115,7 +115,7 @@ const SignUp = () => {
           <OAuth />
           <Link
             href="/log-in"
-            className="text-lg text-center text-general-200 mt-10"
+            className="text-lg text-center text-general-200 mt-5"
           >
             Already have an account?{" "}
             <Text className="text-primary-500">Log In</Text>
@@ -123,9 +123,6 @@ const SignUp = () => {
         </View>
         <ReactNativeModal
           isVisible={verification.state === "pending"}
-          // onBackdropPress={() =>
-          //   setVerification({ ...verification, state: "default" })
-          // }
           onModalHide={() => {
             if (verification.state === "success") {
               setShowSuccessModal(true);
@@ -177,7 +174,7 @@ const SignUp = () => {
               title="Browse Home"
               onPress={() => {
                 setShowSuccessModal(false)
-                router.push(`/(root)/(tabs)/guides`)}}
+                router.push('/(root)/Homepage')}}
 
               className="mt-5"
             />
