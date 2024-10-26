@@ -28,6 +28,9 @@ import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
 import houseHeader from "@/assets/images/house-header.png"
 import appLogo from "@/assets/images/app-logo.png"
+import eyeOpen from "@/assets/icons/open-eye.png"
+import eyeClose from "@/assets/icons/close-eye.png"
+
 
 
 
@@ -65,6 +68,8 @@ export const icons = {
     star,
     target,
     to,
+    eyeOpen,
+    eyeClose,
 };
 
 export const listing = [
