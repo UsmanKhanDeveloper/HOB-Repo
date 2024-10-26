@@ -1,10 +1,14 @@
 import React from "react";
 import Logo from "./Logo.png";
 import { Image } from 'expo-image';
-import { StyleSheet, View, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
-function Homepage(){
+
+// any is temp
+function Homepage() {
+
+  const navigation = useNavigation();
     
     return (<View style={styles.container}>
     <Image
@@ -13,10 +17,14 @@ function Homepage(){
       contentFit="cover"
       transition={1000} 
     />
+ 
+    <TouchableOpacity style={styles.Button}
+    onPress={() => {navigation.navigate('/(auth)/log-in')}}>
+      <Text style={styles.ButtonText}>Sign in</Text> 
+    </TouchableOpacity>
 
-    <View style={styles.Button}>
-      <Text style={styles.ButtonText}>Sign in</Text>  
-    </View> 
+       
+
 
     </View>) 
 }
