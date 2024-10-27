@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from 'expo-image';
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 import { icons, images } from "@/constants";
 import { router, useNavigation } from "expo-router";
 
+interface listing {
+  id: string;
+  price: number;
+  location: string;
+  address: string;
+  time: string;
+  bedrooms: number;
+  bathrooms: number;
+  sqft: number;
+};
+
 function Homepage(){
 
   const navigation = useNavigation();
+  const [listing, setListings] = useState<listing[]>([]); 
+
+  useEffect(() => {
+    console.log("use effect called");
+    setListings([
+      { id: '1', price: 899000, location: 'Mississauga', address: '7222 Triumph Lane', time: '56 min ago', bedrooms: 3, bathrooms: 3, sqft: 1400 },
+      { id: '2', price: 920000, location: 'Toronto', address: '123 Maple Street', time: '10 min ago', bedrooms: 4, bathrooms: 3, sqft: 1600 },
+      { id: '3', price: 875000, location: 'Brampton', address: '55 Oak Avenue', time: '2 hours ago', bedrooms: 3, bathrooms: 2, sqft: 1350 },
+  ]);
+  }, []); 
     
+  // const renderItem = ({ item }: { item: listing }) => (
+  //   <View style={styles.propertyContainer}>
+  //   <Text style={styles.price}>${item.price.toLocaleString()}</Text>
+  //   <Text style={styles.location}>{item.location}</Text>
+  //   <Text>{item.address}</Text>
+  //   <Text>{item.bedrooms} Bedrooms, {item.bathrooms} Bathrooms</Text>
+  //   <Text>{item.sqft} sqft</Text>
+  //   <Text style={styles.time}>Listed {item.time}</Text>
+  //   </View>
+  // );
+
     return (
     <> 
     {/* ^ this is a fragment and u use it to wrap views together <3333 333 3/}
@@ -72,7 +104,7 @@ function Homepage(){
 
     {/* listings */}
     <View style={styles.flexHorizontalContainer}>
-
+      {/* const renderListingItem = ({ item }) => (); */}
     </View>
     </>) 
 }
