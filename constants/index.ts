@@ -30,8 +30,8 @@ import houseHeader from "@/assets/images/house-header.png"
 import appLogo from "@/assets/images/app-logo.png"
 import eyeOpen from "@/assets/icons/open-eye.png"
 import eyeClose from "@/assets/icons/close-eye.png"
-
-
+import deleteCan from "@/assets/icons/delete.png"
+import favIcon from "@/assets/icons/heart.png"
 
 
 export const images = {
@@ -70,6 +70,8 @@ export const icons = {
     to,
     eyeOpen,
     eyeClose,
+    deleteCan,
+    favIcon,
 };
 
 export const listing = [
