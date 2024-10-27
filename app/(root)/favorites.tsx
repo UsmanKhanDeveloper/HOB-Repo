@@ -22,10 +22,8 @@ const FavoritesScreen = () => {
     useEffect(() => {
         // Placeholder: Fetch favorite properties from API
         setFavorites([
-            { id: '1', price: 899000, location: 'Mississauga', address: '7222 Triumph Lane', time: '56 min ago', bedrooms: 3, bathrooms: 3, sqft: 1400 },
-            { id: '2', price: 920000, location: 'Toronto', address: '123 Maple Street', time: '10 min ago', bedrooms: 4, bathrooms: 3, sqft: 1600 },
-            { id: '3', price: 875000, location: 'Brampton', address: '55 Oak Avenue', time: '2 hours ago', bedrooms: 3, bathrooms: 2, sqft: 1350 },
-        ]);
+            { id: '1', price: 899000, location: 'Mississauga', address: '7222 Triumph Lane', time: '56 min ago', bedrooms: 3, bathrooms: 3, sqft: 1400 }
+        ]); //TODO: FIX THE BUG LOGIC PART
     }, []);
 
     const handleSort = (criteria: 'price' | 'location') => {
@@ -97,7 +95,8 @@ const FavoritesScreen = () => {
                 visible={sortModalVisible}
                 onRequestClose={() => setSortModalVisible(false)}
             >
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(100, 100, 100, 0.5)'}}>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(100, 100, 100, 0.5)'
+}}>
                         <View className="w-72 p-5 bg-white rounded-lg">
                         <Text className="text-lg font-bold mb-4">Sort By</Text>
                         <TouchableOpacity onPress={() => handleSort('price')} className="flex-row items-center mb-2">
