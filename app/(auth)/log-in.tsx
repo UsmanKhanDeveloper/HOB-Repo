@@ -3,18 +3,26 @@ import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
 import { images, icons } from "@/constants";
 import { Link, router } from "expo-router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Alert, Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
-import { useSignIn } from "@clerk/clerk-expo";
+import { useAuth, useSignIn } from "@clerk/clerk-expo";
 
 const LogIn = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
-
+  const { isSignedIn } = useAuth(); // Add isSignedIn from useAuth
+  
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false); // State for password visibility
+
+    // Redirect to homepage if already signed in
+    useEffect(() => {
+      if (isSignedIn) {
+        router.replace("/(root)/Homepage");
+      }
+    }, [isSignedIn]);
 
   const onLogInPress = useCallback(async () => {
     if (!isLoaded) return;
