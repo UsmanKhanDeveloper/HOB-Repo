@@ -10,7 +10,7 @@ const Home =() => {
 if (isSignedIn) {
   return <Redirect href="../(root)/Homepage" />; 
 }
-  return <Redirect href="/(auth)/sign-up"/>;
+  return <Redirect href="/(root)/Homepage"/>;
 };
 
 export default Home; 
