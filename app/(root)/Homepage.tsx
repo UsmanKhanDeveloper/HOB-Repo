@@ -11,12 +11,12 @@ function Homepage(){
     
     return (
     <> 
-    {/* ^ this is a fragment and u use it to wrap views together  */}
+    {/* ^ this is a fragment and u use it to wrap views together <3333 333 3/}
 
     {/* horizontal container */}
     <View style={styles.container}>
     <Image
-      style={styles.image}
+      style={styles.logo}
       source={images.appLogo}
       contentFit="cover"
       transition={1000} 
@@ -37,33 +37,43 @@ function Homepage(){
     </View>
 
     {/* horizontal container */}
-    <View style={styles.container}>
+    <View style={styles.flexHorizontalContainer}>
 
       {/* vertical container */}
-      <View style={styles.verticalContainer}>
+      <View style={styles.flexVerticalContainer}>
           <TouchableOpacity>
               <Image style={styles.icon}
               source={images.primary}
               ></Image>
           </TouchableOpacity>
 
-          <Text>Save Search</Text>
+          <Text style={styles.iconText}>Save Search</Text>
       </View>
 
-      <Text>Find Your Dream Home</Text>
+      <View style={styles.searchBar}>
+        <Text style={styles.searchBarText}>Dream Big: Find Your Home</Text>
+        <Image style={styles.searchIcon} source={icons.search}></Image>
+      </View> 
 
-      <View style={styles.verticalContainer}>
+      <View style={styles.flexVerticalContainer}>
           <TouchableOpacity>
               <Image style={styles.icon}
               source={icons.filters}
               ></Image>
           </TouchableOpacity>
-
-          <Text>Save Search</Text>
+          <Text style={styles.iconText}>Save Search</Text>
       </View>
     </View>
 
+    {/* toggle, num of listings and menu */}
+    <View style={styles.flexHorizontalContainer}>
 
+    </View>
+
+    {/* listings */}
+    <View style={styles.flexHorizontalContainer}>
+
+    </View>
     </>) 
 }
 
@@ -74,7 +84,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       justifyContent: 'space-between',
       flexDirection: 'row',
-      padding: 15,
+      padding: 16,
     }, 
     verticalContainer: {
       backgroundColor: '#fff',
@@ -83,27 +93,72 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     centeredContainer: {
-      // flex: 1,
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
       padding: 10,
       fontSize: 16,
     },
+    flexHorizontalContainer: {
+      width: '100%',
+      flex: 1,
+      flexDirection: 'row',
+      // justifyContent: 'space-between',
+      // alignItems: 'center',
+      backgroundColor: '#fff',
+      height: 60,
+      padding: 10,
+    },
+    flexVerticalContainer: {
+      flex: 1,
+      flexDirection: 'column',
+      // justifyContent: 'space-between',
+      // alignItems: 'center',
+      flexShrink: 0,
+      height: 60,
+      width: 39,
+      backgroundColor: '#fff',
+      padding: 10,  
+    },
+    iconText:  {
+      fontSize: 10,
+    },
     boldedText: {
       fontWeight: 'bold',
+    },
+    searchBarText: {
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: 13,
+      padding: 5,
     },
     icon: {
       width: 20,
       height: 20,
     },
-    image: {
+    searchBar: {
+      alignItems: 'center',
+      flexGrow: 1,
+      flexDirection: 'row',
+      borderRadius: 20,
+      borderWidth: 1,
+      justifyContent: 'center',
+      height: 59,
+      borderColor: '#6F6F6F',
+    },
+    searchIcon: {
+      width: 12,
+      height: 15,
+      padding: 10,
+    },
+    logo: {
       width: 140, 
       height: 60, 
       backgroundColor: '#0553', 
     },
     Button: {
-      borderRadius: 38.5,
+      borderRadius: 40,
       backgroundColor: '#596E85',
       height: 40,
     },
