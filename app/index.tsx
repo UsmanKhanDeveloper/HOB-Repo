@@ -10,9 +10,9 @@ const Home =() => {
   const { isSignedIn } = useAuth()
 
 if (isSignedIn) {
-  return <Redirect href="/(root)/Homepage"/> //change and redirect to home page
+  return <Redirect href="/(auth)/sign-up"/> //change and redirect to home page
 }
-  return <Redirect href="/(root)/Homepage"/>;
+  return <Redirect href="/(auth)/sign-up"/>;
 };
 
 export default Home; 
