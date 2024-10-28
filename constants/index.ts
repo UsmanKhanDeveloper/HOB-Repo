@@ -28,7 +28,9 @@ import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
 import houseHeader from "@/assets/images/house-header.png";
 import buyingGuideSelection from "@/assets/images/buying-guide-selection.png";
-
+import sellingGuideSelection from "@/assets/images/Selling-Guide-Section.png";
+import rentingTenantGuideSelection from "@/assets/images/Tenant-Guide-Section.png";
+import rentingLandlordGuideSelection from "@/assets/images/Landlord-Guide-Section.png";
 
 export const images = {
     check,
@@ -36,6 +38,9 @@ export const images = {
     message,
     houseHeader,
     buyingGuideSelection,
+    sellingGuideSelection,
+    rentingTenantGuideSelection,
+    rentingLandlordGuideSelection,
 };
 
 export const icons = {
