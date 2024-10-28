@@ -41,7 +41,6 @@ const LogIn = () => {
         Alert.alert("Error", "Log in failed. Please try again.");
       }
     } catch (err: unknown) {
-      // Check if 'err' has the 'errors' property before accessing it
       if (err instanceof Error && "errors" in err && Array.isArray((err as any).errors)) {
         const error = (err as any).errors[0];
         Alert.alert("Error", error.longMessage);
@@ -114,6 +113,13 @@ const LogIn = () => {
           >
             Don't have an account?{" "}
             <Text className="text-primary-500">Sign Up</Text>
+          </Link>
+          <Link
+            href="/guides"
+            className="text-lg text-center text-general-200 mt-10"
+          >
+            Go to Guides Page?{" "}
+            <Text className="text-primary-500">Guides</Text>
           </Link>
         </View>
       </View>
