@@ -174,7 +174,7 @@ const SignUp = () => {
               title="Browse Home"
               onPress={() => {
                 setShowSuccessModal(false)
-                router.push('/(root)/Homepage')}}
+                router.push('../Homepage')}}
 
               className="mt-5"
             />

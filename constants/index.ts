@@ -27,20 +27,20 @@ import check from "@/assets/images/check.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
 import houseHeader from "@/assets/images/house-header.png";
-import buyingGuidesSelection from "@/assets/images/buying-guides-selection.png";
-import appLogo from "@/assets/images/app-logo.png";
-import primary from "@/assets/images/primary.png";
-import filters from "@/assets/icons/filters.png";
-
+import buyingGuideSelection from "@/assets/images/buying-guide-selection.png";
+import sellingGuideSelection from "@/assets/images/Selling-Guide-Section.png";
+import rentingTenantGuideSelection from "@/assets/images/Tenant-Guide-Section.png";
+import rentingLandlordGuideSelection from "@/assets/images/Landlord-Guide-Section.png";
 
 export const images = {
     check,
     noResult,
     message,
     houseHeader,
-    buyingGuidesSelection,
-    appLogo,
-    primary,
+    buyingGuideSelection,
+    sellingGuideSelection,
+    rentingTenantGuideSelection,
+    rentingLandlordGuideSelection,
 };
 
 export const icons = {
@@ -69,7 +69,6 @@ export const icons = {
     star,
     target,
     to,
-    filters,
 };
 
 export const listing = [
