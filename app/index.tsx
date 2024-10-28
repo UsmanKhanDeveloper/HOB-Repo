@@ -13,9 +13,7 @@ const Home =() => {
 if (isSignedIn) {
   return <Redirect href='/(auth)/sign-up'/> //change and redirect to home page
 }
-  // return <Redirect href="/(auth)/sign-up"/>;
-  return <Redirect href="/(auth)/sign-up"/>;
-
+  return <Redirect href="/(root)/Homepage"/>;
 };
 
 export default Home; 
