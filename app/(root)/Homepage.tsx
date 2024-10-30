@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Image } from 'expo-image';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Alert, Modal } from "react-native";
 import { Link, router, useNavigation} from "expo-router";
 import { icons, images } from "@/constants"; // Assuming your favorite icon is in this folder
 import { useAuth, useUser } from "@clerk/clerk-react"; // Importing useUser
@@ -19,6 +19,14 @@ interface Property {
 }
 
 const Homepage: React.FC = () => {
+
+    // Modal for filter menu
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!modalVisible);
+      };
+
     // Clerk authentication
     const { isSignedIn, signOut } = useAuth(); // Get the sign-in state and sign out function
     const { user } = useUser(); // Use the useUser hook to get user info
@@ -42,6 +50,7 @@ const Homepage: React.FC = () => {
     // Function to handle adding a property to favorites
     const handleAddToFavorites = (id: string) => {
         if (!favorites.includes(id)) {
+            // entered if statement in handleAddToFavorites
             setFavorites((prevFavorites) => [...prevFavorites, id]);
             Alert.alert("Added to Favorites", "This property has been added to your favorites!");
         } else {
@@ -56,9 +65,10 @@ const Homepage: React.FC = () => {
     };
 
     return (
+      <>
         <View style={styles.container}>
             <Image
-                style={styles.image}
+                style={styles.logo}
                 source={images.appLogo}
                 contentFit="cover"
                 transition={1000}
@@ -86,46 +96,77 @@ const Homepage: React.FC = () => {
                     </TouchableOpacity>
                 )}
             </View>
-            <Text style={styles.listingHeader}>Property Listings</Text>
 
             {/* save search, search bar and filter menu */}
             
+            <View>
+            {/* horizontal container */}
+            <View style={styles.flexHorizontalContainer}>
 
+            {/* vertical container */}
+            <View style={styles.flexVerticalContainer}>
+                <TouchableOpacity>
+                    <Image style={styles.icon}
+                    source={images.primary}
+                    ></Image>
+                </TouchableOpacity>
 
-    {/* horizontal container */}
-    <View style={styles.flexHorizontalContainer}>
+                <Text style={styles.iconText}>Save Search</Text>
+            </View>
 
-      {/* vertical container */}
-      <View style={styles.flexVerticalContainer}>
-          <TouchableOpacity>
-              <Image style={styles.image}
-              source={images.primary}
-              ></Image>
-          </TouchableOpacity>
+            <View style={styles.searchBar}>
+            <Text style={styles.searchBarText}>Dream Big: Find Your Home</Text>
+            <Image style={styles.searchIcon} source={icons.search}></Image>
+            </View> 
 
-          <Text style={styles.iconText}>Save Search</Text>
-      </View>
+            <View style={styles.flexVerticalContainer}>
+                {/* Modal is not part of the page structure but it's on TOP of it */}
+                <Modal
+                    animationType="none"
+                    transparent={true}
+                    visible={modalVisible}
+                    // onRequestClose={() => {
+                    //     Alert.alert('Modal has been closed.');
+                    //     setModalVisible(!modalVisible);
+                    // }}>
+                    >
 
-      <View style={styles.searchBar}>
-        <Text style={styles.searchBarText}>Dream Big: Find Your Home</Text>
-        <Image style={styles.searchIcon} source={icons.search}></Image>
-      </View> 
+                <View style={styles.overlayContainer}>
+                    
 
-      <View style={styles.flexVerticalContainer}>
-          <TouchableOpacity>
-              <Image style={styles.image}
-              source={icons.filters}
-              ></Image>
-          </TouchableOpacity>
-          <Text style={styles.iconText}>Save Search</Text>
-      </View>
+                        {/* Gray overlay */}
+                    <TouchableOpacity style={styles.overlay} onPress={toggleModal} activeOpacity={1}>
+                        {/* Touching outside of the modal will dismiss it */}
+
+                        <View style={styles.filterMenuContainer}>
+                        {/* Close Icon */}
+                        <TouchableOpacity onPress={toggleModal} style={styles.icon}>
+
+                            {/* TESTING SEARCH ICON */}
+                        <Image style={styles.icon}source={icons.search}></Image>
+                        </TouchableOpacity>
+                        <Text style={styles.boldedText}>Menu Item 1</Text>
+                    </View>
+                        
+
+                    </TouchableOpacity>
+                    </View>
+                </Modal>
+
+                <TouchableOpacity
+                onPress={() => setModalVisible(true)}>
+                    <Image style={styles.icon}
+                    source={icons.filters}
+                    ></Image>
+                <Text style={styles.iconText}>Filter Menu</Text>
+                </TouchableOpacity>
+
+            </View>
+            </View>
+        </View>
+    <View>
+    <Text style={styles.listingHeader}>Property Listings</Text>
     </View>
-
-    {/* toggle, num of listings and menu */}
-    <View style={styles.flexHorizontalContainer}>
-
-    </View>
-
 
 {/* Listings ScrollView */}
             <ScrollView style={styles.listingsContainer}>
@@ -149,25 +190,46 @@ const Homepage: React.FC = () => {
                 ))}
             </ScrollView>
         </View>
+        </>
     );
 };
 
 export default Homepage;
 
 const styles = StyleSheet.create({
+    overlayContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
     container: {
+    //   borderColor: 'red',
+    //   borderWidth: 1,
       backgroundColor: '#fff',
       justifyContent: 'space-between',
-      flexDirection: 'row',
-      padding: 16,
+      flexGrow: 1,
+      padding: 15,
     }, 
+    filterMenuContainer: {
+        flexDirection: 'row',
+        width: 330,
+        height: 500,
+        padding: 20,
+        backgroundColor: 'white',
+        borderRadius: 5,
+        alignItems: 'center',
+        zIndex: 10, // Ensures it’s above the overlay
+    },
     verticalContainer: {
+    //   borderColor: 'black',
+    //   borderWidth: 1,
       backgroundColor: '#fff',
       justifyContent: 'space-between',
       flexDirection: 'column',
-      padding: 10,
     },
     centeredContainer: {
+    //   borderColor: 'black',
+    //   borderWidth: 1,
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
@@ -175,16 +237,22 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
     flexHorizontalContainer: {
+    //   borderColor: 'red',
+    //   borderWidth: 1,
       width: '100%',
-      flex: 1,
+      flexGrow: 1,
       flexDirection: 'row',
       // justifyContent: 'space-between',
       // alignItems: 'center',
       backgroundColor: '#fff',
-      height: 60,
-      padding: 10,
+    //   height: 60,
+    //   padding: 5,
+      paddingVertical: 10,
+      paddingHorizontal: 0,
     },
     flexVerticalContainer: {
+    //   borderColor: 'red',
+    //   borderWidth: 1,
       flex: 1,
       flexDirection: 'column',
       // justifyContent: 'space-between',
@@ -195,6 +263,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       padding: 10,  
     },
+    overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent gray
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
     iconText:  {
       fontSize: 10,
     },
@@ -208,7 +282,9 @@ const styles = StyleSheet.create({
       fontSize: 13,
       padding: 5,
     },
-    image: {
+    icon: {
+    //   borderColor: 'red',
+    //   borderWidth: 1,
       width: 20,
       height: 20,
     },
@@ -223,6 +299,8 @@ const styles = StyleSheet.create({
       borderColor: '#6F6F6F',
     },
     searchIcon: {
+    //   borderColor: 'red',
+    //   borderWidth: 1,
       width: 12,
       height: 15,
       padding: 10,
@@ -233,6 +311,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#0553', 
     },
     buttonContainer: {
+        // borderColor: 'red',
+        // borderWidth: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -290,6 +370,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginVertical: 10,
+        paddingHorizontal: 10,
     },
     listingsContainer: {
         flexGrow: 1, // Allow ScrollView to expand
