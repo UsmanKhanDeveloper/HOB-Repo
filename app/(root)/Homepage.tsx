@@ -104,7 +104,7 @@ const Homepage: React.FC = () => {
             <View style={styles.flexHorizontalContainer}>
 
             {/* vertical container */}
-            <View style={styles.flexVerticalContainer}>
+            <View style={styles.topBarVerticalContainer}>
                 <TouchableOpacity>
                     <Image style={styles.icon}
                     source={images.primary}
@@ -119,7 +119,7 @@ const Homepage: React.FC = () => {
             <Image style={styles.searchIcon} source={icons.search}></Image>
             </View> 
 
-            <View style={styles.flexVerticalContainer}>
+            <View style={styles.topBarVerticalContainer}>
                 {/* Modal is not part of the page structure but it's on TOP of it */}
                 <Modal
                     animationType="none"
@@ -143,9 +143,40 @@ const Homepage: React.FC = () => {
                         <TouchableOpacity onPress={toggleModal} style={styles.icon}>
 
                             {/* TESTING SEARCH ICON */}
-                        <Image style={styles.icon}source={icons.search}></Image>
+                        {/* <Image style={styles.icon}source={icons.search}></Image> */}
                         </TouchableOpacity>
-                        <Text style={styles.boldedText}>Menu Item 1</Text>
+                        <View style={styles.filterVerticalContainer}>
+                            <Text style={styles.titleText}>Filters</Text>
+
+                            <View style={styles.selectAViewContainer}>
+                            <Text>Select a view</Text>      
+                            </View>
+
+                            <View style={styles.flexHorizontalContainer}>
+                            
+                            <Image style={styles.icon}source={icons.arrowDown}></Image>
+                            <Text>Zones</Text>
+                            </View>
+
+                            <View style={styles.selectAViewContainer}>
+                            <Text>Search Zones</Text>      
+                            </View>
+
+                            <View style={styles.flexHorizontalContainer}>
+                            <Image style={styles.icon}source={icons.arrowDown}></Image>
+                            <Text>People</Text>
+                            </View>
+
+                            <View style={styles.flexHorizontalContainer}>
+                            <Image style={styles.icon}source={icons.arrowDown}></Image>
+                            <Text>Company</Text>
+                            </View>
+
+                            <View style={styles.flexHorizontalContainer}>
+                            <Image style={styles.icon}source={icons.arrowDown}></Image>
+                            <Text>Contract Time</Text>
+                            </View>
+                        </View>
                     </View>
                         
 
@@ -197,7 +228,20 @@ const Homepage: React.FC = () => {
 export default Homepage;
 
 const styles = StyleSheet.create({
+    selectAViewContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start', // align items to the left 
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 5,
+
+        borderWidth: 0.5,
+        borderColor: '#6F6F6F',
+    },
     overlayContainer: {
+        // borderColor: 'red',
+        // borderWidth: 1,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -211,25 +255,26 @@ const styles = StyleSheet.create({
       padding: 15,
     }, 
     filterMenuContainer: {
+        // borderColor: 'red',
+        // borderWidth: 1,
         flexDirection: 'row',
-        width: 330,
+        width: 340,
         height: 500,
-        padding: 20,
+        padding: 8,
         backgroundColor: 'white',
         borderRadius: 5,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         zIndex: 10, // Ensures it’s above the overlay
     },
-    verticalContainer: {
-    //   borderColor: 'black',
-    //   borderWidth: 1,
+    filterVerticalContainer: {
+    //   flexGrow: 1,
+    //   borderColor: 'red',
+    //   borderWidth: 1,  
       backgroundColor: '#fff',
       justifyContent: 'space-between',
       flexDirection: 'column',
     },
     centeredContainer: {
-    //   borderColor: 'black',
-    //   borderWidth: 1,
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
@@ -237,8 +282,6 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
     flexHorizontalContainer: {
-    //   borderColor: 'red',
-    //   borderWidth: 1,
       width: '100%',
       flexGrow: 1,
       flexDirection: 'row',
@@ -251,6 +294,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: 0,
     },
     flexVerticalContainer: {
+      borderColor: 'red',
+      borderWidth: 1,
+      flex: 1,
+      flexDirection: 'column',
+      // justifyContent: 'space-between',
+      // alignItems: 'center',
+      flexShrink: 0,
+      height: 60,
+      width: 39,
+      backgroundColor: '#fff',
+      padding: 10,
+    },
+    topBarVerticalContainer: {
     //   borderColor: 'red',
     //   borderWidth: 1,
       flex: 1,
@@ -269,6 +325,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
       },
+    titleText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
     iconText:  {
       fontSize: 10,
     },
