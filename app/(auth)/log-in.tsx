@@ -109,6 +109,13 @@ const LogIn = () => {
             Don't have an account?{" "}
             <Text className="text-primary-500">Sign Up</Text>
           </Link>
+            <Link
+                href="/guides"
+                className="text-lg text-center text-general-200 mt-10"
+            >
+              go to guides page?{" "}
+              <Text className="text-primary-500">Guides</Text>
+            </Link>
         </View>
       </View>
     </View>

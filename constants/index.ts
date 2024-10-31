@@ -34,7 +34,9 @@ import filters from "@/assets/icons/filters.png";import eyeOpen from "@/assets/i
 import eyeClose from "@/assets/icons/close-eye.png"
 import deleteCan from "@/assets/icons/delete.png"
 import favIcon from "@/assets/icons/heart.png"
-
+import sellingGuideSelection from "@/assets/images/Selling-Guide-Section.png";
+import rentingTenantGuideSelection from "@/assets/images/Tenant-Guide-Section.png";
+import rentingLandlordGuideSelection from "@/assets/images/Landlord-Guide-Section.png";
 
 export const images = {
     check,
@@ -44,6 +46,9 @@ export const images = {
     buyingGuidesSelection,
     appLogo,
     primary,
+    sellingGuideSelection,
+    rentingTenantGuideSelection,
+    rentingLandlordGuideSelection,
 };
 
 export const icons = {
