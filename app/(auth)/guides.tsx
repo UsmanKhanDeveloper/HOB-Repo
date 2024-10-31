@@ -26,7 +26,7 @@ const Guides = () => {
                     <View className="flex-row justify-between">
                         <TouchableOpacity className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center" onPress={() => router.push('../guide-Buying')}>
                             <Image
-                                source={images.buyingGuideSelection}
+                                source={images.buyingGuidesSelection}
                                 className="mb-2 mr-2"
                                 style={{ width: 200, height: 200, resizeMode: 'contain' }}
                             />
