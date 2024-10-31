@@ -27,7 +27,7 @@ import check from "@/assets/images/check.png";
 import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
 import houseHeader from "@/assets/images/house-header.png";
-import buyingGuidesSelection from "@/assets/images/buying-guides-selection.png";
+import buyingGuidesSelection from "@/assets/images/buying-guide-selection.png";
 import appLogo from "@/assets/images/app-logo.png";
 import primary from "@/assets/images/primary.png";
 import filters from "@/assets/icons/filters.png";import eyeOpen from "@/assets/icons/open-eye.png"
