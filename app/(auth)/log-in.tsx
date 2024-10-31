@@ -47,7 +47,8 @@ const LogIn = () => {
   }, [isLoaded, form]);
 
   return (
-    <View className="flex-1 bg-white">
+    <ScrollView>
+    <View className="flex-1 bg-white w-full h-full">
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
           <Image source={images.houseHeader} className="z-0 w-full h-[250px]" />
@@ -104,14 +105,14 @@ const LogIn = () => {
           <OAuth />
           <Link
             href="/sign-up"
-            className="text-lg text-center text-general-200 mt-10"
+            className="text-lg text-center text-general-200 mt-1"
           >
             Don't have an account?{" "}
             <Text className="text-primary-500">Sign Up</Text>
           </Link>
             <Link
                 href="/guides"
-                className="text-lg text-center text-general-200 mt-10"
+                className="text-lg text-center text-general-200 mt-1"
             >
               go to guides page?{" "}
               <Text className="text-primary-500">Guides</Text>
@@ -119,6 +120,7 @@ const LogIn = () => {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
