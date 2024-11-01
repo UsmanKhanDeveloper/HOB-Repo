@@ -139,42 +139,68 @@ const Homepage: React.FC = () => {
                         {/* Touching outside of the modal will dismiss it */}
 
                         <View style={styles.filterMenuContainer}>
-                        {/* Close Icon */}
-                        <TouchableOpacity onPress={toggleModal} style={styles.icon}>
+                        {/* Change this closing Icon to the filter menu*/}
 
-                            {/* TESTING SEARCH ICON */}
+                        {/* <TouchableOpacity onPress={toggleModal} style={styles.icon}> */}
                         {/* <Image style={styles.icon}source={icons.search}></Image> */}
-                        </TouchableOpacity>
+                        {/* </TouchableOpacity> */}
+
                         <View style={styles.filterVerticalContainer}>
                             <Text style={styles.titleText}>Filters</Text>
 
                             <View style={styles.selectAViewContainer}>
-                            <Text>Select a view</Text>      
+                            <Text>Select a view</Text>
+                            <Image style={styles.icon} source={icons.dropDownMenu}></Image>      
                             </View>
 
                             <View style={styles.flexHorizontalContainer}>
                             
                             <Image style={styles.icon}source={icons.arrowDown}></Image>
-                            <Text>Zones</Text>
+                            <Text style={styles.testText}>Zones</Text>
                             </View>
 
                             <View style={styles.selectAViewContainer}>
-                            <Text>Search Zones</Text>      
+                            <Text>Search Zones</Text>
+                            <Image style={styles.icon} source={icons.search}></Image>            
+                            </View>
+
+                            <View style={styles.filterVerticalContainer}>
+                            <View style={styles.flexHorizontalContainer}>
+                                <Image style={styles.icon} source={icons.square}></Image>
+
+                                {/* Placeholder text */}
+                                <Text style={styles.testText}> Zone 1</Text> 
+                            </View>
+
+                            <View style={styles.flexHorizontalContainer}>
+                                <Image style={styles.icon} source={icons.square}></Image>
+
+                                {/* Placeholder text */}
+                                <Text style={styles.testText}> Zone 2</Text> 
+                            </View>
+
+                            <View style={styles.flexHorizontalContainer}>
+                                <Image style={styles.icon} source={icons.square}></Image>
+
+                                {/* Placeholder text */}
+                                <Text style={styles.testText}> Zone 3</Text> 
+                            </View>
+
                             </View>
 
                             <View style={styles.flexHorizontalContainer}>
                             <Image style={styles.icon}source={icons.arrowDown}></Image>
-                            <Text>People</Text>
+                            <Text style={styles.testText}>People</Text>
                             </View>
 
                             <View style={styles.flexHorizontalContainer}>
                             <Image style={styles.icon}source={icons.arrowDown}></Image>
-                            <Text>Company</Text>
+                            <Text style={styles.testText}>Company</Text>
                             </View>
 
                             <View style={styles.flexHorizontalContainer}>
                             <Image style={styles.icon}source={icons.arrowDown}></Image>
-                            <Text>Contract Time</Text>
+                            <Text style={styles.testText}>Contract Time</Text>
                             </View>
                         </View>
                     </View>
@@ -235,7 +261,6 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
         borderRadius: 5,
-
         borderWidth: 0.5,
         borderColor: '#6F6F6F',
     },
@@ -260,16 +285,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: 340,
         height: 500,
-        padding: 8,
+        padding: 10,
         backgroundColor: 'white',
         borderRadius: 5,
         alignItems: 'flex-start',
         zIndex: 10, // Ensures it’s above the overlay
     },
     filterVerticalContainer: {
-    //   flexGrow: 1,
-    //   borderColor: 'red',
-    //   borderWidth: 1,  
+      flexGrow: 1,
+      borderColor: 'green',
+      borderWidth: 1,  
       backgroundColor: '#fff',
       justifyContent: 'space-between',
       flexDirection: 'column',
@@ -282,6 +307,8 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
     flexHorizontalContainer: {
+      borderColor: 'orange',
+      borderWidth: 1,
       width: '100%',
       flexGrow: 1,
       flexDirection: 'row',
@@ -326,6 +353,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
     titleText: {
+        paddingBottom: 10,
         fontSize: 24,
         fontWeight: 'bold',
     },
@@ -342,9 +370,16 @@ const styles = StyleSheet.create({
       fontSize: 13,
       padding: 5,
     },
+    testText: {
+      fontSize: 14,
+      borderColor: 'pink',
+      borderWidth: 1,
+    //   flexGrow: 1,
+      height: 25,
+    },
     icon: {
-    //   borderColor: 'red',
-    //   borderWidth: 1,
+      borderColor: 'blue',
+      borderWidth: 1,
       width: 20,
       height: 20,
     },
