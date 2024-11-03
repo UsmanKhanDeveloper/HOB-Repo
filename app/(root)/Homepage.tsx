@@ -296,9 +296,10 @@ const styles = StyleSheet.create({
     filterMenuContainer: {
         // borderColor: 'red',
         // borderWidth: 1,
+        // flexGrow: 1,
         flexDirection: 'row',
         width: 340,
-        height: 500,
+        // height: 500,
         padding: 10,
         backgroundColor: 'white',
         borderRadius: 5,
