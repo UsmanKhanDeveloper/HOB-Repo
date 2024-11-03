@@ -7,8 +7,16 @@ const Layout = () =>{
   return (
       <Stack>
         <Stack.Screen name="log-in" options={{ headerShown: false }} />
-        <Stack.Screen name="sign-up" options={{ headerShown: false }} />                   <Stack.Screen name="guides" options={{ headerShown: false }} />                    <Stack.Screen name="guide-Buying" options={{ headerShown: false }} />
+        <Stack.Screen name="sign-up" options={{ headerShown: false }} />
+          <Stack.Screen name="guides" options={{ headerShown: false }} />
+          <Stack.Screen name="guide-Buying" options={{ headerShown: false }} />
+        <Stack.Screen name="StepOnePrePurchase" options={{ headerShown: false }} />
+          <Stack.Screen name="StepTwoUnderstandingMarketCondition" options={{ headerShown: false }} />
+          <Stack.Screen name="StepThreeFindingAHome" options={{ headerShown: false }} />
+          <Stack.Screen name="StepFourMakingAnOffer" options={{ headerShown: false }} />
+          <Stack.Screen name="StepFivePostPurchase" options={{ headerShown: false }} />
       </Stack>
+
   );
 }
 export default Layout;
