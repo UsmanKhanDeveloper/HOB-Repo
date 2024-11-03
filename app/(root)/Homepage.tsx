@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Alert, Modal } fr
 import { Link, router, useNavigation} from "expo-router";
 import { icons, images } from "@/constants"; // Assuming your favorite icon is in this folder
 import { useAuth, useUser } from "@clerk/clerk-react"; // Importing useUser
+import CollapsibleMenu from './CollapsibleMenu'; // Importing CollapsibleMenu
 
 // Define the interface for a Property Listing
 interface Property {
@@ -19,6 +20,15 @@ interface Property {
 }
 
 const Homepage: React.FC = () => {
+
+    // for collapsible menu
+    const options = [
+        'Option 1',
+        'Option 2',
+        'Option 3',
+        'Another Option',
+        'More Options',
+      ];
 
     // Modal for filter menu
     const [modalVisible, setModalVisible] = useState(false);
@@ -153,40 +163,44 @@ const Homepage: React.FC = () => {
                             <Image style={styles.icon} source={icons.dropDownMenu}></Image>      
                             </View>
 
-                            <View style={styles.flexHorizontalContainer}>
-                            
+                            {/* <View style={styles.flexHorizontalContainer}>
                             <Image style={styles.icon}source={icons.arrowDown}></Image>
                             <Text style={styles.testText}>Zones</Text>
-                            </View>
+                            </View> */}
 
-                            <View style={styles.selectAViewContainer}>
+                            {/* <View style={styles.selectAViewContainer}>
                             <Text>Search Zones</Text>
                             <Image style={styles.icon} source={icons.search}></Image>            
-                            </View>
-
-                            <View style={styles.filterVerticalContainer}>
-                            <View style={styles.flexHorizontalContainer}>
-                                <Image style={styles.icon} source={icons.square}></Image>
-
-                                {/* Placeholder text */}
-                                <Text style={styles.testText}> Zone 1</Text> 
-                            </View>
+                            </View> */}
 
                             <View style={styles.flexHorizontalContainer}>
-                                <Image style={styles.icon} source={icons.square}></Image>
-
-                                {/* Placeholder text */}
-                                <Text style={styles.testText}> Zone 2</Text> 
+                                <Image style={styles.icon} source={icons.arrowDown}></Image>
+                                <CollapsibleMenu title="Zones" options={options} />
                             </View>
 
+                            {/* <View style={styles.filterVerticalContainer}>
                             <View style={styles.flexHorizontalContainer}>
-                                <Image style={styles.icon} source={icons.square}></Image>
+                                <Image style={styles.icon} source={icons.square}></Image> */}
 
                                 {/* Placeholder text */}
-                                <Text style={styles.testText}> Zone 3</Text> 
-                            </View>
+                                {/* <Text style={styles.testText}> Zone 1</Text> 
+                            </View> */}
 
-                            </View>
+                            {/* <View style={styles.flexHorizontalContainer}> */}
+                                {/* <Image style={styles.icon} source={icons.square}></Image> */}
+
+                                {/* Placeholder text */}
+                                {/* <Text style={styles.testText}> Zone 2</Text>  */}
+                            {/* </View> */}
+
+                            {/* <View style={styles.flexHorizontalContainer}>
+                                <Image style={styles.icon} source={icons.square}></Image> */}
+
+                                {/* Placeholder text */}
+                                {/* <Text style={styles.testText}> Zone 3</Text>  */}
+                            {/* </View> */}
+
+                            {/* </View> */}
 
                             <View style={styles.flexHorizontalContainer}>
                             <Image style={styles.icon}source={icons.arrowDown}></Image>
@@ -293,8 +307,8 @@ const styles = StyleSheet.create({
     },
     filterVerticalContainer: {
       flexGrow: 1,
-      borderColor: 'green',
-      borderWidth: 1,  
+    //   borderColor: 'green',
+    //   borderWidth: 1,  
       backgroundColor: '#fff',
       justifyContent: 'space-between',
       flexDirection: 'column',
@@ -307,8 +321,8 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
     flexHorizontalContainer: {
-      borderColor: 'orange',
-      borderWidth: 1,
+    //   borderColor: 'orange',
+    //   borderWidth: 1,
       width: '100%',
       flexGrow: 1,
       flexDirection: 'row',
@@ -372,14 +386,14 @@ const styles = StyleSheet.create({
     },
     testText: {
       fontSize: 14,
-      borderColor: 'pink',
-      borderWidth: 1,
+    //   borderColor: 'pink',
+    //   borderWidth: 1,
     //   flexGrow: 1,
       height: 25,
     },
     icon: {
-      borderColor: 'blue',
-      borderWidth: 1,
+    //   borderColor: 'blue',
+    //   borderWidth: 1,
       width: 20,
       height: 20,
     },
