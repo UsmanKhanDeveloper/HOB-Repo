@@ -43,6 +43,8 @@ export default function RootLayout() {
         <Stack.Screen name="+not-found" />
         <Stack.Screen name = "(app)" options={{ headerShown: false }} />
         <Stack.Screen name = "log-in" options={{ headerShown: false }} />
+        <Stack.Screen name="(realtor)" options={{ headerShown: false }} />
+
       </Stack>
     </ClerkProvider> 
   );
