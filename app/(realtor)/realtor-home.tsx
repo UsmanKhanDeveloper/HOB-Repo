@@ -24,6 +24,12 @@ const RealtorHomePage = () => {
     address: '',
     status: ''
   });
+  const [isListingModalVisible, setIsListingModalVisible] = useState(false);
+  const [newListing, setNewListing] = useState({
+    image: '',
+    price: '',
+    address: '',
+  });
   const [appointments, setAppointments] = useState([
     { clientName: 'John Doe', date: '2024-11-12', time: '10:00 AM', address: '1234 Elm St', status: 'Upcoming' },
     { clientName: 'Jane Smith', date: '2024-11-13', time: '2:00 PM', address: '5678 Oak Ave', status: 'Completed' },
@@ -31,7 +37,7 @@ const RealtorHomePage = () => {
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);
   const [isTimePickerVisible, setTimePickerVisible] = useState(false);
 
-  const [listings] = useState([
+  const [listings, setListings] = useState([
     { id: 1, image: images.houseHeader, price: '$450,000', address: '123 Elm St' },
     { id: 2, image: images.houseHeader, price: '$500,000', address: '456 Oak Ave' },
   ]);
@@ -70,6 +76,12 @@ const RealtorHomePage = () => {
     setAppointments(appointments.filter((_, i) => i !== index));
   };
 
+  const handleAddListing = () => {
+    setListings([...listings, { ...newListing, id: listings.length + 1 }]);
+    setNewListing({ image: '', price: '', address: '' });
+    setIsListingModalVisible(false);
+  };
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#f0f2f5' }}>
       {/* Header Section */}
@@ -95,12 +107,11 @@ const RealtorHomePage = () => {
           <Text style={styles.dashboardItemCount}>{appointments.length}</Text>
         </View>
       </View>
-
-      {/* Active Listings Section */}
-      <View style={{ padding: 20 }}>
+            {/* Active Listings Section */}
+            <View style={{ padding: 20 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Active Listings</Text>
-          <TouchableOpacity onPress={() => console.log('Add Listing')}>
+          <TouchableOpacity onPress={() => setIsListingModalVisible(true)}>
             <Ionicons name="add-circle-outline" size={24} color="#0286FF" />
           </TouchableOpacity>
         </View>
@@ -134,11 +145,42 @@ const RealtorHomePage = () => {
                 }}
               >
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>View Details</Text>
+                
               </TouchableOpacity>
             </View>
           </View>
         ))}
       </View>
+
+      {/* Modal to Add/Edit Listing */}
+      <ScrollView>
+      <Modal visible={isListingModalVisible} animationType="slide">
+        <View style={styles.modalContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Listing Price"
+            value={newListing.price}
+            onChangeText={(text) => setNewListing({ ...newListing, price: text })}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Listing Address"
+            value={newListing.address}
+            onChangeText={(text) => setNewListing({ ...newListing, address: text })}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Image URL"
+            value={newListing.image}
+            onChangeText={(text) => setNewListing({ ...newListing, image: text })}
+          />
+          <View style={styles.modalButtons}>
+            <Button title="Save Listing" onPress={handleAddListing} />
+            <Button title="Cancel" onPress={() => setIsListingModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
+    </ScrollView>
 
       {/* Leads Section */}
       <View style={{ padding: 20 }}>
@@ -260,11 +302,7 @@ const RealtorHomePage = () => {
             <Button title="Cancel" onPress={() => setIsModalVisible(false)} />
           </View>
         </View>
-      </Modal>
-
-      {/* Date and Time Pickers */}
-
-     
+      </Modal>    
     </ScrollView>
   );
 };
