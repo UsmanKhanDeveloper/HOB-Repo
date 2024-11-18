@@ -31,7 +31,7 @@ import buyingGuideSelection from "@/assets/images/buying-guide-selection.png";
 import sellingGuideSelection from "@/assets/images/Selling-Guide-Section.png";
 import rentingTenantGuideSelection from "@/assets/images/Tenant-Guide-Section.png";
 import rentingLandlordGuideSelection from "@/assets/images/Landlord-Guide-Section.png";
-
+import icon from  "@/assets/images/icon.png"
 export const images = {
     check,
     noResult,
@@ -41,6 +41,7 @@ export const images = {
     sellingGuideSelection,
     rentingTenantGuideSelection,
     rentingLandlordGuideSelection,
+    icon,
 };
 
 export const icons = {

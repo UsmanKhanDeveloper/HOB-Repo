@@ -27,7 +27,7 @@ const LogIn =() => {
     
           if (logInAttempt.status === "complete") {
             await setActive({ session: logInAttempt.createdSessionId });
-            router.replace("../Homepage");
+            router.replace("../(root)/(tabs)/home");
           } else {
             console.log(JSON.stringify(logInAttempt, null, 2));
             Alert.alert("Error", "Log in failed. Please try again.");
@@ -74,7 +74,16 @@ const LogIn =() => {
               className="mt-6"
             />
             <OAuth />
+
             <Link
+              href="../(root)/(tabs)/home"
+              className="text-lg text-center text-general-200 mt-10"
+            >
+              homepage?{" "}
+              <Text className="text-primary-500">home</Text>
+            </Link>
+
+            {/* <Link
               href="/sign-up"
               className="text-lg text-center text-general-200 mt-10"
             >
@@ -87,7 +96,7 @@ const LogIn =() => {
             >
               go to guides page?{" "}
               <Text className="text-primary-500">Guides</Text>
-            </Link>
+            </Link> */}
             </View>
           </View>
         </View>
