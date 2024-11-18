@@ -1,50 +1,110 @@
-import React from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  Button,
+  StyleSheet,
+  FlatList,
+  TextInput,
+  Image
+} from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { images } from '@/constants';
 
 const RealtorHomePage = () => {
-  // Sample data for properties, leads, and appointments
-  const listings = [
-    { id: 1, image: 'https://via.placeholder.com/150', price: '$350,000', address: '1234 Elm St' },
-    { id: 2, image: 'https://via.placeholder.com/150', price: '$500,000', address: '5678 Oak Ave' },
-  ];
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [newAppointment, setNewAppointment] = useState({
+    clientName: '',
+    date: '',
+    time: '',
+    address: '',
+    status: ''
+  });
+  const [appointments, setAppointments] = useState([
+    { clientName: 'John Doe', date: '2024-11-12', time: '10:00 AM', address: '1234 Elm St', status: 'Upcoming' },
+    { clientName: 'Jane Smith', date: '2024-11-13', time: '2:00 PM', address: '5678 Oak Ave', status: 'Completed' },
+  ]);
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+  const [isTimePickerVisible, setTimePickerVisible] = useState(false);
 
-  const leads = [
-    { name: 'John Doe', contact: 'john@example.com', status: 'New Lead' },
-    { name: 'Jane Smith', contact: 'jane@example.com', status: 'Follow Up' },
-  ];
+  const [listings] = useState([
+    { id: 1, image: images.houseHeader, price: '$450,000', address: '123 Elm St' },
+    { id: 2, image: images.houseHeader, price: '$500,000', address: '456 Oak Ave' },
+  ]);
 
-  const appointments = [
-    { date: '2024-11-12', time: '10:00 AM', address: '1234 Elm St' },
-    { date: '2024-11-13', time: '2:00 PM', address: '5678 Oak Ave' },
-  ];
+  const [leads] = useState([
+    { name: 'Alice Johnson', contact: 'alice@example.com', status: 'New Lead' },
+    { name: 'Bob Thompson', contact: 'bob@example.com', status: 'Contacted' },
+  ]);
+
+  const handleConfirmDate = (date: Date) => {
+    const formattedDate = date.toISOString().split('T')[0]; // e.g., "2024-11-15"
+    setNewAppointment({ ...newAppointment, date: formattedDate, status: 'Upcoming' });
+    setDatePickerVisible(false);
+  };
+
+  const handleConfirmTime = (time: Date) => {
+    const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // e.g., "2:00 PM"
+    setNewAppointment({ ...newAppointment, time: formattedTime });
+    setTimePickerVisible(false);
+  };
+
+  const handleAddAppointment = () => {
+    setAppointments([...appointments, newAppointment]);
+    setNewAppointment({ clientName: '', date: '', time: '', address: '', status: 'Upcoming' });
+    setIsModalVisible(false);
+  };
+
+  const handleEditAppointment = (index: number) => {
+    const appointment = appointments[index];
+    setNewAppointment(appointment);
+    setIsModalVisible(true);
+    setAppointments(appointments.filter((_, i) => i !== index)); // remove original before edit
+  };
+
+  const handleDeleteAppointment = (index: number) => {
+    setAppointments(appointments.filter((_, i) => i !== index));
+  };
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#f0f2f5' }}>
       {/* Header Section */}
-      <View style={{ backgroundColor: '#0286FF', padding: 20, alignItems: 'center' }}>
-        <Text style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }}>Welcome, Realtor!</Text>
-        <Text style={{ color: 'white', marginTop: 5, fontSize: 16 }}>Manage your listings, leads, and appointments here.</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Welcome, Realtor!</Text>
+        <Text style={styles.headerSubText}>
+          Manage your listings, leads, and appointments here.
+        </Text>
       </View>
 
       {/* Dashboard Section */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 20 }}>
-        <View style={{ alignItems: 'center', backgroundColor: '#fff', padding: 15, borderRadius: 10, elevation: 4 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Active Listings</Text>
-          <Text style={{ fontSize: 24, color: '#0286FF' }}>2</Text>
+      <View style={styles.dashboard}>
+        <View style={styles.dashboardItem}>
+          <Text style={styles.dashboardItemText}>Active Listings</Text>
+          <Text style={styles.dashboardItemCount}>{listings.length}</Text>
         </View>
-        <View style={{ alignItems: 'center', backgroundColor: '#fff', padding: 15, borderRadius: 10, elevation: 4 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Leads</Text>
-          <Text style={{ fontSize: 24, color: '#0286FF' }}>2</Text>
+        <View style={styles.dashboardItem}>
+          <Text style={styles.dashboardItemText}>Leads</Text>
+          <Text style={styles.dashboardItemCount}>{leads.length}</Text>
         </View>
-        <View style={{ alignItems: 'center', backgroundColor: '#fff', padding: 15, borderRadius: 10, elevation: 4 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Appointments</Text>
-          <Text style={{ fontSize: 24, color: '#0286FF' }}>2</Text>
+        <View style={styles.dashboardItem}>
+          <Text style={styles.dashboardItemText}>Appointments</Text>
+          <Text style={styles.dashboardItemCount}>{appointments.length}</Text>
         </View>
       </View>
 
-      {/* Listings Section */}
+      {/* Active Listings Section */}
       <View style={{ padding: 20 }}>
-        <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 10 }}>Current Listings</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Active Listings</Text>
+          <TouchableOpacity onPress={() => console.log('Add Listing')}>
+            <Ionicons name="add-circle-outline" size={24} color="#0286FF" />
+          </TouchableOpacity>
+        </View>
+
         {listings.map((listing) => (
           <View
             key={listing.id}
@@ -58,7 +118,7 @@ const RealtorHomePage = () => {
             }}
           >
             <Image
-              source={{ uri: listing.image }}
+              source={images.houseHeader}
               style={{ width: 100, height: 100, borderRadius: 8, marginRight: 15 }}
             />
             <View>
@@ -82,7 +142,12 @@ const RealtorHomePage = () => {
 
       {/* Leads Section */}
       <View style={{ padding: 20 }}>
-        <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 10 }}>Leads</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Leads</Text>
+          <TouchableOpacity onPress={() => console.log('Add Lead')}>
+            <Ionicons name="add-circle-outline" size={24} color="#0286FF" />
+          </TouchableOpacity>
+        </View>
         {leads.map((lead, index) => (
           <View
             key={index}
@@ -116,37 +181,174 @@ const RealtorHomePage = () => {
 
       {/* Appointments Section */}
       <View style={{ padding: 20 }}>
-        <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 10 }}>Upcoming Appointments</Text>
-        {appointments.map((appointment, index) => (
-          <View
-            key={index}
-            style={{
-              backgroundColor: '#ffffff',
-              marginVertical: 10,
-              borderRadius: 8,
-              padding: 15,
-              elevation: 2,
-            }}
-          >
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{appointment.date}</Text>
-            <Text style={{ fontSize: 14, color: '#555' }}>{appointment.time}</Text>
-            <Text style={{ fontSize: 14, color: '#555' }}>{appointment.address}</Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#0286FF',
-                padding: 8,
-                marginTop: 12,
-                borderRadius: 5,
-                alignItems: 'center',
-              }}
-            >
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>View Details</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
+        <View style={styles.sectionHeader}>
+          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Upcoming Appointments</Text>
+          <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+          <Ionicons name="add-circle-outline" size={24} color="#0286FF" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Add ScrollView here */}
+        <ScrollView style={{ marginTop: 10 }}>
+          <FlatList
+            data={appointments}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <View style={styles.appointmentCard}>
+                <Text style={{fontSize: 18, fontWeight: 'bold' }}>{item.clientName}</Text>
+                <Text style={styles.appointmentText}>{item.date}</Text>
+                <Text style={styles.appointmentText}>{item.time}</Text>
+                <Text style={styles.appointmentText}>{item.address}</Text>
+                <Text
+                  style={[
+                    styles.appointmentStatus,
+                    { color: item.status === 'Upcoming' ? '#28a745' : '#ff9800' },
+                  ]}
+                >
+                  {item.status}
+                </Text>
+                <View style={styles.appointmentActions}>
+                  <TouchableOpacity onPress={() => handleEditAppointment(index)}>
+                    <Text style={styles.appointmentActionText}>Edit</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => handleDeleteAppointment(index)}>
+                    <Text style={styles.appointmentActionText}>Delete</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          />
+        </ScrollView>
       </View>
+
+      {/* Modal to Add/Edit Appointment */}
+      <Modal visible={isModalVisible} animationType="slide">
+        <View style={styles.modalContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Client Name"
+            value={newAppointment.clientName}
+            onChangeText={(text) => setNewAppointment({ ...newAppointment, clientName: text })}
+            
+          />
+          <TouchableOpacity onPress={() => setDatePickerVisible(true)}>
+            <Text style={styles.input}>{newAppointment.date || 'Select Date'}</Text>
+          </TouchableOpacity>
+          <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirmDate}
+        onCancel={() => setDatePickerVisible(false)}
+      />
+          <TouchableOpacity onPress={() => setTimePickerVisible(true)}>
+            <Text style={styles.input}>{newAppointment.time || 'Select Time'}</Text>
+          </TouchableOpacity>
+          <DateTimePickerModal
+        isVisible={isTimePickerVisible}
+        mode="time"
+        onConfirm={handleConfirmTime}
+        onCancel={() => setTimePickerVisible(false)}
+      />
+          <TextInput
+            style={styles.input}
+            placeholder="Address"
+            value={newAppointment.address}
+            onChangeText={(text) => setNewAppointment({ ...newAppointment, address: text })}
+          />
+          <View style={styles.modalButtons}>
+            <Button title="Save Appointment" onPress={handleAddAppointment} />
+            <Button title="Cancel" onPress={() => setIsModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
+
+      {/* Date and Time Pickers */}
+
+     
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#0286FF',
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  headerSubText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  dashboard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  dashboardItem: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    width: '30%',
+    alignItems: 'center',
+  },
+  dashboardItemText: {
+    fontSize: 12,
+    fontWeight:'bold'
+  },
+  dashboardItemCount: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  appointmentCard: {
+    backgroundColor: '#ffffff',
+    padding: 20,
+    marginVertical: 10,
+    borderRadius: 8,
+    elevation: 2,
+  },
+  appointmentText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  appointmentStatus: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  appointmentActions: {
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between',
+  },
+  appointmentActionText: {
+    color: '#0286FF',
+    fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  input: {
+    borderBottomWidth: 1,
+    marginBottom: 15,
+    padding: 10,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
 
 export default RealtorHomePage;
