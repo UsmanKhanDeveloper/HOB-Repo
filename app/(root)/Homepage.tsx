@@ -5,6 +5,10 @@ import { Link, router, useNavigation} from "expo-router";
 import { icons, images } from "@/constants"; // Assuming your favorite icon is in this folder
 import { useAuth, useUser } from "@clerk/clerk-react"; // Importing useUser
 import CollapsibleMenu from './CollapsibleMenu'; // Importing CollapsibleMenu
+import { fetchPropertyData } from "../services/apiService";
+
+// const API_HOST = "zillow-com1.p.rapidapi.com"
+// const API_KEY= process.env.REACT_APP_RAPIDAPI_KEY;
 
 // Define the interface for a Property Listing
 interface Property {
@@ -20,6 +24,22 @@ interface Property {
 }
 
 const Homepage: React.FC = () => {
+
+    // for API Call
+    const [apiProperties, setProperties] = useState<any[]>([]);
+    const [error, setError] = useState<string | null>(null);
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const data = await fetchPropertyData("Toronto, ON");
+    //             setProperties(data);
+    //         } catch (error) {
+    //             setError("Failed to fetch property data");
+    //         }
+    //     };
+    //     fetchData();
+    // }, []);
 
     // for collapsible menu
     const options = [
@@ -158,7 +178,7 @@ const Homepage: React.FC = () => {
                         <View style={styles.filterVerticalContainer}>
                             <Text style={styles.titleText}>Filters</Text>
 
-                            <View style={styles.selectAViewContainer}>
+                            <View style={styles.selectAViewContainer}>                                                 
                             <Text>Select a view</Text>
                             <Image style={styles.icon} source={icons.dropDownMenu}></Image>      
                             </View>
@@ -239,6 +259,17 @@ const Homepage: React.FC = () => {
     <Text style={styles.listingHeader}>Property Listings</Text>
     </View>
 
+    {/* <View style={styles.testView}>
+        {error && <p>{error}</p>}
+        {properties.map((property, index) => (
+            <View key={index}>
+                <Text>{property.address}</Text>
+                <Text>{property.price}</Text> */}
+                {/* add more property details here */}
+            {/* </View> */}
+        {/* ))} */}
+    {/* </View> */}
+
 {/* Listings ScrollView */}
             <ScrollView style={styles.listingsContainer}>
                 {properties.map((property) => (
@@ -268,6 +299,10 @@ const Homepage: React.FC = () => {
 export default Homepage;
 
 const styles = StyleSheet.create({
+    testView: {
+        borderColor: 'red',
+        borderWidth: 1,
+    },
     selectAViewContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
