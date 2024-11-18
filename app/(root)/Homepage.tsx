@@ -10,7 +10,7 @@ function Homepage(){
     return (<View style={styles.container}>
     <Image
       style={styles.image}
-      source={images.appLogo}
+      source={images.icon}
       contentFit="cover"
       transition={1000} 
     />
