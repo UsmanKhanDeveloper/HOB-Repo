@@ -52,8 +52,11 @@ const SignUp = () => {
         code: verification.code,
       });
       if (completeSignUp.status === "complete") {
-        await fetchAPI("/(api)/user", {
+        await fetchAPI("https://4c82-174-92-111-95.ngrok-free.app/api/user", {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             name: form.name,
             email: form.email,
@@ -81,9 +84,9 @@ const SignUp = () => {
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
-        <Image source={images.houseHeader} className="z-0 w-full h-[250px]"/>
-        <Text className="text-2xl text-black font-JakartaBold text-center text-[#0286FF] bottom-10">
-        Create Your Account
+          <Image source={images.houseHeader} className="z-0 w-full h-[250px]" />
+          <Text className="text-2xl text-black font-JakartaBold text-center text-[#0286FF] bottom-10">
+            Create Your Account
           </Text>
         </View>
         <View className="p-5">
@@ -177,9 +180,9 @@ const SignUp = () => {
             <CustomButton
               title="Browse Home"
               onPress={() => {
-                setShowSuccessModal(false)
-                router.push('../Homepage')}}
-
+                setShowSuccessModal(false);
+                router.push("../Homepage");
+              }}
               className="mt-5"
             />
           </View>

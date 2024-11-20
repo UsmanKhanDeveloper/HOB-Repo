@@ -26,7 +26,7 @@ const Guides = () => {
           <View className="flex-row justify-between">
             <TouchableOpacity
               className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center"
-              onPress={() => router.push("../BuyingGuides/guide-Buying")}
+              onPress={() => router.push("/(guides)/BuyingGuides/guide-Buying")}
             >
               <Image
                 source={images.buyingGuideSelection}
@@ -40,7 +40,9 @@ const Guides = () => {
 
             <TouchableOpacity
               className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center"
-              onPress={() => router.push("../SellingGuides/guide-Selling")}
+              onPress={() =>
+                router.push("/(guides)/SellingGuides/guide-Selling")
+              }
             >
               <Image
                 source={images.sellingGuideSelection}
@@ -57,7 +59,9 @@ const Guides = () => {
           <View className="flex-row justify-between">
             <TouchableOpacity
               className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center"
-              onPress={() => router.push("../guide-Buying")}
+              onPress={() =>
+                router.push("/(guides)/SellingGuides/guide-Selling")
+              }
             >
               <Image
                 source={images.rentingTenantGuideSelection}
@@ -71,7 +75,9 @@ const Guides = () => {
 
             <TouchableOpacity
               className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center"
-              onPress={() => router.push("../guide-Buying")}
+              onPress={() =>
+                router.push("/(guides)/SellingGuides/guide-Selling")
+              }
             >
               <Image
                 source={images.rentingLandlordGuideSelection}
