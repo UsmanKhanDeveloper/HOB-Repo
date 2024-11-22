@@ -58,12 +58,12 @@ const SignUp = () => {
           state: "success",
         });
 
-        // // Role-based redirection after successful verification
-        // if (role === 'realtor') {
-        //   router.push('/realtor-home'); // Redirect to Realtor's home
-        // } else if (role === 'User') {
-        //   router.push('/Homepage'); // Redirect to User's home
-        // }
+      // Role-based redirection
+      if (role === "realtor") {
+        router.push("/realtor-home"); // Redirect to Realtor Home
+      } else if (role === "User") {
+        router.push("/Homepage"); // Redirect to User Homepage
+      }
 
       } else {
         setVerification({
