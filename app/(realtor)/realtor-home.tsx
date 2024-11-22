@@ -72,7 +72,7 @@ const RealtorHomePage = () => {
     const appointment = appointments[index];
     setNewAppointment(appointment);
     setIsModalVisible(true);
-    setAppointments(appointments.filter((_, i) => i !== index)); // remove original before edit
+    setAppointments(appointments.filter((_, i) => i !== index)); 
   };
 
   const handleDeleteAppointment = (index: number) => {
@@ -121,7 +121,6 @@ const handleFollowUp = (lead: Lead) => {
     console.log('Lead status is not "New Lead", cannot follow up.');
   }
 };
-
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#f0f2f5' }}>
