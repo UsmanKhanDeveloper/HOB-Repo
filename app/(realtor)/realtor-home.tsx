@@ -9,7 +9,9 @@ import {
   StyleSheet,
   FlatList,
   TextInput,
-  Image
+  Image,
+  Linking,
+  Alert
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -29,6 +31,7 @@ const RealtorHomePage = () => {
     image: '',
     price: '',
     address: '',
+    description: ''
   });
   const [appointments, setAppointments] = useState([
     { clientName: 'John Doe', date: '2024-11-12', time: '10:00 AM', address: '1234 Elm St', status: 'Upcoming' },
@@ -43,8 +46,8 @@ const RealtorHomePage = () => {
   ]);
 
   const [leads] = useState([
-    { name: 'Alice Johnson', contact: 'alice@example.com', status: 'New Lead' },
-    { name: 'Bob Thompson', contact: 'bob@example.com', status: 'Contacted' },
+    { name: 'Aryan Mantrawadi', contact: 'aryan@gmail.com', status: 'New Lead' },
+    { name: 'Bob Thompson', contact: 'bob@gmail.com', status: 'Contacted' },
   ]);
 
   const handleConfirmDate = (date: Date) => {
@@ -78,9 +81,47 @@ const RealtorHomePage = () => {
 
   const handleAddListing = () => {
     setListings([...listings, { ...newListing, id: listings.length + 1 }]);
-    setNewListing({ image: '', price: '', address: '' });
+    setNewListing({ image: '', price: '', address: '', description: '' });
     setIsListingModalVisible(false);
   };
+
+interface Lead {
+  status: string; 
+  contact: string;
+  name: string; 
+}
+
+const handleFollowUp = (lead: Lead) => {
+  if (lead.status === 'New Lead') {
+    const emailBody = `Hi ${lead.name}, I would like to follow up regarding your interest in our listings.`;
+    const emailSubject = 'Follow Up';
+
+    const emailUrl = `mailto:${lead.contact}?subject=${encodeURIComponent(
+      emailSubject
+    )}&body=${encodeURIComponent(emailBody)}`;
+
+    // Attempt to open the default email client
+    Linking.canOpenURL(emailUrl)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(emailUrl).catch((err) =>
+            console.error('Error opening email client:', err)
+          );
+        } else {
+          Alert.alert(
+            'Email Not Configured',
+            'No email client is set up on your device.'
+          );
+        }
+      })
+      .catch((err) =>
+        console.error('Error checking email client availability:', err)
+      );
+  } else {
+    console.log('Lead status is not "New Lead", cannot follow up.');
+  }
+};
+
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#f0f2f5' }}>
@@ -168,6 +209,12 @@ const RealtorHomePage = () => {
             value={newListing.address}
             onChangeText={(text) => setNewListing({ ...newListing, address: text })}
           />
+            <TextInput
+            style={styles.input}
+            placeholder="Listing Description"
+            value={newListing.address}
+            onChangeText={(text) => setNewListing({ ...newListing, description: text })}
+          />
           <TextInput
             style={styles.input}
             placeholder="Image URL"
@@ -184,42 +231,38 @@ const RealtorHomePage = () => {
 
       {/* Leads Section */}
       <View style={{ padding: 20 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Leads</Text>
-          <TouchableOpacity onPress={() => console.log('Add Lead')}>
-            <Ionicons name="add-circle-outline" size={24} color="#0286FF" />
+      <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Leads</Text>
+      {leads.map((lead, index) => (
+        <View
+          key={index}
+          style={{
+            backgroundColor: '#ffffff',
+            marginVertical: 10,
+            borderRadius: 8,
+            padding: 15,
+            elevation: 2,
+          }}
+        >
+          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{lead.name}</Text>
+          <Text style={{ fontSize: 14, color: '#555' }}>{lead.contact}</Text>
+          <Text style={{ fontSize: 14, color: lead.status === 'New Lead' ? '#28a745' : '#ff9800' }}>
+            {lead.status}
+          </Text>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#0286FF',
+              padding: 8,
+              marginTop: 12,
+              borderRadius: 5,
+              alignItems: 'center',
+            }}
+            onPress={() => handleFollowUp(lead)}
+          >
+            <Text style={{ color: 'white', fontWeight: 'bold' }}>Follow Up</Text>
           </TouchableOpacity>
         </View>
-        {leads.map((lead, index) => (
-          <View
-            key={index}
-            style={{
-              backgroundColor: '#ffffff',
-              marginVertical: 10,
-              borderRadius: 8,
-              padding: 15,
-              elevation: 2,
-            }}
-          >
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{lead.name}</Text>
-            <Text style={{ fontSize: 14, color: '#555' }}>{lead.contact}</Text>
-            <Text style={{ fontSize: 14, color: lead.status === 'New Lead' ? '#28a745' : '#ff9800' }}>
-              {lead.status}
-            </Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#0286FF',
-                padding: 8,
-                marginTop: 12,
-                borderRadius: 5,
-                alignItems: 'center',
-              }}
-            >
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>Follow Up</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
+      ))}
+    </View>
 
       {/* Appointments Section */}
       <View style={{ padding: 20 }}>
