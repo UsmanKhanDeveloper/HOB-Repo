@@ -17,14 +17,8 @@ import StepTwoUnderstandingMarketCondition from "@/app/(guides)/BuyingGuides/Ste
 import StepThreeFindingAHome from "@/app/(guides)/BuyingGuides/StepThreeFindingAHome";
 import StepFourMakingAnOffer from "@/app/(guides)/BuyingGuides/StepFourMakingAnOffer";
 import StepFivePostPurchase from "@/app/(guides)/BuyingGuides/StepFivePostPurchase";
-
-interface Question {
-  text: string;
-  options: string[];
-  correctAnswer: string;
-  correctExplanation: string;
-  incorrectExplanation: string;
-}
+import TestDatabasePage from "./TestDatabasePage";
+import TestDatabasePageDynamic from "./TestDatabasePageDynamic";
 
 const guideBuying = () => {
   const router = useRouter();
@@ -48,6 +42,7 @@ const guideBuying = () => {
           ‣ Navigate Each Step Answering Questions to Track Your Progress
         </Text>
         {/* Step Components below */}
+        <TestDatabasePage />
         <StepOnePrePurchasing />
         <StepTwoUnderstandingMarketCondition />
         <StepThreeFindingAHome />

@@ -53,19 +53,20 @@ const SignUp = () => {
         code: verification.code,
       });
       if (completeSignUp.status === "complete") {
-        await setActive({ session: completeSignUp.createdSessionId });
-        setVerification({
-          ...verification,
-          state: "success",
-        });
-
-      // Role-based redirection
-      if (role === "realtor") {
-        router.push("/realtor-home"); // Redirect to Realtor Home
-      } else if (role === "User") {
-        router.push("/Homepage"); // Redirect to User Homepage
-      }
-
+        await fetchAPI(
+          "https://b096-2605-8d80-6c3-f7e8-c4f-9f87-302f-3eed.ngrok-free.app/api/user",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: form.name,
+              email: form.email,
+              clerkId: completeSignUp.createdUserId,
+            }),
+          }
+        );
       } else {
         setVerification({
           ...verification,
