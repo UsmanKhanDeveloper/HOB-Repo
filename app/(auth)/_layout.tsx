@@ -1,9 +1,7 @@
-import { Stack } from 'expo-router';
-import React from 'react';
+import { Stack } from "expo-router";
+import React from "react";
 
-
-const Layout = () =>{
-
+const Layout = () => {
   return (
       <Stack>
         <Stack.Screen name="log-in" options={{ headerShown: false }} />
@@ -13,5 +11,5 @@ const Layout = () =>{
         <Stack.Screen name="forgot-password" options={{headerShown: false}}/>
       </Stack>
   );
-}
+};
 export default Layout;

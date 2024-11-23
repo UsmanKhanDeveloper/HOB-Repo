@@ -10,6 +10,7 @@ import OAuth from "@/components/OAuth";
 import CustomRadioButton from "@/components/RadioButtons"; 
 import { icons, images } from "@/constants";
 import React from "react";
+import { fetchAPI } from "@/lib/fetch";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -85,9 +86,9 @@ const SignUp = () => {
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
-          <Image source={images.houseHeader} className="z-0 w-full h-[250px]" />
-          <Text className="text-2xl text-black font-JakartaBold text-center text-[#0286FF] bottom-10">
-            Create Your Account
+            <Image source={images.houseHeader} className="z-0 w-full h-[250px]"  />
+            <Text className="text-2xl text-black font-JakartaBold text-center text-[#0286FF] bottom-10">
+                Create Your Account
           </Text>
         </View>
         <View className="p-5">
@@ -203,3 +204,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
