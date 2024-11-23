@@ -52,17 +52,20 @@ const SignUp = () => {
         code: verification.code,
       });
       if (completeSignUp.status === "complete") {
-        await fetchAPI("https://4c82-174-92-111-95.ngrok-free.app/api/user", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: form.name,
-            email: form.email,
-            clerkId: completeSignUp.createdUserId,
-          }),
-        });
+        await fetchAPI(
+          "https://b096-2605-8d80-6c3-f7e8-c4f-9f87-302f-3eed.ngrok-free.app/api/user",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: form.name,
+              email: form.email,
+              clerkId: completeSignUp.createdUserId,
+            }),
+          }
+        );
       } else {
         setVerification({
           ...verification,
