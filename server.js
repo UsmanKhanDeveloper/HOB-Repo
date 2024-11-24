@@ -48,20 +48,56 @@ app.post('/api/user', async (req, res) => {
 });
 
 // Endpoint to fetch substeps
+// server.js (Add this to fetch bullets with substeps)
 app.get('/api/substeps', async (req, res) => {
+  const stepNumber = req.query.step_number;
+  const includeBullets = req.query.include_bullets === "true";
+
+  if (!stepNumber) {
+    return res.status(400).json({ error: 'Missing step_number query parameter' });
+  }
+
+  try {
+    // Fetch substeps based on step number
+    const substepsResult = await client.query(
+      'SELECT * FROM substeps WHERE step_number = $1',
+      [stepNumber]
+    );
+    const substeps = substepsResult.rows;
+
+    // If include_bullets is true, fetch bullets for each substep
+    if (includeBullets) {
+      for (const substep of substeps) {
+        const bulletsResult = await client.query(
+          'SELECT * FROM bullets WHERE substep_id = $1',
+          [substep.id]
+        );
+        substep.bullets = bulletsResult.rows; // Attach bullets to substep
+      }
+    }
+
+    res.json(substeps);
+  } catch (error) {
+    console.error('Error fetching substeps:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+//API route/endpoint to fetch questions
+app.get('/api/questions', async (req, res) => {
   const stepNumber = req.query.step_number;
   if (!stepNumber) {
     return res.status(400).json({ error: 'Missing step_number query parameter' });
   }
 
   try {
-    const substepsResult = await client.query(
-      'SELECT * FROM substeps WHERE step_number = $1',
+    const result = await client.query(
+      'SELECT * FROM questions WHERE step_number = $1',
       [stepNumber]
     );
-    res.json(substepsResult.rows);
+    res.json(result.rows);
   } catch (error) {
-    console.error('Error fetching substeps:', error);
+    console.error('Error fetching questions:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

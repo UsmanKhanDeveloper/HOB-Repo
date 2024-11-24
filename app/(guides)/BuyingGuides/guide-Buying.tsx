@@ -43,11 +43,11 @@ const guideBuying = () => {
         </Text>
         {/* Step Components below */}
         <TestDatabasePage />
-        <StepOnePrePurchasing />
+        {/* <StepOnePrePurchasing />
         <StepTwoUnderstandingMarketCondition />
         <StepThreeFindingAHome />
         <StepFourMakingAnOffer />
-        <StepFivePostPurchase />
+        <StepFivePostPurchase /> */}
       </ScrollView>
     </>
   );
