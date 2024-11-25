@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import { fetchPropertyData } from '../services/apiService';
 
 interface CollapsibleMenuProps {
   title: string;
   options: string[];
 }
 
-const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title, options }) => {
+const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   // Filter options based on the search term
-  const filteredOptions = options.filter(option =>
-    option.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredOptions = options.filter(option =>
+  //   option.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+  
+  // Search is sent to API
+  const search = async (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+
+    try {
+      const result = await fetchPropertyData(searchTerm);
+      // set it in a variable 
+      setSearchResults(result);
+    }
+
+    catch (error) {
+      console.error("Error fetching property data:", error);
+      throw error;
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -29,12 +47,12 @@ const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title, options }) => 
           <TextInput
             placeholder="Search..."
             value={searchTerm}
-            onChangeText={setSearchTerm}
+            onChangeText={search} // called when a text input changes
             style={styles.input}
           />
-          {filteredOptions.length > 0 ? (
+          {searchResults.length > 0 ? (
             <FlatList
-              data={filteredOptions}
+              data={searchResults}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => <Text style={styles.option}>{item}</Text>}
             />

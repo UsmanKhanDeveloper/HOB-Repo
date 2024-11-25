@@ -29,18 +29,6 @@ const Homepage: React.FC = () => {
     const [apiProperties, setProperties] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const data = await fetchPropertyData("Toronto, ON");
-    //             setProperties(data);
-    //         } catch (error) {
-    //             setError("Failed to fetch property data");
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
-
     // for collapsible menu
     const options = [
         'Option 1',
@@ -195,7 +183,7 @@ const Homepage: React.FC = () => {
 
                             <View style={styles.flexHorizontalContainer}>
                                 <Image style={styles.icon} source={icons.arrowDown}></Image>
-                                <CollapsibleMenu title="Zones" options={options} />
+                                <CollapsibleMenu title="Zones"/>
                             </View>
 
                             {/* <View style={styles.filterVerticalContainer}>
