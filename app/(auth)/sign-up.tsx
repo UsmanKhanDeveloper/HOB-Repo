@@ -10,10 +10,12 @@ import OAuth from "@/components/OAuth";
 import CustomRadioButton from "@/components/RadioButtons"; 
 import { icons, images } from "@/constants";
 import React from "react";
+import { fetchAPI } from "@/lib/fetch";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -40,11 +42,12 @@ const SignUp = () => {
         state: "pending",
       });
     } catch (err: any) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
       console.log(JSON.stringify(err, null, 2));
       Alert.alert("Error", err.errors[0].longMessage);
     }
   };
-
   const onPressVerify = async () => {
     if (!isLoaded) return;
     try {
@@ -52,6 +55,20 @@ const SignUp = () => {
         code: verification.code,
       });
       if (completeSignUp.status === "complete") {
+        await fetchAPI(
+          "https://b096-2605-8d80-6c3-f7e8-c4f-9f87-302f-3eed.ngrok-free.app/api/user",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: form.name,
+              email: form.email,
+              clerkId: completeSignUp.createdUserId,
+            }),
+          }
+        );
         await setActive({ session: completeSignUp.createdSessionId });
         setVerification({
           ...verification,
@@ -60,7 +77,7 @@ const SignUp = () => {
 
       // Role-based redirection
       if (role === "realtor") {
-        router.push("/realtor-home"); // Redirect to Realtor Home
+        router.push("./realtor-home"); // Redirect to Realtor Home
       } else if (role === "User") {
         router.push("/Homepage"); // Redirect to User Homepage
       }
@@ -73,6 +90,8 @@ const SignUp = () => {
         });
       }
     } catch (err: any) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
       setVerification({
         ...verification,
         error: err.errors[0].longMessage,
@@ -80,7 +99,6 @@ const SignUp = () => {
       });
     }
   };
-
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
@@ -105,6 +123,20 @@ const SignUp = () => {
             textContentType="emailAddress"
             value={form.email}
             onChangeText={(value) => setForm({ ...form, email: value })}
+          />
+          <InputField
+            label="Password"
+            placeholder="Enter password"
+            icon={icons.lock}
+            secureTextEntry={true}
+            textContentType="password"
+            value={form.password}
+            onChangeText={(value) => setForm({ ...form, password: value })}
+          />
+          <CustomButton
+            title="Sign Up"
+            onPress={onSignUpPress}
+            className="mt-6"
           />
           <View className="relative">
             <InputField
@@ -144,11 +176,14 @@ const SignUp = () => {
 
           <CustomButton title="Sign Up" onPress={onSignUpPress} className="mt-6" />
           <OAuth />
-          <Link href="/log-in" className="text-lg text-center text-general-200 mt-5">
+          <Link
+            href="/log-in"
+            className="text-lg text-center text-general-200 mt-5"
+          >
             Already have an account?{" "}
             <Text className="text-primary-500">Log In</Text>
           </Link>
-          <Link href="/realtor-home" className="text-lg text-center text-general-200 mt-5">
+          <Link href="./realtor-home" className="text-lg text-center text-general-200 mt-5">
             realtorhome?{" "}
             <Text className="text-primary-500">realtor</Text> //TODO: REMOVE BYPASS AFTER DONE
           </Link>
@@ -162,7 +197,9 @@ const SignUp = () => {
           }}
         >
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-            <Text className="font-JakartaExtraBold text-2xl mb-2">Verification</Text>
+            <Text className="font-JakartaExtraBold text-2xl mb-2">
+              Verification
+            </Text>
             <Text className="font-Jakarta mb-5">
               We've sent a verification code to {form.email}.
             </Text>
@@ -172,18 +209,31 @@ const SignUp = () => {
               placeholder={"12345"}
               value={verification.code}
               keyboardType="numeric"
-              onChangeText={(code) => setVerification({ ...verification, code })}
+              onChangeText={(code) =>
+                setVerification({ ...verification, code })
+              }
             />
             {verification.error && (
-              <Text className="text-red-500 text-sm mt-1">{verification.error}</Text>
+              <Text className="text-red-500 text-sm mt-1">
+                {verification.error}
+              </Text>
             )}
-            <CustomButton title="Verify Email" onPress={onPressVerify} className="mt-5 bg-success-500" />
+            <CustomButton
+              title="Verify Email"
+              onPress={onPressVerify}
+              className="mt-5 bg-success-500"
+            />
           </View>
         </ReactNativeModal>
         <ReactNativeModal isVisible={showSuccessModal}>
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-            <Image source={images.check} className="w-[110px] h-[110px] mx-auto my-5" />
-            <Text className="text-3xl font-JakartaBold text-center">Verified</Text>
+            <Image
+              source={images.check}
+              className="w-[110px] h-[110px] mx-auto my-5"
+            />
+            <Text className="text-3xl font-JakartaBold text-center">
+              Verified
+            </Text>
             <Text className="text-base text-gray-400 font-Jakarta text-center mt-2">
               You have successfully verified your account.
             </Text>
@@ -191,7 +241,7 @@ const SignUp = () => {
               title="Browse Home"
               onPress={() => {
                 setShowSuccessModal(false);
-                router.push('/(root)/Homepage');
+                router.push("../Homepage");
               }}
               className="mt-5"
             />
@@ -201,5 +251,4 @@ const SignUp = () => {
     </ScrollView>
   );
 };
-
 export default SignUp;
