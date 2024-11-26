@@ -12,13 +12,12 @@ import {
 import { useRouter } from "expo-router";
 import { images } from "@/constants";
 import { SafeAreaView } from "react-native-safe-area-context";
-import StepOnePrePurchasing from "@/app/(guides)/BuyingGuides/StepOnePrePurchasing";
-import StepTwoUnderstandingMarketCondition from "@/app/(guides)/BuyingGuides/StepTwoUnderstandingMarketCondition";
-import StepThreeFindingAHome from "@/app/(guides)/BuyingGuides/StepThreeFindingAHome";
-import StepFourMakingAnOffer from "@/app/(guides)/BuyingGuides/StepFourMakingAnOffer";
-import StepFivePostPurchase from "@/app/(guides)/BuyingGuides/StepFivePostPurchase";
+import StepOnePrePurchasing from "./StepOnePrePurchasing";
+import StepTwoUnderstandingMarketCondition from "./StepTwoUnderstandingMarketCondition";
+import StepThreeFindingAHome from "./StepThreeFindingAHome";
+import StepFourMakingAnOffer from "./StepFourMakingAnOffer";
+import StepFivePostPurchase from "./StepFivePostPurchase";
 import TestDatabasePage from "./TestDatabasePage";
-import TestDatabasePageDynamic from "./TestDatabasePageDynamic";
 
 const guideBuying = () => {
   const router = useRouter();

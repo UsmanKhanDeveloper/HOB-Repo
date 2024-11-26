@@ -1,7 +1,7 @@
 import { useSignUp } from "@clerk/clerk-expo";
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, ScrollView, Text, View } from "react-native";
+import { Alert, Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { ReactNativeModal } from "react-native-modal";
 
 import CustomButton from "@/components/CustomButton";
@@ -77,7 +77,7 @@ const SignUp = () => {
 
       // Role-based redirection
       if (role === "realtor") {
-        router.push("/realtor-home"); // Redirect to Realtor Home
+        router.push("./realtor-home"); // Redirect to Realtor Home
       } else if (role === "User") {
         router.push("/Homepage"); // Redirect to User Homepage
       }
@@ -183,7 +183,7 @@ const SignUp = () => {
             Already have an account?{" "}
             <Text className="text-primary-500">Log In</Text>
           </Link>
-          <Link href="/realtor-home" className="text-lg text-center text-general-200 mt-5">
+          <Link href="./realtor-home" className="text-lg text-center text-general-200 mt-5">
             realtorhome?{" "}
             <Text className="text-primary-500">realtor</Text> //TODO: REMOVE BYPASS AFTER DONE
           </Link>
