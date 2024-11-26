@@ -41,8 +41,8 @@ const RealtorHomePage = () => {
   const [isTimePickerVisible, setTimePickerVisible] = useState(false);
 
   const [listings, setListings] = useState([
-    { id: 1, image: images.houseHeader, price: '$450,000', address: '123 Elm St' },
-    { id: 2, image: images.houseHeader, price: '$500,000', address: '456 Oak Ave' },
+    { id: 1, image: images.houseHeader, price: '$450,000', address: '123 Elm St', description: '' },
+    { id: 2, image: images.houseHeader, price: '$500,000', address: '456 Oak Ave', description: '' },
   ]);
 
   const [leads] = useState([
@@ -83,6 +83,17 @@ const RealtorHomePage = () => {
     setListings([...listings, { ...newListing, id: listings.length + 1 }]);
     setNewListing({ image: '', price: '', address: '', description: '' });
     setIsListingModalVisible(false);
+  };
+
+  const handleEditListing = (index: number) => {
+    const listing = listings[index]; // Get the selected listing
+    setNewListing(listing); // Populate the modal with the listing details
+    setIsModalVisible(true); // Show the modal for editing
+    setListings(listings.filter((_, i) => i !== index)); // Update the listings state to exclude the edited listing
+  };
+  
+  const handleDeleteListing = (index: number) => {
+    setListings(listings.filter((_, i) => i !== index)); // Remove the listing from listings
   };
 
 interface Lead {
@@ -148,49 +159,44 @@ const handleFollowUp = (lead: Lead) => {
         </View>
       </View>
             {/* Active Listings Section */}
-            <View style={{ padding: 20 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Active Listings</Text>
-          <TouchableOpacity onPress={() => setIsListingModalVisible(true)}>
-            <Ionicons name="add-circle-outline" size={24} color="#0286FF" />
-          </TouchableOpacity>
-        </View>
+{/* Listings Section */}
+<View style={{ padding: 20 }}>
+  <View style={styles.sectionHeader}>
+    <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Active Listings</Text>
+    <TouchableOpacity onPress={() => setIsListingModalVisible(true)}>
+      <Ionicons name="add-circle-outline" size={24} color="#0286FF" />
+    </TouchableOpacity>
+  </View>
 
-        {listings.map((listing) => (
-          <View
-            key={listing.id}
-            style={{
-              flexDirection: 'row',
-              backgroundColor: '#ffffff',
-              marginVertical: 10,
-              borderRadius: 8,
-              padding: 15,
-              elevation: 2,
-            }}
-          >
-            <Image
-              source={images.houseHeader}
-              style={{ width: 100, height: 100, borderRadius: 8, marginRight: 15 }}
-            />
-            <View>
-              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{listing.price}</Text>
-              <Text style={{ fontSize: 14, color: '#555' }}>{listing.address}</Text>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: '#0286FF',
-                  padding: 8,
-                  marginTop: 12,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                }}
-              >
-                <Text style={{ color: 'white', fontWeight: 'bold' }}>View Details</Text>
-                
+  {/* Add ScrollView here */}
+  <ScrollView style={{ marginTop: 10 }}>
+    <FlatList
+      data={listings}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item, index }) => (
+        <View style={styles.appointmentCard}>
+          <Image
+            source={item.image}
+            style={{ width: 100, height: 100, borderRadius: 8, marginRight: 15 }}
+          />
+          <View style={{ flex: 1 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.price}</Text>
+            <Text style={styles.appointmentText}>{item.address}</Text>
+            <View style={styles.appointmentActions}>
+              <TouchableOpacity onPress={() => handleEditListing(index)}>
+                <Text style={styles.appointmentActionText}>Edit</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleDeleteListing(index)}>
+                <Text style={styles.appointmentActionText}>Delete</Text>
               </TouchableOpacity>
             </View>
           </View>
-        ))}
-      </View>
+        </View>
+      )}
+    />
+  </ScrollView>
+</View>
+
 
       {/* Modal to Add/Edit Listing */}
       <ScrollView>
@@ -211,7 +217,7 @@ const handleFollowUp = (lead: Lead) => {
             <TextInput
             style={styles.input}
             placeholder="Listing Description"
-            value={newListing.address}
+            value={newListing.description}
             onChangeText={(text) => setNewListing({ ...newListing, description: text })}
           />
           <TextInput
@@ -428,6 +434,16 @@ const styles = StyleSheet.create({
   modalButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  actionButton: {
+    padding: 8,
+    borderRadius: 5,
+    alignItems: 'center',
+    flex: 1,
+  },
+  actionButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
