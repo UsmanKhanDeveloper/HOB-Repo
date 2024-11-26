@@ -91,6 +91,16 @@ export default function Layout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="maps"
+        options={{
+          title: "maps",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon source={icons.map} focused={focused} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
