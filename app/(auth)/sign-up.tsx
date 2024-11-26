@@ -124,20 +124,6 @@ const SignUp = () => {
             value={form.email}
             onChangeText={(value) => setForm({ ...form, email: value })}
           />
-          <InputField
-            label="Password"
-            placeholder="Enter password"
-            icon={icons.lock}
-            secureTextEntry={true}
-            textContentType="password"
-            value={form.password}
-            onChangeText={(value) => setForm({ ...form, password: value })}
-          />
-          <CustomButton
-            title="Sign Up"
-            onPress={onSignUpPress}
-            className="mt-6"
-          />
           <View className="relative">
             <InputField
               label="Password"
