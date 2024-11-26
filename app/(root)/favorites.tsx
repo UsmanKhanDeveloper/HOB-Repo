@@ -61,7 +61,7 @@ const FavoritesScreen = () => {
                     <Text className="text-center mb-5">Add your favorite listing to track price and status changes!</Text>
                     <TouchableOpacity
                         className="bg-blue-500 py-3 px-6 rounded-lg"
-                        onPress={() => router.push('/Homepage')}
+                        onPress={() => router.push('../(root)/(tabs)/home')}
                     >
                         <Text className="text-white font-bold text-center">Browse Properties</Text>
                     </TouchableOpacity>
@@ -83,7 +83,7 @@ const FavoritesScreen = () => {
                     />
                     <TouchableOpacity
                         className="absolute bottom-10 left-4 right-4 bg-blue-500 py-3 rounded-lg"
-                        onPress={() => router.push('/Homepage')}
+                        onPress={() => router.push('../(root)/(tabs)/home')}
                     >
                         <Text className="text-white font-bold text-center">Add More Listings</Text>
                     </TouchableOpacity>

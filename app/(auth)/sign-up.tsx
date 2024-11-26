@@ -163,7 +163,7 @@ const SignUp = () => {
           <CustomButton title="Sign Up" onPress={onSignUpPress} className="mt-6" />
           <OAuth />
           <Link
-            href="/log-in"
+            href="../(root)/(tabs)/home"
             className="text-lg text-center text-general-200 mt-5"
           >
             Already have an account?{" "}
