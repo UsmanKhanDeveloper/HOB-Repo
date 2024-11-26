@@ -88,7 +88,7 @@ const RealtorHomePage = () => {
   const handleEditListing = (index: number) => {
     const listing = listings[index]; // Get the selected listing
     setNewListing(listing); // Populate the modal with the listing details
-    setIsModalVisible(true); // Show the modal for editing
+    setIsListingModalVisible(true); // Show the modal for editing
     setListings(listings.filter((_, i) => i !== index)); // Update the listings state to exclude the edited listing
   };
   
@@ -177,7 +177,7 @@ const handleFollowUp = (lead: Lead) => {
         <View style={styles.appointmentCard}>
           <Image
             source={item.image}
-            style={{ width: 100, height: 100, borderRadius: 8, marginRight: 15 }}
+            style={{ width: 350, height: 150, borderRadius: 8, marginRight: 15 }}
           />
           <View style={{ flex: 1 }}>
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.price}</Text>
