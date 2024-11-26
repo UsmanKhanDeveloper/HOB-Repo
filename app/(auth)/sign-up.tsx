@@ -7,6 +7,7 @@ import { ReactNativeModal } from "react-native-modal";
 import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
+import CustomRadioButton from "@/components/RadioButtons"; 
 import { icons, images } from "@/constants";
 import React from "react";
 import { fetchAPI } from "@/lib/fetch";
@@ -25,6 +26,8 @@ const SignUp = () => {
     error: "",
     code: "",
   });
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); 
+  const [role, setRole] = useState("User"); 
 
   const onSignUpPress = async () => {
     if (!isLoaded) return;
@@ -66,6 +69,19 @@ const SignUp = () => {
             }),
           }
         );
+        await setActive({ session: completeSignUp.createdSessionId });
+        setVerification({
+          ...verification,
+          state: "success",
+        });
+
+      // Role-based redirection
+      if (role === "realtor") {
+        router.push("/realtor-home"); // Redirect to Realtor Home
+      } else if (role === "User") {
+        router.push("/Homepage"); // Redirect to User Homepage
+      }
+
       } else {
         setVerification({
           ...verification,
@@ -122,6 +138,43 @@ const SignUp = () => {
             onPress={onSignUpPress}
             className="mt-6"
           />
+          <View className="relative">
+            <InputField
+              label="Password"
+              placeholder="Enter password"
+              icon={icons.lock}
+              secureTextEntry={!isPasswordVisible} 
+              textContentType="password"
+              value={form.password}
+              onChangeText={(value) => setForm({ ...form, password: value })}
+            />
+            <TouchableOpacity
+              onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 15,
+                zIndex: 1, 
+              }}
+            >
+              <Image
+                source={isPasswordVisible ? icons.eyeOpen : icons.eyeClose} 
+                style={{ width: 24, height: 24 }}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <Text className="mt-6 text-lg font-JakartaBold">Your Role</Text>
+          <CustomRadioButton
+            options={[
+              { label: "User", value: "User" },
+              { label: "Realtor", value: "realtor" },
+            ]}
+            selectedValue={role}
+            onSelect={(value) => setRole(value)} 
+          />
+
+          <CustomButton title="Sign Up" onPress={onSignUpPress} className="mt-6" />
           <OAuth />
           <Link
             href="/log-in"
@@ -129,6 +182,10 @@ const SignUp = () => {
           >
             Already have an account?{" "}
             <Text className="text-primary-500">Log In</Text>
+          </Link>
+          <Link href="/realtor-home" className="text-lg text-center text-general-200 mt-5">
+            realtorhome?{" "}
+            <Text className="text-primary-500">realtor</Text> //TODO: REMOVE BYPASS AFTER DONE
           </Link>
         </View>
         <ReactNativeModal
