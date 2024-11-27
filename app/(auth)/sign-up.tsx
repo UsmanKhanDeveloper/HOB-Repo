@@ -20,6 +20,7 @@ const SignUp = () => {
     name: "",
     email: "",
     password: "",
+    role: ""
   });
   const [verification, setVerification] = useState({
     state: "default",
@@ -65,6 +66,7 @@ const SignUp = () => {
             body: JSON.stringify({
               name: form.name,
               email: form.email,
+              role: form.role,
               clerkId: completeSignUp.createdUserId,
             }),
           }
@@ -79,7 +81,7 @@ const SignUp = () => {
       if (role === "realtor") {
         router.push("./realtor-home"); // Redirect to Realtor Home
       } else if (role === "User") {
-        router.push("/Homepage"); // Redirect to User Homepage
+        router.push("../(root)/(tabs)/home"); // Redirect to User Homepage
       }
 
       } else {
