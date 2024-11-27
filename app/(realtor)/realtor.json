@@ -1,0 +1,202 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "company": "Re/Max Realtron Realty Inc.",
+      "image": "assets/icons/profile.png",
+      "rating": 4.5,
+      "buttonText": "Get in touch!",
+      "address": "123 King St W, Toronto, ON M5H 2N2",
+      "phone": "+1 (416) 555-0123"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "company": "Century 21 Percy Fulton Ltd.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 3.5,
+      "buttonText": "Contact Now",
+      "address": "456 Mississauga Rd, Mississauga, ON L5V 1H3",
+      "phone": "+1 (905) 555-0456"
+    },
+    {
+      "id": 3,
+      "name": "Robert Brown",
+      "company": "Keller Williams Realty Centres",
+      "image": "https://via.placeholder.com/150",
+      "rating": 2.0,
+      "buttonText": "Get in Touch",
+      "address": "789 Bay St, Toronto, ON M5G 2G4",
+      "phone": "+1 (416) 555-0789"
+    },
+    { 
+      "id": 4,
+      "name": "Emily White",
+      "company": "Sotheby's International Realty Canada",
+      "image": "https://via.placeholder.com/150",
+      "rating": 2.5,
+      "buttonText": "Contact Now",
+      "address": "101 Lakeshore Rd W, Oakville, ON L6K 1G5",
+      "phone": "+1 (905) 555-1011"
+    },
+    {
+      "id": 5,
+      "name": "Michael Green",
+      "company": "Royal LePage Signature Realty",
+      "image": "https://via.placeholder.com/150",
+      "rating": 3.0,
+      "buttonText": "Reach Out",
+      "address": "202 Front St E, Toronto, ON M5A 1E8",
+      "phone": "+1 (416) 555-2020"
+    },
+    {
+      "id": 6,
+      "name": "Sarah Taylor",
+      "company": "Coldwell Banker The Real Estate Centre",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.0,
+      "buttonText": "Contact Me",
+      "address": "303 Queen St W, Toronto, ON M5V 2B4",
+      "phone": "+1 (416) 555-3033"
+    },
+    {
+      "id": 7,
+      "name": "David Harris",
+      "company": "Bosley Real Estate Ltd.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 5.0,
+      "buttonText": "Get in Touch",
+      "address": "404 Eglinton Ave E, Brampton, ON L6P 3B9",
+      "phone": "+1 (905) 555-4044"
+    },
+    {
+      "id": 8,
+      "name": "Olivia Martinez",
+      "company": "The Red Pin",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.3,
+      "buttonText": "Call Now",
+      "address": "505 Dundas St E, Toronto, ON M5A 1X5",
+      "phone": "+1 (416) 555-5055"
+    },
+    {
+      "id": 9,
+      "name": "Liam Wilson",
+      "company": "Royal LePage Your Community Realty",
+      "image": "https://via.placeholder.com/150",
+      "rating": 3.8,
+      "buttonText": "Reach Out",
+      "address": "606 Lawrence Ave W, Mississauga, ON L5B 2Y7",
+      "phone": "+1 (905) 555-6066"
+    },
+    {
+      "id": 10,
+      "name": "Ava Miller",
+      "company": "Remax Hallmark Realty Ltd.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.1,
+      "buttonText": "Contact Me",
+      "address": "707 Yonge St, Toronto, ON M4Y 1Z9",
+      "phone": "+1 (416) 555-7077"
+    },
+    {
+      "id": 11,
+      "name": "Ethan Clark",
+      "company": "Harvey Kalles Real Estate Ltd.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.4,
+      "buttonText": "Get in Touch",
+      "address": "808 Bayview Ave, Brampton, ON L7A 1V2",
+      "phone": "+1 (905) 555-8088"
+    },
+    {
+      "id": 12,
+      "name": "Mia Robinson",
+      "company": "Right at Home Realty Inc.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 3.2,
+      "buttonText": "Contact Now",
+      "address": "909 Finch Ave W, Oakville, ON L6M 2G1",
+      "phone": "+1 (905) 555-9099"
+    },
+    {
+      "id": 13,
+      "name": "James Lewis",
+      "company": "Sutton Group - Associates Realty Inc.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.6,
+      "buttonText": "Contact Me",
+      "address": "1010 St. Clair Ave W, Toronto, ON M6E 1B8",
+      "phone": "+1 (416) 555-1010"
+    },
+    {
+      "id": 14,
+      "name": "Charlotte Walker",
+      "company": "IPG Commercial Real Estate",
+      "image": "https://via.placeholder.com/150",
+      "rating": 3.7,
+      "buttonText": "Get in Touch",
+      "address": "1111 Gerrard St E, Toronto, ON M4L 3T4",
+      "phone": "+1 (416) 555-1111"
+    },
+    {
+      "id": 15,
+      "name": "William Young",
+      "company": "The Agency",
+      "image": "https://via.placeholder.com/150",
+      "rating": 3.9,
+      "buttonText": "Reach Out",
+      "address": "1212 Bathurst St, Mississauga, ON L5M 4L7",
+      "phone": "+1 (905) 555-1212"
+    },
+    {
+      "id": 16,
+      "name": "Sophia King",
+      "company": "RE/MAX West Realty Inc.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.2,
+      "buttonText": "Contact Now",
+      "address": "1313 Queen St W, Oakville, ON L6J 3Z8",
+      "phone": "+1 (905) 555-1313"
+    },
+    {
+      "id": 17,
+      "name": "Lucas Scott",
+      "company": "Century 21 Leading Edge Realty Inc.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.7,
+      "buttonText": "Get in Touch",
+      "address": "1414 College St, Toronto, ON M6H 1A4",
+      "phone": "+1 (416) 555-1414"
+    },
+    {
+      "id": 18,
+      "name": "Isabella Lee",
+      "company": "Chestnut Park Real Estate Limited",
+      "image": "https://via.placeholder.com/150",
+      "rating": 3.6,
+      "buttonText": "Reach Out",
+      "address": "1515 Dundas St W, Oakville, ON L6M 4S3",
+      "phone": "+1 (905) 555-1515"
+    },
+    {
+      "id": 19,
+      "name": "Sebastian Martinez",
+      "company": "Royal LePage Estate Realty",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.3,
+      "buttonText": "Contact Now",
+      "address": "1616 Mount Pleasant Rd, Mississauga, ON L5M 2H1",
+      "phone": "+1 (905) 555-1616"
+    },
+    {
+      "id": 20,
+      "name": "Amelia Thompson",
+      "company": "Forest Hill Real Estate Inc.",
+      "image": "https://via.placeholder.com/150",
+      "rating": 4.8,
+      "buttonText": "Get in Touch",
+      "address": "1717 Eglinton Ave W, Brampton, ON L6T 3X9",
+      "phone": "+1 (416) 555-1717"
+    }
+]
