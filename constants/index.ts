@@ -37,6 +37,9 @@ import buyingGuidesSelection from "@/assets/images/buying-guide-selection.png";
 import sellingGuideSelection from "@/assets/images/Selling-Guide-Section.png";
 import rentingTenantGuideSelection from "@/assets/images/Tenant-Guide-Section.png";
 import rentingLandlordGuideSelection from "@/assets/images/Landlord-Guide-Section.png";
+import call from "@/assets/icons/call.png";
+import info from "@/assets/icons/info.png";
+
 
 export const images = {
     check,
@@ -69,7 +72,6 @@ export const icons = {
     marker,
     out,
     person,
-    pin,
     point,
     profile,
     search,
@@ -82,6 +84,8 @@ export const icons = {
     deleteCan,
     favIcon,
     filters,
+    call,
+    info
 };
 
 export const listing = [
