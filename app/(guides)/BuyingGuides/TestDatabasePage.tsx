@@ -72,8 +72,20 @@ const TestDatabasePage = () => {
         const response = await axios.get(
           `http://192.168.2.16:3000/api/questions?step_number=1`
         );
-        console.log("Fetched Questions:", response.data); // Debug log
+        //console.log("Fetched Questions:", response.data); // Debug log
+
         setQuestions(response.data);
+
+        // Map the data to match the Question interface (technique)
+        // const mappedQuestions = response.data.map((q: any) => ({
+        //     text: q.question_text,
+        //     options: q.options,
+        //     correctAnswer: q.correct_answer,
+        //     correctExplanation: q.correct_explanation,
+        //     incorrectExplanation: q.incorrect_explanation,
+        //   }));
+
+        //   setQuestions(mappedQuestions);
       } catch (error) {
         console.error("Error fetching questions:", error);
       }
@@ -92,10 +104,10 @@ const TestDatabasePage = () => {
 
   const handleOptionSelect = (option: string, question: Question) => {
     setSelectedOption(option);
-    const correct = option === question.correctAnswer;
+    const correct = option === question.correct_answer;
     setIsCorrect(correct);
     setExplanation(
-      correct ? question.correctExplanation : question.incorrectExplanation
+      correct ? question.correct_explanation : question.incorrect_explanation
     );
   };
 
@@ -140,6 +152,9 @@ const TestDatabasePage = () => {
       console.log(showQuestion);
     }, 100);
   };
+
+  console.log("this is now " + showQuestion);
+  console.log("these are the questions " + JSON.stringify(questions));
 
   return (
     <SafeAreaView>
@@ -219,10 +234,10 @@ const TestDatabasePage = () => {
               </TouchableOpacity>
             )}
 
-            {showQuestion && questions.length > 0 && (
+            {showQuestion && (
               <View className="mt-4">
                 <Text className="font-bold text-lg">
-                  {questions[currentQuestionIndex]?.text}
+                  {questions[currentQuestionIndex]?.question_text}
                 </Text>
                 {questions[currentQuestionIndex]?.options?.map(
                   (option, idx) => (

@@ -1,13 +1,20 @@
 import { useSignUp } from "@clerk/clerk-expo";
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
+import {
+  Alert,
+  Image,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { ReactNativeModal } from "react-native-modal";
 
 import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
-import CustomRadioButton from "@/components/RadioButtons"; 
+import CustomRadioButton from "@/components/RadioButtons";
 import { icons, images } from "@/constants";
 import React from "react";
 import { fetchAPI } from "@/lib/fetch";
@@ -19,6 +26,7 @@ const SignUp = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    role: "",
     password: "",
   });
   const [verification, setVerification] = useState({
@@ -26,8 +34,8 @@ const SignUp = () => {
     error: "",
     code: "",
   });
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false); 
-  const [role, setRole] = useState("User"); 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [role, setRole] = useState("User");
 
   const onSignUpPress = async () => {
     if (!isLoaded) return;
@@ -65,6 +73,7 @@ const SignUp = () => {
             body: JSON.stringify({
               name: form.name,
               email: form.email,
+              role: form.role,
               clerkId: completeSignUp.createdUserId,
             }),
           }
@@ -75,13 +84,12 @@ const SignUp = () => {
           state: "success",
         });
 
-      // Role-based redirection
-      if (role === "realtor") {
-        router.push("./realtor-home"); // Redirect to Realtor Home
-      } else if (role === "User") {
-        router.push("/Homepage"); // Redirect to User Homepage
-      }
-
+        // Role-based redirection
+        if (role === "realtor") {
+          router.push("../(realtor)/realtor-home"); // Redirect to Realtor Home
+        } else if (role === "User") {
+          router.push("../(root)/(tabs)/home"); // Redirect to User Homepage
+        }
       } else {
         setVerification({
           ...verification,
@@ -143,7 +151,7 @@ const SignUp = () => {
               label="Password"
               placeholder="Enter password"
               icon={icons.lock}
-              secureTextEntry={!isPasswordVisible} 
+              secureTextEntry={!isPasswordVisible}
               textContentType="password"
               value={form.password}
               onChangeText={(value) => setForm({ ...form, password: value })}
@@ -151,14 +159,14 @@ const SignUp = () => {
             <TouchableOpacity
               onPress={() => setIsPasswordVisible(!isPasswordVisible)}
               style={{
-                position: 'absolute',
+                position: "absolute",
                 right: 10,
                 top: 15,
-                zIndex: 1, 
+                zIndex: 1,
               }}
             >
               <Image
-                source={isPasswordVisible ? icons.eyeOpen : icons.eyeClose} 
+                source={isPasswordVisible ? icons.eyeOpen : icons.eyeClose}
                 style={{ width: 24, height: 24 }}
               />
             </TouchableOpacity>
@@ -171,10 +179,14 @@ const SignUp = () => {
               { label: "Realtor", value: "realtor" },
             ]}
             selectedValue={role}
-            onSelect={(value) => setRole(value)} 
+            onSelect={(value) => setRole(value)}
           />
 
-          <CustomButton title="Sign Up" onPress={onSignUpPress} className="mt-6" />
+          <CustomButton
+            title="Sign Up"
+            onPress={onSignUpPress}
+            className="mt-6"
+          />
           <OAuth />
           <Link
             href="/log-in"
@@ -183,9 +195,12 @@ const SignUp = () => {
             Already have an account?{" "}
             <Text className="text-primary-500">Log In</Text>
           </Link>
-          <Link href="./realtor-home" className="text-lg text-center text-general-200 mt-5">
-            realtorhome?{" "}
-            <Text className="text-primary-500">realtor</Text> //TODO: REMOVE BYPASS AFTER DONE
+          <Link
+            href="./realtor-home"
+            className="text-lg text-center text-general-200 mt-5"
+          >
+            realtorhome? <Text className="text-primary-500">realtor</Text>{" "}
+            //TODO: REMOVE BYPASS AFTER DONE
           </Link>
         </View>
         <ReactNativeModal

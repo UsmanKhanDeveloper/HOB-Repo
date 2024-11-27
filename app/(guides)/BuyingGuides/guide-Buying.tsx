@@ -13,10 +13,10 @@ import { useRouter } from "expo-router";
 import { images } from "@/constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StepOnePrePurchasing from "./StepOnePrePurchasing";
-import StepTwoUnderstandingMarketCondition from "./StepTwoUnderstandingMarketCondition";
-import StepThreeFindingAHome from "./StepThreeFindingAHome";
-import StepFourMakingAnOffer from "./StepFourMakingAnOffer";
-import StepFivePostPurchase from "./StepFivePostPurchase";
+// import StepTwoUnderstandingMarketCondition from "./StepTwoUnderstandingMarketCondition";
+// import StepThreeFindingAHome from "./StepThreeFindingAHome";
+// import StepFourMakingAnOffer from "./StepFourMakingAnOffer";
+// import StepFivePostPurchase from "./StepFivePostPurchase";
 import TestDatabasePage from "./TestDatabasePage";
 
 const guideBuying = () => {
@@ -43,10 +43,10 @@ const guideBuying = () => {
         {/* Step Components below */}
         <TestDatabasePage />
         <StepOnePrePurchasing />
-        <StepTwoUnderstandingMarketCondition />
+        {/*<StepTwoUnderstandingMarketCondition />
         <StepThreeFindingAHome />
         <StepFourMakingAnOffer />
-        <StepFivePostPurchase />
+        <StepFivePostPurchase /> */}
       </ScrollView>
     </>
   );

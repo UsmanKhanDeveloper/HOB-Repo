@@ -144,86 +144,92 @@ const StepOnePrePurchasing = () => {
 
   const questionsStepOne: Question[] = [
     {
-      text: "What is considered a good credit score for a better mortgage rate?",
+      question_text:
+        "What is considered a good credit score for a better mortgage rate?",
       options: ["A- Below 600", "B- 600-699", "C- 750 above"],
-      correctAnswer: "C- 750 above",
-      correctExplanation:
+      correct_answer: "C- 750 above",
+      correct_explanation:
         "That's right! A credit score of 750 or higher generally qualifies for the best mortgage rates. If your score is lower, you might consider steps to improve it.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Not quite. A score of 750 or above is ideal for getting the best mortgage rates. It’s worth checking your credit score and improving it before you apply for a mortgage.",
     },
     {
-      text: "What is the typical down payment required for a home?",
+      question_text: "What is the typical down payment required for a home?",
       options: [
         "A) 1% of the home’s price",
         "B) 5% to 20% of the home’s price",
         "C) 25% of the home’s price",
         "D) 50% of the home’s price",
       ],
-      correctAnswer: "B) 5% to 20% of the home’s price",
-      correctExplanation:
+      correct_answer: "B) 5% to 20% of the home’s price",
+      correct_explanation:
         "Great! The typical down payment ranges from 5% to 20% of the home’s price, depending on the market and your financial situation.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Not quite. A down payment usually falls between 5% and 20%, though some buyers might be eligible for programs with lower requirements.",
     },
     {
-      text: "What percentage of your monthly income should go toward housing expenses (including your mortgage)?",
+      question_text:
+        "What percentage of your monthly income should go toward housing expenses (including your mortgage)?",
       options: ["A) 10%", "B) 20%", "C) 30%", "D) 50%"],
-      correctAnswer: "C) 30%",
-      correctExplanation:
+      correct_answer: "C) 30%",
+      correct_explanation:
         "Correct! A common rule of thumb is that your housing expenses should be about 30% of your monthly income to ensure affordability.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Actually, around 30% of your income should go toward housing expenses, including your mortgage, to keep it affordable.",
     },
     {
-      text: "What is a good way to improve your credit score before applying for a mortgage?",
+      question_text:
+        "What is a good way to improve your credit score before applying for a mortgage?",
       options: [
         "A) Pay down outstanding debts",
         "B) Close unused credit accounts",
         "C) Make multiple credit card applications",
         "D) Ignore your credit score until you apply",
       ],
-      correctAnswer: "A) Pay down outstanding debts",
-      correctExplanation:
+      correct_answer: "A) Pay down outstanding debts",
+      correct_explanation:
         "Good job! Paying down debts helps improve your credit score, which can lead to better mortgage terms.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Not quite. Paying down outstanding debts is a great way to improve your credit score before applying for a mortgage.",
     },
     {
-      text: "Which of the following is typically required for mortgage pre-approval?",
+      question_text:
+        "Which of the following is typically required for mortgage pre-approval?",
       options: [
         "A) Proof of income and employment",
         "B) A completed home inspection",
         "C) The exact address of the home you're buying",
         "D) Homeowners insurance",
       ],
-      correctAnswer: "A) Proof of income and employment",
-      correctExplanation:
+      correct_answer: "A) Proof of income and employment",
+      correct_explanation:
         "Exactly! Lenders will want proof of income and employment to assess whether you qualify for a mortgage.",
-      incorrectExplanation:
+      incorrect_explanation:
         "For mortgage pre-approval, lenders primarily need proof of income and employment—not the details of the home just yet.",
     },
     {
-      text: "What’s the purpose of getting pre-approved for a mortgage before house hunting?",
+      question_text:
+        "What’s the purpose of getting pre-approved for a mortgage before house hunting?",
       options: [
         "A) To show sellers you're serious",
         "B) To secure a fixed interest rate early",
         "C) To understand your borrowing limit",
         "D) All of the above",
       ],
-      correctAnswer: "D) All of the above",
-      correctExplanation:
+      correct_answer: "D) All of the above",
+      correct_explanation:
         "Exactly! Getting pre-approved helps you know your budget, shows sellers you're serious, and locks in an interest rate.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Actually, all of these are reasons why pre-approval is important. It helps with budgeting, credibility, and securing an interest rate.",
     },
     {
-      text: "What is the minimum down payment typically required for a conventional mortgage?",
+      question_text:
+        "What is the minimum down payment typically required for a conventional mortgage?",
       options: ["A) 0%", "B) 3%", "C) 5%", "D) 20%"],
-      correctAnswer: "B) 3%",
-      correctExplanation:
+      correct_answer: "B) 3%",
+      correct_explanation:
         "Correct! Many lenders allow as little as 3% down for a conventional mortgage, though 20% is common to avoid PMI.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Actually, many lenders allow a minimum down payment of 3% for a conventional mortgage.",
     },
   ];
@@ -240,10 +246,10 @@ const StepOnePrePurchasing = () => {
 
   const handleOptionSelect = (option: string, question: Question) => {
     setSelectedOption(option);
-    const correct = option === question.correctAnswer;
+    const correct = option === question.correct_answer;
     setIsCorrect(correct);
     setExplanation(
-      correct ? question.correctExplanation : question.incorrectExplanation
+      correct ? question.correct_explanation : question.incorrect_explanation
     );
 
     // Fade in explanation
@@ -363,7 +369,7 @@ const StepOnePrePurchasing = () => {
       {showQuestion && (
         <View className="mt-4">
           <Text className="font-bold text-lg">
-            {questionsStepOne[currentQuestionIndex].text}
+            {questionsStepOne[currentQuestionIndex].question_text}
           </Text>
           {questionsStepOne[currentQuestionIndex].options.map((option) => (
             <TouchableOpacity
