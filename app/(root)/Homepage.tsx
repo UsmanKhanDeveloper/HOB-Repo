@@ -265,7 +265,7 @@ const Homepage: React.FC = () => {
                             style={styles.icon}
                             source={icons.arrowDown}
                           ></Image>
-                          <CollapsibleMenu title="Zones" />
+                          {/* <CollapsibleMenu title="Zones" /> */}
                         </View>
 
                         {/* <View style={styles.filterVerticalContainer}>
