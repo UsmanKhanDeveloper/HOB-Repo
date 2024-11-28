@@ -12,11 +12,7 @@ import {
 import { Link, router, useNavigation } from "expo-router";
 import { icons, images } from "@/constants"; // Assuming your favorite icon is in this folder
 import { useAuth, useUser } from "@clerk/clerk-react"; // Importing useUser
-import CollapsibleMenu from "./CollapsibleMenu"; // Importing CollapsibleMenu
-import { fetchPropertyData } from "../services/apiService";
-
-// const API_HOST = "zillow-com1.p.rapidapi.com"
-// const API_KEY= process.env.REACT_APP_RAPIDAPI_KEY;
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Define the interface for a Property Listing
 interface Property {
@@ -32,19 +28,6 @@ interface Property {
 }
 
 const Homepage: React.FC = () => {
-  // for API Call
-  const [apiProperties, setProperties] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  // for collapsible menu
-  const options = [
-    "Option 1",
-    "Option 2",
-    "Option 3",
-    "Another Option",
-    "More Options",
-  ];
-
   // Modal for filter menu
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -147,7 +130,7 @@ const Homepage: React.FC = () => {
 
   return (
     <>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Image
           style={styles.logo}
           source={images.appLogo}
@@ -233,71 +216,19 @@ const Homepage: React.FC = () => {
                     {/* Touching outside of the modal will dismiss it */}
 
                     <View style={styles.filterMenuContainer}>
-                      {/* Change this closing Icon to the filter menu*/}
-
-                      {/* <TouchableOpacity onPress={toggleModal} style={styles.icon}> */}
-                      {/* <Image style={styles.icon}source={icons.search}></Image> */}
-                      {/* </TouchableOpacity> */}
-
+                      {/* Close Icon */}
+                      <TouchableOpacity
+                        onPress={toggleModal}
+                        style={styles.icon}
+                      >
+                        {/* TESTING SEARCH ICON */}
+                        {/* <Image style={styles.icon}source={icons.search}></Image> */}
+                      </TouchableOpacity>
                       <View style={styles.filterVerticalContainer}>
                         <Text style={styles.titleText}>Filters</Text>
 
                         <View style={styles.selectAViewContainer}>
                           <Text>Select a view</Text>
-                          <Image
-                            style={styles.icon}
-                            source={icons.dropDownMenu}
-                          ></Image>
-                        </View>
-
-                        {/* <View style={styles.flexHorizontalContainer}>
-                            <Image style={styles.icon}source={icons.arrowDown}></Image>
-                            <Text style={styles.testText}>Zones</Text>
-                            </View> */}
-
-                        {/* <View style={styles.selectAViewContainer}>
-                            <Text>Search Zones</Text>
-                            <Image style={styles.icon} source={icons.search}></Image>            
-                            </View> */}
-
-                        <View style={styles.flexHorizontalContainer}>
-                          <Image
-                            style={styles.icon}
-                            source={icons.arrowDown}
-                          ></Image>
-                          <CollapsibleMenu title="Zones" />
-                        </View>
-
-                        {/* <View style={styles.filterVerticalContainer}>
-                            <View style={styles.flexHorizontalContainer}>
-                                <Image style={styles.icon} source={icons.square}></Image> */}
-
-                        {/* Placeholder text */}
-                        {/* <Text style={styles.testText}> Zone 1</Text> 
-                            </View> */}
-
-                        {/* <View style={styles.flexHorizontalContainer}> */}
-                        {/* <Image style={styles.icon} source={icons.square}></Image> */}
-
-                        {/* Placeholder text */}
-                        {/* <Text style={styles.testText}> Zone 2</Text>  */}
-                        {/* </View> */}
-
-                        {/* <View style={styles.flexHorizontalContainer}>
-                                <Image style={styles.icon} source={icons.square}></Image> */}
-
-                        {/* Placeholder text */}
-                        {/* <Text style={styles.testText}> Zone 3</Text>  */}
-                        {/* </View> */}
-
-                        {/* </View> */}
-
-                        <View style={styles.flexHorizontalContainer}>
-                          <Image
-                            style={styles.icon}
-                            source={icons.arrowDown}
-                          ></Image>
-                          <Text style={styles.testText}>People</Text>
                         </View>
 
                         <View style={styles.flexHorizontalContainer}>
@@ -305,7 +236,11 @@ const Homepage: React.FC = () => {
                             style={styles.icon}
                             source={icons.arrowDown}
                           ></Image>
-                          <Text style={styles.testText}>Company</Text>
+                          <Text>Zones</Text>
+                        </View>
+
+                        <View style={styles.selectAViewContainer}>
+                          <Text>Search Zones</Text>
                         </View>
 
                         <View style={styles.flexHorizontalContainer}>
@@ -313,7 +248,23 @@ const Homepage: React.FC = () => {
                             style={styles.icon}
                             source={icons.arrowDown}
                           ></Image>
-                          <Text style={styles.testText}>Contract Time</Text>
+                          <Text>People</Text>
+                        </View>
+
+                        <View style={styles.flexHorizontalContainer}>
+                          <Image
+                            style={styles.icon}
+                            source={icons.arrowDown}
+                          ></Image>
+                          <Text>Company</Text>
+                        </View>
+
+                        <View style={styles.flexHorizontalContainer}>
+                          <Image
+                            style={styles.icon}
+                            source={icons.arrowDown}
+                          ></Image>
+                          <Text>Contract Time</Text>
                         </View>
                       </View>
                     </View>
@@ -331,17 +282,6 @@ const Homepage: React.FC = () => {
         <View>
           <Text style={styles.listingHeader}>Property Listings</Text>
         </View>
-
-        {/* <View style={styles.testView}>
-        {error && <p>{error}</p>}
-        {properties.map((property, index) => (
-            <View key={index}>
-                <Text>{property.address}</Text>
-                <Text>{property.price}</Text> */}
-        {/* add more property details here */}
-        {/* </View> */}
-        {/* ))} */}
-        {/* </View> */}
 
         {/* Listings ScrollView */}
         <ScrollView style={styles.listingsContainer}>
@@ -373,7 +313,7 @@ const Homepage: React.FC = () => {
             </TouchableOpacity>
           ))}
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </>
   );
 };
@@ -381,10 +321,6 @@ const Homepage: React.FC = () => {
 export default Homepage;
 
 const styles = StyleSheet.create({
-  testView: {
-    borderColor: "red",
-    borderWidth: 1,
-  },
   selectAViewContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -392,6 +328,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
+
     borderWidth: 0.5,
     borderColor: "#6F6F6F",
   },
@@ -413,19 +350,18 @@ const styles = StyleSheet.create({
   filterMenuContainer: {
     // borderColor: 'red',
     // borderWidth: 1,
-    // flexGrow: 1,
     flexDirection: "row",
     width: 340,
-    // height: 500,
-    padding: 10,
+    height: 500,
+    padding: 8,
     backgroundColor: "white",
     borderRadius: 5,
     alignItems: "flex-start",
     zIndex: 10, // Ensures it’s above the overlay
   },
   filterVerticalContainer: {
-    flexGrow: 1,
-    //   borderColor: 'green',
+    //   flexGrow: 1,
+    //   borderColor: 'red',
     //   borderWidth: 1,
     backgroundColor: "#fff",
     justifyContent: "space-between",
@@ -439,8 +375,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   flexHorizontalContainer: {
-    //   borderColor: 'orange',
-    //   borderWidth: 1,
     width: "100%",
     flexGrow: 1,
     flexDirection: "row",
@@ -485,7 +419,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleText: {
-    paddingBottom: 10,
     fontSize: 24,
     fontWeight: "bold",
   },
@@ -502,15 +435,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     padding: 5,
   },
-  testText: {
-    fontSize: 14,
-    //   borderColor: 'pink',
-    //   borderWidth: 1,
-    //   flexGrow: 1,
-    height: 25,
-  },
   icon: {
-    //   borderColor: 'blue',
+    //   borderColor: 'red',
     //   borderWidth: 1,
     width: 20,
     height: 20,
