@@ -33,6 +33,7 @@ import filters from "@/assets/icons/filters.png";import eyeOpen from "@/assets/i
 import eyeClose from "@/assets/icons/close-eye.png"
 import deleteCan from "@/assets/icons/delete.png"
 import favIcon from "@/assets/icons/heart.png"
+import dropDownMenu from "@/assets/icons/drop-down-menu.png"
 import buyingGuidesSelection from "@/assets/images/buying-guide-selection.png";
 import sellingGuideSelection from "@/assets/images/Selling-Guide-Section.png";
 import rentingTenantGuideSelection from "@/assets/images/Tenant-Guide-Section.png";
@@ -40,6 +41,7 @@ import rentingLandlordGuideSelection from "@/assets/images/Landlord-Guide-Sectio
 import call from "@/assets/icons/call.png";
 import info from "@/assets/icons/info.png";
 
+import square from "@/assets/icons/square.png"
 
 export const images = {
     check,
@@ -85,7 +87,9 @@ export const icons = {
     favIcon,
     filters,
     call,
-    info
+    info,
+    dropDownMenu,
+    square,
 };
 
 export const listing = [
