@@ -28,7 +28,6 @@ const SignUp = () => {
     email: "",
     role: "",
     password: "",
-    role: ""
   });
   const [verification, setVerification] = useState({
     state: "default",
