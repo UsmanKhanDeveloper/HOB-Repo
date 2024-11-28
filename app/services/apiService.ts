@@ -4,7 +4,7 @@ const API_KEY= process.env.REACT_APP_RAPIDAPI_KEY;
 
 export const fetchPropertyData = async (location: string) => {
     try {
-      const response = await fetch(`https://${API_HOST}/search?location=${}&output=json&status=forSale&sortSelection=priorityscore&listing_type=by_agent&doz=any`, {
+      const response = await fetch(`https://${API_HOST}/search?location=${location}&output=json&status=forSale&sortSelection=priorityscore&listing_type=by_agent&doz=any`, {
         method: 'GET',
         headers: {
           'x-rapidapi-key': API_KEY!,
