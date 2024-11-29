@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { icons } from '@/constants'; // Adjust this import if needed
 import Icon from 'react-native-vector-icons/FontAwesome'; // Example of vector icon library
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 interface Realtor {
   id: string;
@@ -103,17 +104,28 @@ const RealtorsScreen = () => {
   };
 
   const handleSort = () => {
-    const filtered = realtors.filter((realtor) => 
-      realtor.location && realtor.location.toLowerCase().startsWith('toronto')
-    );
+    // Fallback to an empty array if filteredRealtors is undefined
+    const realtors = filteredRealtors ?? []; 
   
-    const sortedRealtors = [...filtered].sort((a, b) => {
-      if (sortBy === 'rating') return b.rating - a.rating;
-      if (sortBy === 'location') return a.location.localeCompare(b.location);
-      return 0;
-    });
+    let sortedRealtors: Realtor[];
   
+    if (sortBy === 'rating') {
+      // Sort by rating (highest to lowest)
+      sortedRealtors = [...realtors].sort((a, b) => b.rating - a.rating);
+    } else if (sortBy === 'location') {
+      // Sort by location (address A-Z)
+      sortedRealtors = [...realtors].sort((a, b) =>
+        a.address.localeCompare(b.address)
+      );
+    } else {
+      // If no sort criteria, retain the original order
+      sortedRealtors = realtors;
+    }
+  
+    // Update the state with sorted data
     setFilteredRealtors(sortedRealtors);
+  
+    // Close the modal after applying the sort
     setSortModalVisible(false);
   };
 
@@ -127,9 +139,11 @@ const RealtorsScreen = () => {
     >
       <View className="flex-row items-center">
         {/* Left side: Realtor name and details */}
-        <Image
-          source={{ uri: item.profilePicture }}
-          className="w-16 h-16 rounded-full mr-4"
+        <FontAwesome
+          name="user-circle"
+          size={64} // Match the w-16 and h-16 size (16 * 4 = 64)
+          color="#3c84d6" // Customize the icon color as needed
+          style={{ borderRadius: 32, marginRight: 16 }} // Matches rounded-full and mr-4
         />
         <View className="flex-1">
           <Text className="text-lg font-bold">{item.name}</Text>
