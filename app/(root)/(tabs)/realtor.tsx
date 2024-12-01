@@ -9,12 +9,14 @@ import {
   TextInput,
   Linking,
   Alert,
+  Button,
 } from 'react-native';
 import { icons } from '@/constants'; // Adjust this import if needed
 import Icon from 'react-native-vector-icons/FontAwesome'; // Example of vector icon library
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 interface Realtor {
+  reviews: any;
   id: string;
   name: string;
   rating: number;
@@ -32,6 +34,8 @@ const RealtorsScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [sortModalVisible, setSortModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState<'rating' | 'location'>('rating');
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
+
 
   // State for modal visibility and selected realtor
   const [selectedRealtor, setSelectedRealtor] = useState<Realtor | null>(null);
@@ -52,7 +56,20 @@ const RealtorsScreen = () => {
 
     loadRealtorsData();
   }, []);
+  const [isAddingReview, setIsAddingReview] = useState(false);  // State to toggle between review list and form
+  const [newReview, setNewReview] = useState({ reviewer: '', rating: 0, comment: '' });  // State for new review input
+  
+  const handleAddReview = () => {
+    if (newReview.reviewer && newReview.rating && newReview.comment) {
+      // Assuming selectedRealtor is a state and you can update reviews here
+      selectedRealtor?.reviews.push(newReview);  // Add the new review to the realtor's reviews
+      setNewReview({ reviewer: '', rating: 0, comment: '' });  // Clear the form
+      setIsAddingReview(false);  // Switch back to review list
+    }
+  };
 
+  
+  
   const handleSearch = (text: string) => {
     setSearchText(text);
     const normalizedText = text.trim().toLowerCase();  // Normalize input
@@ -129,6 +146,11 @@ const RealtorsScreen = () => {
     setSortModalVisible(false);
   };
 
+  const handleIconPress = (realtor: React.SetStateAction<Realtor | null>) => {
+    setSelectedRealtor(realtor);
+    setInfoModalVisible(true);
+  };
+
   const renderRealtorItem = ({ item }: { item: Realtor }) => (
     <TouchableOpacity
       className="bg-white-300 p-4 my-2 rounded-3xl border-2 border-blue-400 shadow-md"        
@@ -155,18 +177,17 @@ const RealtorsScreen = () => {
   
         {/* Right side: Icon buttons */}
         <View className="flex items-center">
-          {/* Info Icon */}
-          <TouchableOpacity
-            onPress={() => {
-              setSelectedRealtor(item);
-              setProfileModalVisible(true);
-            }}
-            className="p-2"
-          >
-            <Icon name="info-circle" size={20} color="black" />
-          </TouchableOpacity>
-        </View>
-  
+      {/* Info Icon */}
+      <TouchableOpacity
+        onPress={() => handleIconPress(item)}
+        className="p-2"
+      >
+        <Icon name="info-circle" size={20} color="black" />
+      </TouchableOpacity>
+
+      {/* Modal for Realtor Info */}
+      {renderInfoModal()}
+    </View>
         {/* Call Icon */}
         <View>
           <TouchableOpacity
@@ -189,6 +210,38 @@ const RealtorsScreen = () => {
       </View>
     </TouchableOpacity>
   );
+  const renderInfoModal = () => (
+    <Modal
+      transparent={true}
+      animationType="slide"
+      visible={infoModalVisible}
+      onRequestClose={() => setInfoModalVisible(false)}
+    >
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(100, 100, 100, 0.5)',
+        }}
+      >
+        <View className="w-72 p-5 bg-white rounded-lg">
+          <Text className="text-2xl font-bold mb-4">{selectedRealtor?.name}</Text>
+          <Text className="text-lg">{selectedRealtor?.company}</Text>
+          <Text className="text-sm text-gray-500">{selectedRealtor?.location}</Text>
+          <Text className="text-sm">{selectedRealtor?.address}</Text>
+          <Text className="text-sm mt-3">Rating: {selectedRealtor?.rating}</Text>
+          
+          <TouchableOpacity
+            onPress={() => setInfoModalVisible(false)}
+            className="bg-[#3c84d6] p-2 rounded-md mt-4"
+          >
+            <Text className="text-white text-center">Close</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
 
   const renderProfileModal = () => (
     <Modal
@@ -206,12 +259,71 @@ const RealtorsScreen = () => {
         }}
       >
         <View className="w-72 p-5 bg-white rounded-lg">
-          <Text className="text-2xl font-bold mb-4">{selectedRealtor?.name}</Text>
-          <Text className="text-lg">{selectedRealtor?.company}</Text>
-          <Text className="text-sm text-gray-500">{selectedRealtor?.location}</Text>
-          <Text className="text-sm">{selectedRealtor?.address}</Text>
-          <Text className="text-sm mt-3">Rating: {selectedRealtor?.rating}</Text>
-          
+          {/* Title */}
+          <Text className="text-2xl font-bold mb-4">Reviews</Text>
+  
+          {/* Display reviews or add review form */}
+          {isAddingReview ? (
+            // Add Review Form
+            <View>
+              <TextInput
+                style={{ borderWidth: 1, borderColor: '#ccc', marginBottom: 10, padding: 8, borderRadius: 5 }}
+                placeholder="Your Name"
+                value={newReview.reviewer}
+                onChangeText={(text) => setNewReview({ ...newReview, reviewer: text })}
+              />
+              <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <TouchableOpacity key={star} onPress={() => setNewReview({ ...newReview, rating: star })}>
+                    <Icon
+                      name={star <= newReview.rating ? 'star' : 'star-o'}
+                      size={30}
+                      color="#FFD700"
+                    />
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <TextInput
+                style={{ borderWidth: 1, borderColor: '#ccc', marginBottom: 10, padding: 8, borderRadius: 5 }}
+                placeholder="Write your review..."
+                value={newReview.comment}
+                onChangeText={(text) => setNewReview({ ...newReview, comment: text })}
+              />
+              <Button title="Submit Review" onPress={handleAddReview} />
+              <TouchableOpacity
+                onPress={() => setIsAddingReview(false)}  // Switch back to reviews list
+                className="bg-[#3c84d6] p-2 rounded-md mt-4"
+              >
+                <Text className="text-white text-center">Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            // Display List of Reviews
+            <View>
+              {selectedRealtor?.reviews && selectedRealtor.reviews.length > 0 ? (
+                selectedRealtor.reviews.map((review: { reviewer: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; rating: number; comment: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
+                  <View key={index} style={{ marginBottom: 10 }}>
+                    <Text style={{ fontWeight: 'bold' }}>{review.reviewer}</Text>
+                    <Text style={{ marginBottom: 5 }}>
+                      {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                    </Text>
+                    <Text>{review.comment}</Text>
+                  </View>
+                ))
+              ) : (
+                <Text>No reviews available.</Text>
+              )}
+  
+              <TouchableOpacity
+                onPress={() => setIsAddingReview(true)}  // Switch to add review form
+                className="bg-[#3c84d6] p-2 rounded-md mt-4"
+              >
+                <Text className="text-white text-center">Add Review</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+  
+          {/* Close button */}
           <TouchableOpacity
             onPress={() => setProfileModalVisible(false)}
             className="bg-[#3c84d6] p-2 rounded-md mt-4"
@@ -317,6 +429,7 @@ const RealtorsScreen = () => {
       )}
 
       {renderProfileModal()}
+      {renderInfoModal()}
     </View>
   );
 };
