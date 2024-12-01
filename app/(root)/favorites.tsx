@@ -22,7 +22,18 @@ const FavoritesScreen = () => {
     useEffect(() => {
         // Placeholder: Fetch favorite properties from API
         setFavorites([
-            { id: '1', price: 899000, location: 'Mississauga', address: '7222 Triumph Lane', time: '56 min ago', bedrooms: 3, bathrooms: 3, sqft: 1400 }
+            { id: '1', price: 899000, location: 'Mississauga', address: '7222 Triumph Lane', time: '56 min ago', bedrooms: 3, bathrooms: 3, sqft: 1400 },
+            {
+                id: "2",
+                price: 920000,
+                location: "Toronto",
+                address: "123 Maple Street",
+                time: "10 min ago",
+                bedrooms: 4,
+                bathrooms: 3,
+                sqft: 1600,
+              },
+
         ]); //TODO: FIX THE BUG LOGIC PART
     }, []);
 
