@@ -181,10 +181,6 @@ const SignUp = () => {
             Already have an account?{" "}
             <Text className="text-primary-500">Log In</Text>
           </Link>
-          <Link href="./realtor-home" className="text-lg text-center text-general-200 mt-5">
-            realtorhome?{" "}
-            <Text className="text-primary-500">realtor</Text> //TODO: REMOVE BYPASS AFTER DONE
-          </Link>
         </View>
         <ReactNativeModal
           isVisible={verification.state === "pending"}
