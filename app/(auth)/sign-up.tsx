@@ -175,7 +175,7 @@ const SignUp = () => {
           />
           <OAuth />
           <Link
-            href="../(root)/(tabs)/home"
+            href="../log-in"
             className="text-lg text-center text-general-200 mt-5"
           >
             Already have an account?{" "}
