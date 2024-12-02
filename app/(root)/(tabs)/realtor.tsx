@@ -14,6 +14,8 @@ import {
 import { icons } from '@/constants'; // Adjust this import if needed
 import Icon from 'react-native-vector-icons/FontAwesome'; // Example of vector icon library
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Sentiment from 'sentiment';
+
 
 interface Realtor {
   reviews: any;
@@ -35,7 +37,7 @@ const RealtorsScreen = () => {
   const [sortModalVisible, setSortModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState<'rating' | 'location'>('rating');
   const [infoModalVisible, setInfoModalVisible] = useState(false);
-
+  const sentiment = new Sentiment();
 
   // State for modal visibility and selected realtor
   const [selectedRealtor, setSelectedRealtor] = useState<Realtor | null>(null);
@@ -243,6 +245,17 @@ const RealtorsScreen = () => {
     </Modal>
   );
 
+  const analyzeSentiment = (text: string) => {
+    const result = sentiment.analyze(text);
+  
+    if (result.score > 0) {
+      return 'Positive';
+    } else if (result.score < 0) {
+      return 'Negative';
+    }
+    return 'Neutral'; // 3.5 is considered neutral
+  };
+
   const renderProfileModal = () => (
     <Modal
       transparent={true}
@@ -307,7 +320,10 @@ const RealtorsScreen = () => {
                     <Text style={{ marginBottom: 5 }}>
                       {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
                     </Text>
-                    <Text>{review.comment}</Text>
+                    <Text>{review.comment}</Text> 
+                    <Text style={{ fontStyle: 'italic' }}>
+  Sentiment: {analyzeSentiment(String(review.comment))}
+</Text>
                   </View>
                 ))
               ) : (
