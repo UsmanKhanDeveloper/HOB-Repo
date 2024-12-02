@@ -38,10 +38,10 @@ const MatterportView = () => {
       <button id="capture-button">Capture Snapshot</button>
       <script>
         // Replace with your Matterport SDK key
-        const SDK_KEY = du9h8tpf20fegyna491whw17b;
+        const SDK_KEY = "du9h8tpf20fegyna491whw17b";
 
         // Replace with your Matterport space ID
-        const SPACE_ID = EadMuW7Tsh5;
+        const SPACE_ID = "EadMuW7Tsh5";
 
         // Initialize the Matterport SDK
         window.MP_SDK.connect(
@@ -85,21 +85,21 @@ const MatterportView = () => {
     </html>
   `;
 
-  const onMessage = (event) => {
-    try {
-      const messageData = JSON.parse(event.nativeEvent.data);
-      if (messageData.type === 'snapshot') {
-        // Handle the received snapshot
+  const onMessage = (event: any) => {
+    // try {
+    //   const messageData = JSON.parse(event.nativeEvent.data);
+    //   if (messageData.type === 'snapshot') {
+    //     // Handle the received snapshot
 
-        setSnapshotUri(messageData.data);
-        Alert.alert('Snapshot Captured', 'The snapshot has been captured successfully.');
+    //     setSnapshotUri(messageData.data);
+    //     Alert.alert('Snapshot Captured', 'The snapshot has been captured successfully.');
       
-    } else if (messageData.type === 'error') {
-        Alert.alert('Error', messageData.message);
-      }    
-    } catch (error) {
-      console.error('Error parsing message from WebView:', error);
-    }  
+    // } else if (messageData.type === 'error') {
+    //     Alert.alert('Error', messageData.message);
+    //   }    
+    // } catch (error) {
+    //   console.error('Error parsing message from WebView:', error);
+    // }  
 };
   return (
     <View style={styles.container}>
@@ -112,7 +112,8 @@ const MatterportView = () => {
         javaScriptEnabled={true}
         domStorageEnabled={true}
         allowFileAccess={true}
-      />{snapshotUri && (
+      />
+      {/* {snapshotUri && (
         <View style={styles.snapshotContainer}>
             <Text style={styles.snapshotTitle}>Captured Snapshot:</Text>
             <Image 
@@ -121,7 +122,7 @@ const MatterportView = () => {
                 resizeMode="contain"
             />
         </View>
-      )}
+      )} */}
     </View>  
     );
 };

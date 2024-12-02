@@ -85,7 +85,7 @@ const Homepage: React.FC = () => {
 
     return (
       <>
-        <MatterportView />;  
+        <MatterportView />
         <View style={styles.container}>
             <Image
                 style={styles.logo}
