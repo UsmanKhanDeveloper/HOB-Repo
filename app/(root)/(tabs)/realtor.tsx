@@ -322,8 +322,8 @@ const RealtorsScreen = () => {
                     </Text>
                     <Text>{review.comment}</Text> 
                     <Text style={{ fontStyle: 'italic' }}>
-  Sentiment: {analyzeSentiment(String(review.comment))}
-</Text>
+                      Review Tone: {analyzeSentiment(String(review.comment))}
+                      </Text>
                   </View>
                 ))
               ) : (
