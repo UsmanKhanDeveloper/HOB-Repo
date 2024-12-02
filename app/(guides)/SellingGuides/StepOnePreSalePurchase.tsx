@@ -57,26 +57,29 @@ const StepOnePreSalePurchase = () => {
 
   const questionsStepOne: Question[] = [
     {
-      text: "What is considered a good credit score for a better mortgage rate?",
+      id: 1,
+      question_text:
+        "What is considered a good credit score for a better mortgage rate?",
       options: ["A- Below 600", "B- 600-699", "C- 750 above"],
-      correctAnswer: "C- 750 above",
-      correctExplanation:
+      correct_answer: "C- 750 above",
+      correct_explanation:
         "That's right! A credit score of 750 or higher generally qualifies for the best mortgage rates. If your score is lower, you might consider steps to improve it.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Not quite. A score of 750 or above is ideal for getting the best mortgage rates. It’s worth checking your credit score and improving it before you apply for a mortgage.",
     },
     {
-      text: "What is the typical down payment required for a home?",
+      id: 2,
+      question_text: "What is the typical down payment required for a home?",
       options: [
         "A) 1% of the home’s price",
         "B) 5% to 20% of the home’s price",
         "C) 25% of the home’s price",
         "D) 50% of the home’s price",
       ],
-      correctAnswer: "B) 5% to 20% of the home’s price",
-      correctExplanation:
+      correct_answer: "B) 5% to 20% of the home’s price",
+      correct_explanation:
         "Great! The typical down payment ranges from 5% to 20% of the home’s price, depending on the market and your financial situation.",
-      incorrectExplanation:
+      incorrect_explanation:
         "Not quite. A down payment usually falls between 5% and 20%, though some buyers might be eligible for programs with lower requirements.",
     },
   ];
@@ -93,10 +96,10 @@ const StepOnePreSalePurchase = () => {
 
   const handleOptionSelect = (option: string, question: Question) => {
     setSelectedOption(option);
-    const correct = option === question.correctAnswer;
+    const correct = option === question.correct_answer;
     setIsCorrect(correct);
     setExplanation(
-      correct ? question.correctExplanation : question.incorrectExplanation
+      correct ? question.correct_explanation : question.incorrect_explanation
     );
 
     // Fade in explanation
@@ -207,7 +210,7 @@ const StepOnePreSalePurchase = () => {
       {showQuestion && (
         <View className="mt-4">
           <Text className="font-bold text-lg">
-            {questionsStepOne[currentQuestionIndex].text}
+            {questionsStepOne[currentQuestionIndex].question_text}
           </Text>
           {questionsStepOne[currentQuestionIndex].options.map((option) => (
             <TouchableOpacity

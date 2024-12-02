@@ -42,7 +42,7 @@ const Guides = () => {
             <TouchableOpacity
               className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center"
               onPress={() =>
-                router.push("./(guides)/SellingGuides/guide-Selling")
+                router.push("/(guides)/SellingGuides/guide-Selling")
               }
             >
               <Image
@@ -61,7 +61,9 @@ const Guides = () => {
             <TouchableOpacity
               className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center"
               onPress={() =>
-                router.push("./(guides)/SellingGuides/guide-Selling")
+                router.push(
+                  "../../(guides)/TenantRentingGuides/guide-Tenant-Renting"
+                )
               }
             >
               <Image
@@ -77,7 +79,7 @@ const Guides = () => {
             <TouchableOpacity
               className="w-[48%] bg-white p-4 rounded-lg shadow-md items-center"
               onPress={() =>
-                router.push("./(guides)/SellingGuides/guide-Selling")
+                router.push("/(guides)/SellingGuides/guide-Selling")
               }
             >
               <Image

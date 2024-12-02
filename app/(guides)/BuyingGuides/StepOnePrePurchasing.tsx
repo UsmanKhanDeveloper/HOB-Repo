@@ -144,6 +144,7 @@ const StepOnePrePurchasing = () => {
 
   const questionsStepOne: Question[] = [
     {
+      id: 1,
       question_text:
         "What is considered a good credit score for a better mortgage rate?",
       options: ["A- Below 600", "B- 600-699", "C- 750 above"],
@@ -154,6 +155,7 @@ const StepOnePrePurchasing = () => {
         "Not quite. A score of 750 or above is ideal for getting the best mortgage rates. It’s worth checking your credit score and improving it before you apply for a mortgage.",
     },
     {
+      id: 2,
       question_text: "What is the typical down payment required for a home?",
       options: [
         "A) 1% of the home’s price",
@@ -168,6 +170,7 @@ const StepOnePrePurchasing = () => {
         "Not quite. A down payment usually falls between 5% and 20%, though some buyers might be eligible for programs with lower requirements.",
     },
     {
+      id: 3,
       question_text:
         "What percentage of your monthly income should go toward housing expenses (including your mortgage)?",
       options: ["A) 10%", "B) 20%", "C) 30%", "D) 50%"],
@@ -178,6 +181,7 @@ const StepOnePrePurchasing = () => {
         "Actually, around 30% of your income should go toward housing expenses, including your mortgage, to keep it affordable.",
     },
     {
+      id: 4,
       question_text:
         "What is a good way to improve your credit score before applying for a mortgage?",
       options: [
@@ -193,6 +197,7 @@ const StepOnePrePurchasing = () => {
         "Not quite. Paying down outstanding debts is a great way to improve your credit score before applying for a mortgage.",
     },
     {
+      id: 5,
       question_text:
         "Which of the following is typically required for mortgage pre-approval?",
       options: [
@@ -208,6 +213,7 @@ const StepOnePrePurchasing = () => {
         "For mortgage pre-approval, lenders primarily need proof of income and employment—not the details of the home just yet.",
     },
     {
+      id: 6,
       question_text:
         "What’s the purpose of getting pre-approved for a mortgage before house hunting?",
       options: [
@@ -223,6 +229,7 @@ const StepOnePrePurchasing = () => {
         "Actually, all of these are reasons why pre-approval is important. It helps with budgeting, credibility, and securing an interest rate.",
     },
     {
+      id: 7,
       question_text:
         "What is the minimum down payment typically required for a conventional mortgage?",
       options: ["A) 0%", "B) 3%", "C) 5%", "D) 20%"],

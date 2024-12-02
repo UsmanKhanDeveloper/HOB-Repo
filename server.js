@@ -83,6 +83,65 @@ app.get('/api/substeps', async (req, res) => {
   }
 });
 
+// Endpoint to fetch substepsTwoBuying
+// server.js (Add this to fetch bulletsTwoBuying with substepsTwoBuying)
+app.get('/api/substepsTwoBuying', async (req, res) => {
+  const includeBullets = req.query.include_bullets === "true";
+
+  try {
+    // Fetch all substepsTwoBuying
+    const substepsResult = await client.query(
+      'SELECT * FROM substepsTwoBuying'
+    );
+    const substeps = substepsResult.rows;
+
+    // If include_bullets is true, fetch bullets for each substep
+    if (includeBullets) {
+      for (const substep of substeps) {
+        const bulletsResult = await client.query(
+          'SELECT * FROM bulletsTwoBuying WHERE substepTwoBuying_id = $1',
+          [substep.id]
+        );
+        substep.bullets = bulletsResult.rows; // Attach bullets to substep
+      }
+    }
+
+    res.json(substeps);
+  } catch (error) {
+    console.error('Error fetching substepsTwoBuying:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Endpoint to fetch substepsThreeBuying
+app.get('/api/substepsThreeBuying', async (req, res) => {
+  const includeBullets = req.query.include_bullets === "true";
+
+  try {
+    // Fetch all substepsThreeBuying
+    const substepsResult = await client.query(
+      'SELECT * FROM substepsThreeBuying'
+    );
+    const substeps = substepsResult.rows;
+
+    // If include_bullets is true, fetch bullets for each substep
+    if (includeBullets) {
+      for (const substep of substeps) {
+        const bulletsResult = await client.query(
+          'SELECT * FROM bulletsThreeBuying WHERE substepThreeBuying_id = $1',
+          [substep.id]
+        );
+        substep.bullets = bulletsResult.rows; // Attach bullets to substep
+      }
+    }
+
+    res.json(substeps);
+  } catch (error) {
+    console.error('Error fetching substepsThreeBuying:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //API route/endpoint to fetch questions
 app.get('/api/questions', async (req, res) => {
   const stepNumber = req.query.step_number;

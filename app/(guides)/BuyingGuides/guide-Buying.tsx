@@ -17,7 +17,10 @@ import StepOnePrePurchasing from "./StepOnePrePurchasing";
 // import StepThreeFindingAHome from "./StepThreeFindingAHome";
 // import StepFourMakingAnOffer from "./StepFourMakingAnOffer";
 // import StepFivePostPurchase from "./StepFivePostPurchase";
-import TestDatabasePage from "./TestDatabasePage";
+import TestDatabasePage from "./StepOnePrePurchasingDatabase";
+import StepOnePrePurchasingDatabase from "./StepOnePrePurchasingDatabase";
+import StepTwoUnderstandingMarketConditionDB from "./StepTwoUnderstandingMarketConditionDB";
+import StepThreeFindingAHomeDB from "./StepThreeFindingAHomeDB";
 
 const guideBuying = () => {
   const router = useRouter();
@@ -41,8 +44,10 @@ const guideBuying = () => {
           ‣ Navigate Each Step Answering Questions to Track Your Progress
         </Text>
         {/* Step Components below */}
-        <TestDatabasePage />
-        <StepOnePrePurchasing />
+        <StepOnePrePurchasingDatabase />
+        <StepTwoUnderstandingMarketConditionDB />
+        <StepThreeFindingAHomeDB />
+        {/* <StepOnePrePurchasing /> */}
         {/*<StepTwoUnderstandingMarketCondition />
         <StepThreeFindingAHome />
         <StepFourMakingAnOffer />

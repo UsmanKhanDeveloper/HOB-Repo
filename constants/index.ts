@@ -29,10 +29,11 @@ import noResult from "@/assets/images/no-result.png";
 import houseHeader from "@/assets/images/house-header.png";
 import appLogo from "@/assets/images/app-logo.png";
 import primary from "@/assets/images/primary.png";
-import filters from "@/assets/icons/filters.png";import eyeOpen from "@/assets/icons/open-eye.png"
-import eyeClose from "@/assets/icons/close-eye.png"
-import deleteCan from "@/assets/icons/delete.png"
-import favIcon from "@/assets/icons/heart.png"
+import filters from "@/assets/icons/filters.png";
+import eyeOpen from "@/assets/icons/open-eye.png";
+import eyeClose from "@/assets/icons/close-eye.png";
+import deleteCan from "@/assets/icons/delete.png";
+import favIcon from "@/assets/icons/heart.png";
 import buyingGuidesSelection from "@/assets/images/buying-guide-selection.png";
 import sellingGuideSelection from "@/assets/images/Selling-Guide-Section.png";
 import rentingTenantGuideSelection from "@/assets/images/Tenant-Guide-Section.png";
