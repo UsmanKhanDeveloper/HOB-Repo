@@ -1,0 +1,61 @@
+<!DOCTYPE html><html>
+    <head>
+        <title>Matterport Viewer</title>
+    <meta charset="UTF-8"><style>body, html, #showcase {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }    #capture-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+</style><!-- Include the Matterport SDK script -->
+<script src="https://static.matterport.com/showcase-sdk/latest.js"></script>
+</head>
+    <body>
+        <div id="showcase"></div>
+        <button id="capture-button">Capture Snapshot</button>
+<script>
+
+  // Replace with your Matterport space\
+  const SDK_KEY = du9h8tpf20fegyna491whw17b; 
+  const SPACE_ID = EadMuW7Tsh5;
+
+  // Initialize the Matterport 
+  window.MP_SDK.connect(
+    document.getElementById('showcase'),
+    SDK_KEY,
+    SPACE_ID,
+    ).then(function (sdk) {
+    console.log('Matterport SDK connected');
+
+    // Function to capture a snapshotfunction 
+    function captureSnapshot() {
+      sdk.Renderer.takeScreenShot().then(function (screenshotURI) {
+        // Send the screenshot data to the React Native 
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: 'snapshot',
+          data: screenshotURI
+        }));        
+    }).catch(function (error) {
+        console.error('Error taking screenshot:', error);
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: 'error',
+          message: error.message}));
+    }); 
+    };
+    // Add event listener to the capture 
+    buttondocument.getElementById('capture-button').addEventListener('click', captureSnapshot);
+  }).catch(function (error) {
+    console.error('Error connecting to Matterport SDK:', error);
+    window.ReactNativeWebView.postMessage(JSON.stringify({
+      type: 'error',
+      message: error.message
+    }));
+  });
+</script></body></html>

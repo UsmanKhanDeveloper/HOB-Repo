@@ -2,15 +2,23 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { fetchPropertyData } from '../services/apiService';
 
+// type 
 interface CollapsibleMenuProps {
   title: string;
-  options: string[];
 }
 
+type PropertyData = {
+  address: {
+    city: string;
+    state: string;
+  },
+}
+
+// functional component
 const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<PropertyData[]>([]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -23,7 +31,7 @@ const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
   
   // Search is sent to API
   const search = async (searchTerm: string) => {
-    setSearchTerm(searchTerm);
+    // setSearchTerm(searchTerm);
 
     try {
       const result = await fetchPropertyData(searchTerm);
@@ -40,21 +48,23 @@ const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={toggleMenu} style={styles.button}>
-        <Text style={styles.buttonText}>{title}</Text>
+        {/* TODO: look at "title" in the ui where is it*/}
+        <Text style={styles.buttonText}>{title}</Text> 
       </TouchableOpacity>
       {isOpen && (
         <View style={styles.menu}>
           <TextInput
             placeholder="Search..."
             value={searchTerm}
-            onChangeText={search} // called when a text input changes
+            onChangeText={setSearchTerm} // called when a text input changes
             style={styles.input}
+            onSubmitEditing={() => search(searchTerm)} // runs when u press enter :)
           />
           {searchResults.length > 0 ? (
             <FlatList
               data={searchResults}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => <Text style={styles.option}>{item}</Text>}
+              renderItem={({ item }) => <Text style={styles.option}>{item.address.city},{item.address.state}</Text>} // this is how you compose different properties (in this case a string "city" and "country") in a interface?? 
             />
           ) : (
             <Text style={styles.noOptionsText}>No options found</Text>

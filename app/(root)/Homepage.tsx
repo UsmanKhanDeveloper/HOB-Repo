@@ -6,6 +6,7 @@ import { icons, images } from "@/constants"; // Assuming your favorite icon is i
 import { useAuth, useUser } from "@clerk/clerk-react"; // Importing useUser
 import CollapsibleMenu from './CollapsibleMenu'; // Importing CollapsibleMenu
 import { fetchPropertyData } from "../services/apiService";
+import MatterportView from '@/components/MatterportView';
 
 // const API_HOST = "zillow-com1.p.rapidapi.com"
 // const API_KEY= process.env.REACT_APP_RAPIDAPI_KEY;
@@ -84,6 +85,7 @@ const Homepage: React.FC = () => {
 
     return (
       <>
+        <MatterportView />;  
         <View style={styles.container}>
             <Image
                 style={styles.logo}
