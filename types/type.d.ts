@@ -1,5 +1,13 @@
 import {TextInputProps, TouchableOpacityProps} from "react-native";
 
+declare interface Question {
+    question_text: string;
+    options: string[];
+    correct_answer: string;
+    correct_explanation: string;
+    incorrect_explanation: string;
+} //these interface variables have to be same as
+
 declare interface Driver {
     driver_id: number;
     first_name: string;

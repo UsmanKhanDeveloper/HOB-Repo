@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import { fetchPropertyData } from '../services/apiService';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+} from "react-native";
+import { fetchPropertyData } from "../services/apiService";
 
 // type 
 interface CollapsibleMenuProps {
@@ -17,7 +24,7 @@ type PropertyData = {
 // functional component
 const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<PropertyData[]>([]);
 
   const toggleMenu = () => {
@@ -28,18 +35,16 @@ const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
   // const filteredOptions = options.filter(option =>
   //   option.toLowerCase().includes(searchTerm.toLowerCase())
   // );
-  
+
   // Search is sent to API
   const search = async (searchTerm: string) => {
     // setSearchTerm(searchTerm);
 
     try {
       const result = await fetchPropertyData(searchTerm);
-      // set it in a variable 
+      // set it in a variable
       setSearchResults(result);
-    }
-
-    catch (error) {
+    } catch (error) {
       console.error("Error fetching property data:", error);
       throw error;
     }
@@ -84,32 +89,31 @@ const styles = StyleSheet.create({
     // width: 250,
     // marginBottom: 10,
 
-    flexDirection: 'column',
+    flexDirection: "column",
     marginBottom: 10,
   },
   button: {
-// backgroundColor: '#007BFF',
+    // backgroundColor: '#007BFF',
     // padding: 10,
     paddingBottom: 10,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
   },
   buttonText: {
-    color: 'black',
-    textAlign: 'left',
+    color: "black",
+    textAlign: "left",
     fontSize: 14,
     // padding: 0,
-
   },
   menu: {
     // padding: 10,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: "#f9f9f9",
   },
   input: {
-    width: '100%',
+    width: "100%",
     padding: 8,
     marginBottom: 10,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 4,
   },
@@ -117,7 +121,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   noOptionsText: {
-    textAlign: 'center',
-    color: '#999',
+    textAlign: "center",
+    color: "#999",
   },
 });
