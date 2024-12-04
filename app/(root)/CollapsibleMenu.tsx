@@ -7,7 +7,7 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
-import { fetchPropertyData } from "../services/apiService";
+import { fetchSuggestedLocation } from "../services/apiService";
 
 // type 
 interface CollapsibleMenuProps {
@@ -21,11 +21,11 @@ type PropertyData = {
   },
 }
 
-// functional component
+// Searches the Zillow Database for suggested locations (City, State) for the search bar
 const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState<PropertyData[]>([]);
+  const [searchResults, setSearchResults] = useState<PropertyData[]>([]); // rename this
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -41,7 +41,7 @@ const CollapsibleMenu: React.FC<CollapsibleMenuProps> = ({ title }) => {
     // setSearchTerm(searchTerm);
 
     try {
-      const result = await fetchPropertyData(searchTerm);
+      const result = await fetchSuggestedLocation(searchTerm);
       // set it in a variable
       setSearchResults(result);
     } catch (error) {
