@@ -83,7 +83,64 @@ const MatterportView = () => {
     </body>
     </html>
   `;
-  
+
+  const htmlTest =
+  `
+  <html>
+  <head>
+  <script type="importmap">
+    {
+      "imports": {
+        "MP_SDK": "https://static.matterport.com/showcase-sdk/bootstrap/3.0.0-0-g0517b8d76c/sdk.es6.js"
+      }
+    }
+  </script>
+  <script type="text/javascript">
+    window.ReactNativeWebView.postMessage("before head has started..");
+  </script>
+  </head>
+  <body>
+    <iframe
+      width="650"
+      height="480"
+      src="https://my.matterport.com/show?m=SxQL3iGyoDo&play=1&applicationKey=du9h8tpf20fegyna491whw17b"
+      frameborder="0"
+      allow="fullscreen *"
+      id="showcase-iframe">
+    </iframe>
+    <script type="module">
+      window.ReactNativeWebView.postMessage("before import has started..");
+      import { connect } from 'MP_SDK';
+      (async function connectSdk() {
+        window.ReactNativeWebView.postMessage("connectSdk fun has started..");
+        const iframe = document.getElementById('showcase-iframe');
+
+        // connect the sdk; log an error and stop if there were any connection issues
+        try {
+          window.ReactNativeWebView.postMessage("try has started..");
+          const mpSdk = await connect(iframe);
+          onShowcaseConnect(mpSdk);
+        } catch (e) {
+          window.ReactNativeWebView.postMessage(e);
+        }
+      })();
+
+      async function onShowcaseConnect(mpSdk) {
+        // insert your sdk code here. See the ref https://matterport.github.io/showcase-sdk//docs/reference/current/index.html
+
+        // try retrieving the model data and log the model's sid
+        try {
+          const modelData = await mpSdk.Model.getData();
+          console.log('Model sid:' + modelData.sid);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    </script>
+  </body>
+</html>`
+  ;
+
  // may be failinng at initializing matterport sdk
   const onMessage = (event: any) => {
     try {
@@ -125,7 +182,7 @@ const MatterportView = () => {
   return (
     <View style={styles.container}>
       <WebView ref={webviewRef}originWhitelist={['*']}
-        source={{ html: htmlContent }}
+        source={{ html: htmlTest }}
         style={styles.webview}onMessage={onMessage}javaScriptEnabled={true}domStorageEnabled={true}allowFileAccess={true}
       />      
       {snapshotUri && ( 
@@ -140,7 +197,7 @@ const MatterportView = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  webview: { flex: 1, height: 100, width: 800, borderColor: 'red', borderWidth: 1 },
+  webview: { flex: 1, height: 400, width: 500, borderColor: 'red', borderWidth: 1 },
   snapshotContainer: {
     position: 'absolute',
     bottom: 10,
