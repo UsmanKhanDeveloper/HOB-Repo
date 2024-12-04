@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { View, StyleSheet, Alert, TouchableOpacity, Text, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-
 const MatterportView = () => {
   const webviewRef = useRef(null);
   const [snapshotUri, setSnapshotUri] = useState(null);
@@ -84,52 +83,64 @@ const MatterportView = () => {
     </body>
     </html>
   `;
-
+  
+ // may be failinng at initializing matterport sdk
   const onMessage = (event: any) => {
-    // try {
-    //   const messageData = JSON.parse(event.nativeEvent.data);
-    //   if (messageData.type === 'snapshot') {
-    //     // Handle the received snapshot
+    try {
+      const messageData = JSON.parse(event.nativeEvent.data);
+      if (messageData.type === 'snapshot') {
+        // Handle the received snapshot
 
-    //     setSnapshotUri(messageData.data);
-    //     Alert.alert('Snapshot Captured', 'The snapshot has been captured successfully.');
+        setSnapshotUri(messageData.data);
+        Alert.alert('Snapshot Captured', 'The snapshot has been captured successfully.');
       
-    // } else if (messageData.type === 'error') {
-    //     Alert.alert('Error', messageData.message);
-    //   }    
-    // } catch (error) {
-    //   console.error('Error parsing message from WebView:', error);
-    // }  
+    } else if (messageData.type === 'error') {
+        Alert.alert('Error', messageData.message);
+      }    
+    } catch (error) {
+      console.error('Error parsing message from WebView:', error);
+    }  
 };
+  // return (
+  //   <View style={styles.container}>
+  //       <WebView ref={webviewRef}
+  //       originWhitelist={['*']}
+  //       source={{ html: htmlContent }}
+  //       // source={{ html: '<h1><center>Hello world</center></h1>' }} 
+
+  //       // <WebView 
+  //       // originWhitelist={['*']}
+  //       // source={{ html: '<h1>Hello World</h1>' }} 
+  //       // style={{ borderColor: "red", borderWidth: 1, height: 100}}/>
+
+  //       style={styles.webview}
+  //       onMessage={onMessage}
+  //       javaScriptEnabled={true}
+  //       domStorageEnabled={true}
+  //       allowFileAccess={true}
+  //     />
+  //   </View>  
+  //   );
+
   return (
     <View style={styles.container}>
-        <WebView ref={webviewRef}
-        originWhitelist={['*']}
+      <WebView ref={webviewRef}originWhitelist={['*']}
         source={{ html: htmlContent }}
-
-        style={styles.webview}
-        onMessage={onMessage}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        allowFileAccess={true}
-      />
-      {/* {snapshotUri && (
+        style={styles.webview}onMessage={onMessage}javaScriptEnabled={true}domStorageEnabled={true}allowFileAccess={true}
+      />      
+      {snapshotUri && ( 
         <View style={styles.snapshotContainer}>
-            <Text style={styles.snapshotTitle}>Captured Snapshot:</Text>
-            <Image 
-                source={{ uri: snapshotUri }}
-                style={styles.snapshotImage} // ur at step 5
-                resizeMode="contain"
-            />
-        </View>
-      )} */}
-    </View>  
-    );
+        <Text style={styles.snapshotTitle}>Captured Snapshot:</Text>
+          <Image source={{ uri: snapshotUri }}
+            style={styles.snapshotImage}resizeMode="contain"
+          /></View>
+      )}
+    </View>  );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  webview: { flex: 1 },
+  webview: { flex: 1, height: 100, width: 800, borderColor: 'red', borderWidth: 1 },
   snapshotContainer: {
     position: 'absolute',
     bottom: 10,

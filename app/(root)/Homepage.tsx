@@ -146,238 +146,244 @@ const Homepage: React.FC = () => {
     // You can navigate to a property detail screen here
   };
 
-    return (
-      <>
-        <MatterportView />
-        <View style={styles.container}>
-            <Image
-                style={styles.logo}
-                source={images.appLogo}
-                contentFit="cover"
-                transition={1000}
-            />
-
-        <View>
-          {isSignedIn && user ? ( // Check if the user is signed in
-            <>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.welcomeText}>
-                  Welcome, {user.firstName}!
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={styles.signOutButton}
-                onPress={() => signOut()}
-              >
-                <Text style={styles.buttonText}>Sign out</Text>
-              </TouchableOpacity>
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  style={styles.favoriteButton}
-                  onPress={() => router.push("/(root)/favorites")}
-                >
-                  <Image source={icons.favIcon} style={styles.favoriteIcon} />
-                  <Text style={styles.favoriteText}>
-                    Your Favorite Listings
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </>
-          ) : (
-            <TouchableOpacity
-              style={styles.signInButton}
-              onPress={() => router.push("/(auth)/log-in")}
-            >
-              <Text style={styles.buttonText}>Sign in</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-
-        {/* save search, search bar and filter menu */}
-
-        <View>
-          {/* horizontal container */}
-          <View style={styles.flexHorizontalContainer}>
-            {/* vertical container */}
-            <View style={styles.topBarVerticalContainer}>
-              <TouchableOpacity>
-                <Image style={styles.icon} source={images.primary}></Image>
-              </TouchableOpacity>
-
-              <Text style={styles.iconText}>Save Search</Text>
-            </View>
-
-            <View style={styles.searchBar}>
-              <Text style={styles.searchBarText}>
-                Dream Big: Find Your Home
-              </Text>
-              <Image style={styles.searchIcon} source={icons.search}></Image>
-            </View>
-
-            <View style={styles.topBarVerticalContainer}>
-              {/* Modal is not part of the page structure but it's on TOP of it */}
-              <Modal
-                animationType="none"
-                transparent={true}
-                visible={modalVisible}
-                // onRequestClose={() => {
-                //     Alert.alert('Modal has been closed.');
-                //     setModalVisible(!modalVisible);
-                // }}>
-              >
-                <View style={styles.overlayContainer}>
-                  {/* Gray overlay */}
-                  <TouchableOpacity
-                    style={styles.overlay}
-                    onPress={toggleModal}
-                    activeOpacity={1}
-                  >
-                    {/* Touching outside of the modal will dismiss it */}
-
-                    <View style={styles.filterMenuContainer}>
-                      {/* Change this closing Icon to the filter menu*/}
-
-                      {/* <TouchableOpacity onPress={toggleModal} style={styles.icon}> */}
-                      {/* <Image style={styles.icon}source={icons.search}></Image> */}
-                      {/* </TouchableOpacity> */}
-
-                      <View style={styles.filterVerticalContainer}>
-                        <Text style={styles.titleText}>Filters</Text>
-
-                        <View style={styles.selectAViewContainer}>
-                          <Text>Select a view</Text>
-                          <Image
-                            style={styles.icon}
-                            source={icons.dropDownMenu}
-                          ></Image>
-                        </View>
-
-                        {/* <View style={styles.flexHorizontalContainer}>
-                            <Image style={styles.icon}source={icons.arrowDown}></Image>
-                            <Text style={styles.testText}>Zones</Text>
-                            </View> */}
-
-                        {/* <View style={styles.selectAViewContainer}>
-                            <Text>Search Zones</Text>
-                            <Image style={styles.icon} source={icons.search}></Image>            
-                            </View> */}
-
-                        <View style={styles.flexHorizontalContainer}>
-                          <Image
-                            style={styles.icon}
-                            source={icons.arrowDown}
-                          ></Image>
-                          <CollapsibleMenu title="Zones" />
-                        </View>
-
-                        {/* <View style={styles.filterVerticalContainer}>
-                            <View style={styles.flexHorizontalContainer}>
-                                <Image style={styles.icon} source={icons.square}></Image> */}
-
-                        {/* Placeholder text */}
-                        {/* <Text style={styles.testText}> Zone 1</Text> 
-                            </View> */}
-
-                        {/* <View style={styles.flexHorizontalContainer}> */}
-                        {/* <Image style={styles.icon} source={icons.square}></Image> */}
-
-                        {/* Placeholder text */}
-                        {/* <Text style={styles.testText}> Zone 2</Text>  */}
-                        {/* </View> */}
-
-                        {/* <View style={styles.flexHorizontalContainer}>
-                                <Image style={styles.icon} source={icons.square}></Image> */}
-
-                        {/* Placeholder text */}
-                        {/* <Text style={styles.testText}> Zone 3</Text>  */}
-                        {/* </View> */}
-
-                        {/* </View> */}
-
-                        <View style={styles.flexHorizontalContainer}>
-                          <Image
-                            style={styles.icon}
-                            source={icons.arrowDown}
-                          ></Image>
-                          <Text style={styles.testText}>People</Text>
-                        </View>
-
-                        <View style={styles.flexHorizontalContainer}>
-                          <Image
-                            style={styles.icon}
-                            source={icons.arrowDown}
-                          ></Image>
-                          <Text style={styles.testText}>Company</Text>
-                        </View>
-
-                        <View style={styles.flexHorizontalContainer}>
-                          <Image
-                            style={styles.icon}
-                            source={icons.arrowDown}
-                          ></Image>
-                          <Text style={styles.testText}>Contract Time</Text>
-                        </View>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              </Modal>
-
-              <TouchableOpacity onPress={() => setModalVisible(true)}>
-                <Image style={styles.icon} source={icons.filters}></Image>
-                <Text style={styles.iconText}>Filter Menu</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View>
-          <Text style={styles.listingHeader}>Property Listings</Text>
-        </View>
-
-        {/* <View style={styles.testView}>
-        {error && <p>{error}</p>}
-        {properties.map((property, index) => (
-            <View key={index}>
-                <Text>{property.address}</Text>
-                <Text>{property.price}</Text> */}
-        {/* add more property details here */}
-        {/* </View> */}
-        {/* ))} */}
-        {/* </View> */}
-
-        {/* Listings ScrollView */}
-        <ScrollView style={styles.listingsContainer}>
-          {properties.map((property) => (
-            <TouchableOpacity
-              key={property.id}
-              style={styles.propertyItem}
-              onPress={() => handlePropertyClick(property.id)} // Handle click
-            >
-              <Image source={property.image} style={styles.propertyImage} />
-              <View style={styles.propertyDetailsContainer}>
-                <Text style={styles.propertyTitle}>
-                  {property.location} - {property.address}
-                </Text>
-                <Text style={styles.propertyDescription}>
-                  Price: ${property.price.toLocaleString()}
-                </Text>
-                <Text style={styles.propertyDetails}>
-                  {property.bedrooms} Bedrooms, {property.bathrooms} Bathrooms,{" "}
-                  {property.sqft} sqft
-                </Text>
-                <Text style={styles.propertyTime}>{property.time}</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => handleAddToFavorites(property.id)}
-              >
-                <Image source={icons.favIcon} style={styles.favoriteIcon} />
-              </TouchableOpacity>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+  return (
+    <>
+      <MatterportView />
     </>
-  );
+  )
+
+  //   return (
+  //     <>
+  //       <View style={styles.container}>
+        
+  //           <Image
+  //               style={styles.logo}
+  //               source={images.appLogo}
+  //               contentFit="cover"
+  //               transition={1000}
+  //           />
+
+  //       <View>
+  //         {isSignedIn && user ? ( // Check if the user is signed in
+  //           <>
+  //             <View style={styles.buttonContainer}>
+  //               <Text style={styles.welcomeText}>
+  //                 Welcome, {user.firstName}!
+  //               </Text>
+  //             </View>
+  //             <TouchableOpacity
+  //               style={styles.signOutButton}
+  //               onPress={() => signOut()}
+  //             >
+  //               <Text style={styles.buttonText}>Sign out</Text>
+  //             </TouchableOpacity>
+  //             <View style={styles.buttonContainer}>
+  //               <TouchableOpacity
+  //                 style={styles.favoriteButton}
+  //                 onPress={() => router.push("/(root)/favorites")}
+  //               >
+  //                 <Image source={icons.favIcon} style={styles.favoriteIcon} />
+  //                 <Text style={styles.favoriteText}>
+  //                   Your Favorite Listings
+  //                 </Text>
+  //               </TouchableOpacity>
+  //             </View>
+  //           </>
+  //         ) : (
+  //           <TouchableOpacity
+  //             style={styles.signInButton}
+  //             onPress={() => router.push("/(auth)/log-in")}
+  //           >
+  //             <Text style={styles.buttonText}>Sign in</Text>
+  //           </TouchableOpacity>
+  //         )}
+  //       </View>
+
+  //       {/* save search, search bar and filter menu */}
+
+  //       <View>
+  //         {/* horizontal container */}
+  //         <View style={styles.flexHorizontalContainer}>
+  //           {/* vertical container */}
+  //           <View style={styles.topBarVerticalContainer}>
+  //             <TouchableOpacity>
+  //               <Image style={styles.icon} source={images.primary}></Image>
+  //             </TouchableOpacity>
+
+  //             <Text style={styles.iconText}>Save Search</Text>
+  //           </View>
+
+  //           <View style={styles.searchBar}>
+  //             <Text style={styles.searchBarText}>
+  //               Dream Big: Find Your Home
+  //             </Text>
+  //             <Image style={styles.searchIcon} source={icons.search}></Image>
+  //           </View>
+
+  //           <View style={styles.topBarVerticalContainer}>
+  //             {/* Modal is not part of the page structure but it's on TOP of it */}
+  //             <Modal
+  //               animationType="none"
+  //               transparent={true}
+  //               visible={modalVisible}
+  //               // onRequestClose={() => {
+  //               //     Alert.alert('Modal has been closed.');
+  //               //     setModalVisible(!modalVisible);
+  //               // }}>
+  //             >
+  //               <View style={styles.overlayContainer}>
+  //                 {/* Gray overlay */}
+  //                 <TouchableOpacity
+  //                   style={styles.overlay}
+  //                   onPress={toggleModal}
+  //                   activeOpacity={1}
+  //                 >
+  //                   {/* Touching outside of the modal will dismiss it */}
+
+  //                   <View style={styles.filterMenuContainer}>
+  //                     {/* Change this closing Icon to the filter menu*/}
+
+  //                     {/* <TouchableOpacity onPress={toggleModal} style={styles.icon}> */}
+  //                     {/* <Image style={styles.icon}source={icons.search}></Image> */}
+  //                     {/* </TouchableOpacity> */}
+
+  //                     <View style={styles.filterVerticalContainer}>
+  //                       <Text style={styles.titleText}>Filters</Text>
+
+  //                       <View style={styles.selectAViewContainer}>
+  //                         <Text>Select a view</Text>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.dropDownMenu}
+  //                         ></Image>
+  //                       </View>
+
+  //                       {/* <View style={styles.flexHorizontalContainer}>
+  //                           <Image style={styles.icon}source={icons.arrowDown}></Image>
+  //                           <Text style={styles.testText}>Zones</Text>
+  //                           </View> */}
+
+  //                       {/* <View style={styles.selectAViewContainer}>
+  //                           <Text>Search Zones</Text>
+  //                           <Image style={styles.icon} source={icons.search}></Image>            
+  //                           </View> */}
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <CollapsibleMenu title="Zones" />
+  //                       </View>
+
+  //                       {/* <View style={styles.filterVerticalContainer}>
+  //                           <View style={styles.flexHorizontalContainer}>
+  //                               <Image style={styles.icon} source={icons.square}></Image> */}
+
+  //                       {/* Placeholder text */}
+  //                       {/* <Text style={styles.testText}> Zone 1</Text> 
+  //                           </View> */}
+
+  //                       {/* <View style={styles.flexHorizontalContainer}> */}
+  //                       {/* <Image style={styles.icon} source={icons.square}></Image> */}
+
+  //                       {/* Placeholder text */}
+  //                       {/* <Text style={styles.testText}> Zone 2</Text>  */}
+  //                       {/* </View> */}
+
+  //                       {/* <View style={styles.flexHorizontalContainer}>
+  //                               <Image style={styles.icon} source={icons.square}></Image> */}
+
+  //                       {/* Placeholder text */}
+  //                       {/* <Text style={styles.testText}> Zone 3</Text>  */}
+  //                       {/* </View> */}
+
+  //                       {/* </View> */}
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <Text style={styles.testText}>People</Text>
+  //                       </View>
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <Text style={styles.testText}>Company</Text>
+  //                       </View>
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <Text style={styles.testText}>Contract Time</Text>
+  //                       </View>
+  //                     </View>
+  //                   </View>
+  //                 </TouchableOpacity>
+  //               </View>
+  //             </Modal>
+
+  //             <TouchableOpacity onPress={() => setModalVisible(true)}>
+  //               <Image style={styles.icon} source={icons.filters}></Image>
+  //               <Text style={styles.iconText}>Filter Menu</Text>
+  //             </TouchableOpacity>
+  //           </View>
+  //         </View>
+  //       </View>
+  //       <View>
+  //         <Text style={styles.listingHeader}>Property Listings</Text>
+  //       </View>
+
+  //       {/* <View style={styles.testView}>
+  //       {error && <p>{error}</p>}
+  //       {properties.map((property, index) => (
+  //           <View key={index}>
+  //               <Text>{property.address}</Text>
+  //               <Text>{property.price}</Text> */}
+  //       {/* add more property details here */}
+  //       {/* </View> */}
+  //       {/* ))} */}
+  //       {/* </View> */}
+
+  //       {/* Listings ScrollView */}
+  //       <ScrollView style={styles.listingsContainer}>
+  //         {properties.map((property) => (
+  //           <TouchableOpacity
+  //             key={property.id}
+  //             style={styles.propertyItem}
+  //             onPress={() => handlePropertyClick(property.id)} // Handle click
+  //           >
+  //             <Image source={property.image} style={styles.propertyImage} />
+  //             <View style={styles.propertyDetailsContainer}>
+  //               <Text style={styles.propertyTitle}>
+  //                 {property.location} - {property.address}
+  //               </Text>
+  //               <Text style={styles.propertyDescription}>
+  //                 Price: ${property.price.toLocaleString()}
+  //               </Text>
+  //               <Text style={styles.propertyDetails}>
+  //                 {property.bedrooms} Bedrooms, {property.bathrooms} Bathrooms,{" "}
+  //                 {property.sqft} sqft
+  //               </Text>
+  //               <Text style={styles.propertyTime}>{property.time}</Text>
+  //             </View>
+  //             <TouchableOpacity
+  //               onPress={() => handleAddToFavorites(property.id)}
+  //             >
+  //               <Image source={icons.favIcon} style={styles.favoriteIcon} />
+  //             </TouchableOpacity>
+  //           </TouchableOpacity>
+  //         ))}
+  //       </ScrollView>
+  //     </View>
+  //   </>
+  // );
 };
 
 export default Homepage;

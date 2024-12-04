@@ -13,6 +13,8 @@ import { Link, router, useNavigation } from "expo-router";
 import { icons, images } from "@/constants"; // Assuming your favorite icon is in this folder
 import { useAuth, useUser } from "@clerk/clerk-react"; // Importing useUser
 import { SafeAreaView } from "react-native-safe-area-context";
+import MatterportView from '@/components/MatterportView';
+
 
 // Define the interface for a Property Listing
 interface Property {
@@ -130,16 +132,16 @@ const Homepage: React.FC = () => {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <Image
+    <SafeAreaView style={styles.container}>
+    <Image
           style={styles.logo}
           source={images.appLogo}
           contentFit="cover"
           transition={1000}
         />
 
-        <View>
-          {isSignedIn && user ? ( // Check if the user is signed in
+      <View>
+         {isSignedIn && user ? ( // Check if the user is signed in
             <>
               <View style={styles.buttonContainer}>
                 <Text style={styles.welcomeText}>
@@ -174,30 +176,28 @@ const Homepage: React.FC = () => {
           )}
         </View>
 
-        {/* save search, search bar and filter menu */}
+            <View>
+           {/* horizontal container */}
+           <View style={styles.flexHorizontalContainer}>
+             {/* vertical container */}
+             <View style={styles.topBarVerticalContainer}>
+               <TouchableOpacity>
+                 <Image style={styles.icon} source={images.primary}></Image>
+               </TouchableOpacity>
 
-        <View>
-          {/* horizontal container */}
-          <View style={styles.flexHorizontalContainer}>
-            {/* vertical container */}
-            <View style={styles.topBarVerticalContainer}>
-              <TouchableOpacity>
-                <Image style={styles.icon} source={images.primary}></Image>
-              </TouchableOpacity>
+               <Text style={styles.iconText}>Save Search</Text>
+             </View>
 
-              <Text style={styles.iconText}>Save Search</Text>
-            </View>
+             <View style={styles.searchBar}>
+               <Text style={styles.searchBarText}>
+                 Dream Big: Find Your Home
+               </Text>
+               <Image style={styles.searchIcon} source={icons.search}></Image>
+             </View>
 
-            <View style={styles.searchBar}>
-              <Text style={styles.searchBarText}>
-                Dream Big: Find Your Home
-              </Text>
-              <Image style={styles.searchIcon} source={icons.search}></Image>
-            </View>
-
-            <View style={styles.topBarVerticalContainer}>
-              {/* Modal is not part of the page structure but it's on TOP of it */}
-              <Modal
+             <View style={styles.topBarVerticalContainer}>
+               {/* Modal is not part of the page structure but it's on TOP of it */}
+               <Modal
                 animationType="none"
                 transparent={true}
                 visible={modalVisible}
@@ -207,13 +207,13 @@ const Homepage: React.FC = () => {
                 // }}>
               >
                 <View style={styles.overlayContainer}>
-                  {/* Gray overlay */}
+                   {/* Gray overlay */}
                   <TouchableOpacity
                     style={styles.overlay}
                     onPress={toggleModal}
                     activeOpacity={1}
                   >
-                    {/* Touching outside of the modal will dismiss it */}
+                     {/* Touching outside of the modal will dismiss it */}
 
                     <View style={styles.filterMenuContainer}>
                       {/* Close Icon */}
@@ -281,11 +281,14 @@ const Homepage: React.FC = () => {
         </View>
         <View>
           <Text style={styles.listingHeader}>Property Listings</Text>
+          
         </View>
 
-        {/* Listings ScrollView */}
         <ScrollView style={styles.listingsContainer}>
-          {properties.map((property) => (
+
+        <MatterportView />
+
+           {properties.map((property) => (
             <TouchableOpacity
               key={property.id}
               style={styles.propertyItem}
@@ -316,6 +319,196 @@ const Homepage: React.FC = () => {
       </SafeAreaView>
     </>
   );
+
+  // return (
+  //   <>
+  //     <SafeAreaView style={styles.container}>
+  //       <MatterportView />
+  //       <Image
+  //         style={styles.logo}
+  //         source={images.appLogo}
+  //         contentFit="cover"
+  //         transition={1000}
+  //       />
+
+  //       <View>
+  //         {isSignedIn && user ? ( // Check if the user is signed in
+  //           <>
+  //             <View style={styles.buttonContainer}>
+  //               <Text style={styles.welcomeText}>
+  //                 Welcome, {user.firstName}!
+  //               </Text>
+  //             </View>
+  //             <TouchableOpacity
+  //               style={styles.signOutButton}
+  //               onPress={() => signOut()}
+  //             >
+  //               <Text style={styles.buttonText}>Sign out</Text>
+  //             </TouchableOpacity>
+  //             <View style={styles.buttonContainer}>
+  //               <TouchableOpacity
+  //                 style={styles.favoriteButton}
+  //                 onPress={() => router.push("/(root)/favorites")}
+  //               >
+  //                 <Image source={icons.favIcon} style={styles.favoriteIcon} />
+  //                 <Text style={styles.favoriteText}>
+  //                   Your Favorite Listings
+  //                 </Text>
+  //               </TouchableOpacity>
+  //             </View>
+  //           </>
+  //         ) : (
+  //           <TouchableOpacity
+  //             style={styles.signInButton}
+  //             onPress={() => router.push("/(auth)/log-in")}
+  //           >
+  //             <Text style={styles.buttonText}>Sign in</Text>
+  //           </TouchableOpacity>
+  //         )}
+  //       </View>
+
+  //       {/* save search, search bar and filter menu */}
+
+  //       <View>
+  //         {/* horizontal container */}
+  //         <View style={styles.flexHorizontalContainer}>
+  //           {/* vertical container */}
+  //           <View style={styles.topBarVerticalContainer}>
+  //             <TouchableOpacity>
+  //               <Image style={styles.icon} source={images.primary}></Image>
+  //             </TouchableOpacity>
+
+  //             <Text style={styles.iconText}>Save Search</Text>
+  //           </View>
+
+  //           <View style={styles.searchBar}>
+  //             <Text style={styles.searchBarText}>
+  //               Dream Big: Find Your Home
+  //             </Text>
+  //             <Image style={styles.searchIcon} source={icons.search}></Image>
+  //           </View>
+
+  //           <View style={styles.topBarVerticalContainer}>
+  //             {/* Modal is not part of the page structure but it's on TOP of it */}
+  //             <Modal
+  //               animationType="none"
+  //               transparent={true}
+  //               visible={modalVisible}
+  //               // onRequestClose={() => {
+  //               //     Alert.alert('Modal has been closed.');
+  //               //     setModalVisible(!modalVisible);
+  //               // }}>
+  //             >
+  //               <View style={styles.overlayContainer}>
+  //                 {/* Gray overlay */}
+  //                 <TouchableOpacity
+  //                   style={styles.overlay}
+  //                   onPress={toggleModal}
+  //                   activeOpacity={1}
+  //                 >
+  //                   {/* Touching outside of the modal will dismiss it */}
+
+  //                   <View style={styles.filterMenuContainer}>
+  //                     {/* Close Icon */}
+  //                     <TouchableOpacity
+  //                       onPress={toggleModal}
+  //                       style={styles.icon}
+  //                     >
+  //                       {/* TESTING SEARCH ICON */}
+  //                       {/* <Image style={styles.icon}source={icons.search}></Image> */}
+  //                     </TouchableOpacity>
+  //                     <View style={styles.filterVerticalContainer}>
+  //                       <Text style={styles.titleText}>Filters</Text>
+
+  //                       <View style={styles.selectAViewContainer}>
+  //                         <Text>Select a view</Text>
+  //                       </View>
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <Text>Zones</Text>
+  //                       </View>
+
+  //                       <View style={styles.selectAViewContainer}>
+  //                         <Text>Search Zones</Text>
+  //                       </View>
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <Text>People</Text>
+  //                       </View>
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <Text>Company</Text>
+  //                       </View>
+
+  //                       <View style={styles.flexHorizontalContainer}>
+  //                         <Image
+  //                           style={styles.icon}
+  //                           source={icons.arrowDown}
+  //                         ></Image>
+  //                         <Text>Contract Time</Text>
+  //                       </View>
+  //                     </View>
+  //                   </View>
+  //                 </TouchableOpacity>
+  //               </View>
+  //             </Modal>
+
+  //             <TouchableOpacity onPress={() => setModalVisible(true)}>
+  //               <Image style={styles.icon} source={icons.filters}></Image>
+  //               <Text style={styles.iconText}>Filter Menu</Text>
+  //             </TouchableOpacity>
+  //           </View>
+  //         </View>
+  //       </View>
+  //       <View>
+  //         <Text style={styles.listingHeader}>Property Listings</Text>
+  //       </View>
+
+  //       {/* Listings ScrollView */}
+  //       <ScrollView style={styles.listingsContainer}>
+  //         {properties.map((property) => (
+  //           <TouchableOpacity
+  //             key={property.id}
+  //             style={styles.propertyItem}
+  //             onPress={() => handlePropertyClick(property.id)} // Handle click
+  //           >
+  //             <Image source={property.image} style={styles.propertyImage} />
+  //             <View style={styles.propertyDetailsContainer}>
+  //               <Text style={styles.propertyTitle}>
+  //                 {property.location} - {property.address}
+  //               </Text>
+  //               <Text style={styles.propertyDescription}>
+  //                 Price: ${property.price.toLocaleString()}
+  //               </Text>
+  //               <Text style={styles.propertyDetails}>
+  //                 {property.bedrooms} Bedrooms, {property.bathrooms} Bathrooms,{" "}
+  //                 {property.sqft} sqft
+  //               </Text>
+  //               <Text style={styles.propertyTime}>{property.time}</Text>
+  //             </View>
+  //             <TouchableOpacity
+  //               onPress={() => handleAddToFavorites(property.id)}
+  //             >
+  //               <Image source={icons.favIcon} style={styles.favoriteIcon} />
+  //             </TouchableOpacity>
+  //           </TouchableOpacity>
+  //         ))}
+  //       </ScrollView>
+  //     </SafeAreaView>
+  //   </>
+  // );
 };
 
 export default Homepage;
